@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SuperButton">
+        <!--默认配置-->
+        <attr name="text" format="reference" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="dimension" />
+        <!--默认背景颜色-->
+        <attr name="color" format="color" />
+        <!--按压时的背景颜色-->
+        <attr name="color_pressed" format="color" />
+
+        <!--形状-->
+        <attr name="shape" format="enum">
+            <enum name="OVAL" value="0" />
+            <enum name="CIRCLE" value="1" />
+            <enum name="RECT" value="2" />
+        </attr>
+
+        <!--按钮背景是渐变色时设置-->
+        <!--开始颜色-->
+        <attr name="color_start" format="color" />
+        <!--中间颜色-->
+        <attr name="color_middle" format="color" />
+        <!--结束颜色-->
+        <attr name="color_end" format="color" />
+        <!--颜色方向-->
+        <attr name="color_direction" format="enum">
+            <enum name="LEFT_TO_RIGHT" value="0" />
+            <enum name="RIGHT_TO_LEFT" value="1" />
+            <enum name="TOP_TO_BOTTOM" value="2" />
+            <enum name="BOTTOM_TO_TOP" value="3" />
+        </attr>
+
+        <!--左上角圆角半径-->
+        <attr name="radius_let_top" format="dimension" />
+        <!--左下角圆角半径-->
+        <attr name="radius_let_bottom" format="dimension" />
+        <!--右上角圆角半径-->
+        <attr name="radius_right_top" format="dimension" />
+        <!--右下角圆角半径-->
+        <attr name="radius_right_bottom" format="dimension" />
+
+    </declare-styleable>
+</resources>
