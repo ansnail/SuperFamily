@@ -1,6 +1,7 @@
 package top.androidman.superbutton;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -59,6 +60,12 @@ public class SuperButton extends LinearLayout {
 
         mPaintText.setAntiAlias(true);
         mPaintText.setDither(true);
+
+        ColorStateList backgroundColor = ColorStateList.valueOf(getResources().getColor(R.color.toast_bg_error));
+
+        RoundRectDrawable background = new RoundRectDrawable(backgroundColor, 20);
+
+        setBackground(background);
     }
 
 
