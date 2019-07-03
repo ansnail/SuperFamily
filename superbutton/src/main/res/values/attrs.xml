@@ -2,20 +2,34 @@
 <resources>
     <declare-styleable name="SuperButton">
         <!--默认配置-->
-        <attr name="text" format="reference" />
-        <attr name="text_color" format="color" />
+        <attr name="text" format="string|reference" />
+        <attr name="text_color" format="color|reference" />
         <attr name="text_size" format="dimension" />
         <!--默认背景颜色-->
         <attr name="color" format="color" />
         <!--按压时的背景颜色-->
         <attr name="color_pressed" format="color" />
 
+        <!--图片在文字左边-->
+        <attr name="drawable_left" format="reference" />
+        <!--图片在文字右边-->
+        <attr name="drawable_right" format="reference" />
+        <!--图片在文字上边-->
+        <attr name="drawable_top" format="reference" />
+        <!--图片在文字下边-->
+        <attr name="drawable_bottom" format="reference" />
+       <!--图片距文字的距离-->
+        <attr name="drawable_padding" format="dimension" />
+
         <!--形状-->
         <attr name="shape" format="enum">
-            <enum name="OVAL" value="0" />
+            <!--圆形-->
             <enum name="CIRCLE" value="1" />
+            <!--矩形-->
             <enum name="RECT" value="2" />
         </attr>
+        <!--圆形半径-->
+        <attr name="circle_radius" format="dimension" />
 
         <!--按钮背景是渐变色时设置-->
         <!--开始颜色-->
@@ -33,11 +47,11 @@
         </attr>
 
         <!--左上角圆角半径-->
-        <attr name="radius_let_top" format="dimension" />
+        <attr name="corner_let_top" format="dimension" />
         <!--左下角圆角半径-->
-        <attr name="radius_let_bottom" format="dimension" />
+        <attr name="corner_let_bottom" format="dimension" />
         <!--右上角圆角半径-->
-        <attr name="radius_right_top" format="dimension" />
+        <attr name="corner_right_top" format="dimension" />
         <!--右下角圆角半径-->
         <attr name="radius_right_bottom" format="dimension" />
 
