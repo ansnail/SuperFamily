@@ -2,7 +2,9 @@ package top.androidman.superbutton;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -11,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 
 
@@ -22,6 +23,18 @@ import android.widget.LinearLayout;
  * @description 超级按钮
  */
 public class SuperButton extends LinearLayout {
+    /**
+     * id 默认值
+     */
+    private static final int ID_NULL = -1;
+    /**
+     * 文字内容
+     */
+    private CharSequence text = "";
+    /**
+     * 文字资源id
+     */
+    private int mTextId;
 
     private int colorStart;
     private int colorEnd;
@@ -29,7 +42,6 @@ public class SuperButton extends LinearLayout {
     private int colorPressEnd;
     private int colorS;
     private int colorE;
-    private String text;
     private int textColor;
     private float textSize;
     private float round;
@@ -37,7 +49,7 @@ public class SuperButton extends LinearLayout {
     private RectF mBackGroundRect;
     private LinearGradient backGradient;
 
-    private Paint mPaint = new Paint();
+    private Paint mPaintBackground = new Paint();
     private Paint mPaintText = new Paint();
 
     public SuperButton(Context context) {
@@ -50,22 +62,44 @@ public class SuperButton extends LinearLayout {
 
     public SuperButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        //必须加，否则onTouchEvent只响应ACTION_DOWN
+        parseAttrs(context, attrs);
         setClickable(true);
-        //设置抗锯齿
-        mPaint.setAntiAlias(true);
-        //设置防抖动
-        mPaint.setDither(true);
-        mPaint.setStyle(Paint.Style.FILL);
-
+        //背景画笔
+        mPaintBackground.setAntiAlias(true);
+        mPaintBackground.setDither(true);
+        mPaintBackground.setStyle(Paint.Style.FILL);
+        //文字画笔
         mPaintText.setAntiAlias(true);
         mPaintText.setDither(true);
 
-        ColorStateList backgroundColor = ColorStateList.valueOf(getResources().getColor(R.color.toast_bg_error));
-
+        ColorStateList backgroundColor = ColorStateList.valueOf(Color.BLUE);
         RoundRectDrawable background = new RoundRectDrawable(backgroundColor, 20);
-
         setBackground(background);
+    }
+
+    /**
+     * 解析属性
+     */
+    private void parseAttrs(Context context, @Nullable AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SuperButton);
+        int length = typedArray.getIndexCount();
+        for (int i = 0; i < length; i++) {
+            int attr = typedArray.getIndex(i);
+            //文字内容
+            if (attr == R.styleable.SuperButton_text){
+                mTextId = typedArray.getResourceId(attr, ID_NULL);
+                text = typedArray.getText(attr);
+            }
+            //文字颜色
+            if (attr == R.styleable.SuperButton_text_color){
+                mTextId = typedArray.getResourceId(attr, ID_NULL);
+                text = typedArray.getText(attr);
+            }
+
+        }
+
+
+        typedArray.recycle();
     }
 
 
@@ -86,7 +120,7 @@ public class SuperButton extends LinearLayout {
             width = widthSize;
             height = heightSize;
         }
-        setMeasuredDimension(width,height);
+        setMeasuredDimension(width, height);
     }
 
     @Override
@@ -100,15 +134,15 @@ public class SuperButton extends LinearLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        mPaint.setShader(backGradient);
+        LinearGradient backGradient = new LinearGradient(0, 0, 200, 200, new int[]{Color.RED, Color.GREEN}, null, Shader.TileMode.CLAMP);
+        mPaintBackground.setShader(backGradient);
         //绘制背景 圆角矩形
         if (mBackGroundRect != null) {
-            canvas.drawRoundRect(mBackGroundRect, round, round, mPaint);
+            canvas.drawRoundRect(mBackGroundRect, round, round, mPaintBackground);
         }
         //绘制文字
-        mPaintText.setTextSize(textSize);
-        mPaintText.setColor(textColor);
+        mPaintText.setTextSize(22);
+        mPaintText.setColor(Color.WHITE);
         mPaintText.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetricsInt fontMetrics = mPaintText.getFontMetricsInt();
         float baseline = mBackGroundRect.top + (mBackGroundRect.bottom - mBackGroundRect.top - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;

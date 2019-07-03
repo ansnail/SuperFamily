@@ -6,7 +6,7 @@
         <attr name="text_color" format="color|reference" />
         <attr name="text_size" format="dimension" />
         <!--默认背景颜色-->
-        <attr name="color" format="color" />
+        <attr name="color_normal" format="color" />
         <!--按压时的背景颜色-->
         <attr name="color_pressed" format="color" />
 

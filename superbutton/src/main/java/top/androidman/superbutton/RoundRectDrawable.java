@@ -61,9 +61,9 @@ class RoundRectDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        LinearGradient backGradient = new LinearGradient(0, 0, 200, 200, new int[]{Color.RED, Color.GREEN}, null, Shader.TileMode.CLAMP);
+//        LinearGradient backGradient = new LinearGradient(0, 0, 200, 200, new int[]{Color.RED, Color.GREEN}, null, Shader.TileMode.CLAMP);
         Paint paint = this.mPaint;
-        paint.setShader(backGradient);
+//        paint.setShader(backGradient);
         boolean clearColorFilter;
         if (this.mTintFilter != null && paint.getColorFilter() == null) {
             paint.setColorFilter(this.mTintFilter);
