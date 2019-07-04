@@ -3,7 +3,7 @@
     <declare-styleable name="SuperButton">
         <!--默认配置-->
         <attr name="text" format="string|reference" />
-        <attr name="text_color" format="color|reference" />
+        <attr name="text_color" format="color" />
         <attr name="text_size" format="dimension" />
         <!--默认背景颜色-->
         <attr name="color_normal" format="color" />
@@ -18,7 +18,7 @@
         <attr name="drawable_top" format="reference" />
         <!--图片在文字下边-->
         <attr name="drawable_bottom" format="reference" />
-       <!--图片距文字的距离-->
+        <!--图片距文字的距离-->
         <attr name="drawable_padding" format="dimension" />
 
         <!--形状-->
@@ -46,14 +46,21 @@
             <enum name="BOTTOM_TO_TOP" value="3" />
         </attr>
 
+        <!--按钮圆角，如果单独设置会覆盖此设置-->
+        <attr name="corner" format="dimension" />
         <!--左上角圆角半径-->
-        <attr name="corner_let_top" format="dimension" />
+        <attr name="corner_left_top" format="dimension" />
         <!--左下角圆角半径-->
-        <attr name="corner_let_bottom" format="dimension" />
+        <attr name="corner_left_bottom" format="dimension" />
         <!--右上角圆角半径-->
         <attr name="corner_right_top" format="dimension" />
         <!--右下角圆角半径-->
-        <attr name="radius_right_bottom" format="dimension" />
+        <attr name="corner_right_bottom" format="dimension" />
+
+        <!--边框宽度-->
+        <attr name="border_width" format="dimension" />
+        <!--边框颜色-->
+        <attr name="border_color" format="color" />
 
     </declare-styleable>
 </resources>

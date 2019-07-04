@@ -9,11 +9,14 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
+
+import static top.androidman.superbutton.ResourceId.ID_NULL;
 
 
 /**
@@ -24,9 +27,17 @@ import android.widget.LinearLayout;
  */
 public class SuperButton extends LinearLayout {
     /**
-     * id 默认值
+     * 形状
      */
-    private static final int ID_NULL = -1;
+    private static final int CIRCLE = 0x1;
+    private static final int RECT = 0x2;
+    /**
+     * 颜色方向
+     */
+    private static final int LEFT_TO_RIGHT = 0x1;
+    private static final int RIGHT_TO_LEFT = 0x2;
+    private static final int TOP_TO_BOTTOM = 0x3;
+    private static final int BOTTOM_TO_TOP = 0x4;
     /**
      * 文字内容
      */
@@ -35,6 +46,69 @@ public class SuperButton extends LinearLayout {
      * 文字资源id
      */
     private int mTextId;
+    /**
+     * 文字颜色
+     */
+    private int mTextColor;
+    /**
+     * 文字大小
+     */
+    private int mTextSize;
+    /**
+     * 默认背景颜色
+     */
+    private int mColorNormal;
+    /**
+     * 默认背景颜色
+     */
+    private int mColorPressed;
+    /**
+     * 图片资源
+     */
+    private Drawable mDrawableLeft = null;
+    private Drawable mDrawableRight = null;
+    private Drawable mDrawableTop = null;
+    private Drawable mDrawableBottom = null;
+    /**
+     * 形状
+     */
+    private int mShape = RECT;
+    /**
+     * 形状
+     */
+    private int mCircleRadius;
+    /**
+     * 当背景是渐进色时，开始颜色
+     */
+    private int mColorStart;
+    /**
+     * 当背景是渐进色时，中间颜色
+     */
+    private int mColorMiddle;
+    /**
+     * 当背景是渐进色时，结束颜色
+     */
+    private int mColorEnd;
+    /**
+     * 颜色方向
+     */
+    private int mColorDirection;
+    /**
+     * 四个角角度半径
+     */
+    private int mCornerLeftTop;
+    private int mCornerLeftBottom;
+    private int mCornerRightTop;
+    private int mCornerRightBottom;
+    /**
+     * 边框颜色
+     */
+    private int mBorderColor;
+    /**
+     * 边框宽度
+     */
+    private int mBorderWidth;
+
 
     private int colorStart;
     private int colorEnd;
@@ -84,24 +158,97 @@ public class SuperButton extends LinearLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SuperButton);
         int length = typedArray.getIndexCount();
         for (int i = 0; i < length; i++) {
-            int attr = typedArray.getIndex(i);
+            int index = typedArray.getIndex(i);
             //文字内容
-            if (attr == R.styleable.SuperButton_text){
-                mTextId = typedArray.getResourceId(attr, ID_NULL);
-                text = typedArray.getText(attr);
+            if (index == R.styleable.SuperButton_text) {
+                mTextId = typedArray.getResourceId(index, ID_NULL);
+                text = typedArray.getText(index);
             }
             //文字颜色
-            if (attr == R.styleable.SuperButton_text_color){
-                mTextId = typedArray.getResourceId(attr, ID_NULL);
-                text = typedArray.getText(attr);
+            if (index == R.styleable.SuperButton_text_color) {
+                mTextColor = typedArray.getColor(i, Color.TRANSPARENT);
             }
-
+            //文字大小
+            if (index == R.styleable.SuperButton_text_size) {
+                mTextSize = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //默认背景颜色
+            if (index == R.styleable.SuperButton_color_normal) {
+                mColorNormal = typedArray.getColor(i, Color.TRANSPARENT);
+            }
+            //按压状态颜色
+            if (index == R.styleable.SuperButton_color_pressed) {
+                mColorPressed = typedArray.getColor(i, Color.TRANSPARENT);
+            }
+            //图片在文字左边
+            if (index == R.styleable.SuperButton_drawable_left) {
+                mDrawableLeft = typedArray.getDrawable(i);
+            }
+            //图片在文字右边
+            if (index == R.styleable.SuperButton_drawable_right) {
+                mDrawableRight = typedArray.getDrawable(i);
+            }
+            //图片在文字上边
+            if (index == R.styleable.SuperButton_drawable_top) {
+                mDrawableTop = typedArray.getDrawable(i);
+            }
+            //图片在文字下边
+            if (index == R.styleable.SuperButton_drawable_bottom) {
+                mDrawableBottom = typedArray.getDrawable(i);
+            }
+            //形状
+            if (index == R.styleable.SuperButton_drawable_bottom) {
+                mShape = typedArray.getInt(i,RECT);
+            }
+            //圆形半径
+            if (index == R.styleable.SuperButton_circle_radius) {
+                mCircleRadius = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //开始颜色
+            if (index == R.styleable.SuperButton_color_start) {
+                mColorStart = typedArray.getColor(i, Color.TRANSPARENT);
+            }
+            //中间颜色
+            if (index == R.styleable.SuperButton_color_middle) {
+                mColorMiddle = typedArray.getColor(i, Color.TRANSPARENT);
+            }
+            //结束颜色
+            if (index == R.styleable.SuperButton_color_end) {
+                mColorEnd = typedArray.getColor(i, Color.TRANSPARENT);
+            }
+            //形状
+            if (index == R.styleable.SuperButton_color_direction) {
+                mColorDirection = typedArray.getInt(i,LEFT_TO_RIGHT);
+            }
+            //左上角圆角半径
+            if (index == R.styleable.SuperButton_corner_left_top) {
+                mCornerLeftTop = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //右上角圆角半径
+            if (index == R.styleable.SuperButton_corner_right_top) {
+                mCornerRightTop = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //左下角圆角半径
+            if (index == R.styleable.SuperButton_corner_left_bottom) {
+                mCornerLeftBottom = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //右下角圆角半径
+            if (index == R.styleable.SuperButton_corner_right_bottom) {
+                mCornerLeftBottom = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //边框宽度
+            if (index == R.styleable.SuperButton_border_width) {
+                mBorderWidth = typedArray.getDimensionPixelSize(i, 0);
+            }
+            //边框颜色
+            if (index == R.styleable.SuperButton_border_color) {
+                mBorderColor = typedArray.getColor(i, Color.TRANSPARENT);
+            }
         }
 
 
         typedArray.recycle();
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -146,7 +293,7 @@ public class SuperButton extends LinearLayout {
         mPaintText.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetricsInt fontMetrics = mPaintText.getFontMetricsInt();
         float baseline = mBackGroundRect.top + (mBackGroundRect.bottom - mBackGroundRect.top - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-        canvas.drawText("床前明月光", canvas.getWidth() / 2, baseline, mPaintText);
+        canvas.drawText(text.toString(), canvas.getWidth() / 2, baseline, mPaintText);
 
     }
 
