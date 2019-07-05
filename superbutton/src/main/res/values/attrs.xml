@@ -2,22 +2,23 @@
 <resources>
     <declare-styleable name="SuperButton">
         <!--默认配置-->
-        <attr name="text" format="string|reference" />
-        <attr name="text_color" format="color" />
-        <attr name="text_size" format="dimension" />
+        <attr name="android:text" />
+        <attr name="android:textColor" />
+        <attr name="android:textSize" />
+
         <!--默认背景颜色-->
-        <attr name="color_normal" format="color" />
+        <attr name="color_normal" format="reference|color" />
         <!--按压时的背景颜色-->
-        <attr name="color_pressed" format="color" />
+        <attr name="color_pressed" format="reference|color" />
 
         <!--图片在文字左边-->
-        <attr name="drawable_left" format="reference" />
+        <attr name="drawable_left" format="reference|color" />
         <!--图片在文字右边-->
-        <attr name="drawable_right" format="reference" />
+        <attr name="drawable_right" format="reference|color" />
         <!--图片在文字上边-->
-        <attr name="drawable_top" format="reference" />
+        <attr name="drawable_top" format="reference|color" />
         <!--图片在文字下边-->
-        <attr name="drawable_bottom" format="reference" />
+        <attr name="drawable_bottom" format="reference|color" />
         <!--图片距文字的距离-->
         <attr name="drawable_padding" format="dimension" />
 
