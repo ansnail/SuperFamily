@@ -2,7 +2,6 @@ package top.androidman.superbutton;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -54,7 +53,7 @@ public class SuperButton extends LinearLayout {
     /**
      * 默认背景颜色
      */
-    private ColorStateList mColorNormal;
+    private Drawable mColorNormal;
     /**
      * 默认背景颜色
      */
@@ -151,15 +150,22 @@ public class SuperButton extends LinearLayout {
         //自有属性
         setGravity(Gravity.CENTER);
         setClickable(true);
+        mBackgroundPaint.setStyle(Paint.Style.FILL);
+        mBackgroundPaint.setColor(Color.GRAY);
         //解析属性
         parseAttrs(context, attrs, defStyleAttr, defStyleRes);
         //设置文字和icon相关属性
+        setBackgroundColor(Color.WHITE);
         mTextIconContainer = new TextView(getContext());
         mTextIconContainer.setText(text);
         mTextIconContainer.setTextSize(mTextSize);
-        mTextIconContainer.setTextColor(mTextColor);
-
-        addView(mTextIconContainer);
+        mTextIconContainer.setTextColor(Color.GREEN);
+//        mTextIconContainer.setBackgroundColor(Color.RED);
+        removeAllViews();
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        addView(mTextIconContainer, layoutParams);
+//        ColorStateList backgroundColor = ColorStateList.valueOf(Color.BLUE);
+//        RoundRectDrawable background = new RoundRectDrawable(backgroundColor, 20);
     }
 
     /**
@@ -195,7 +201,7 @@ public class SuperButton extends LinearLayout {
             }
             //默认背景颜色
             if (attr == R.styleable.SuperButton_color_normal) {
-                mColorNormal = typedArray.getColorStateList(attr);
+                mColorNormal = typedArray.getDrawable(attr);
             }
             //按压状态颜色
             if (attr == R.styleable.SuperButton_color_pressed) {
@@ -297,29 +303,27 @@ public class SuperButton extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mBackGroundRect = new RectF(0, 0, w, h);
-        backGradient = new LinearGradient(0, 0, w, 0, new int[]{colorS, colorE}, null, Shader.TileMode.CLAMP);
+        backGradient = new LinearGradient(0, 0, w, 0, new int[]{Color.GREEN, Color.RED}, null, Shader.TileMode.CLAMP);
     }
 
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        RoundRectDrawable background = new RoundRectDrawable(ColorStateList.valueOf(Color.BLUE), 20);
-        setBackground(background);
 
-        LinearGradient backGradient = new LinearGradient(0, 0, 200, 200, new int[]{Color.RED, Color.GREEN}, null, Shader.TileMode.CLAMP);
-        mBackgroundPaint.setShader(backGradient);
-        //绘制背景 圆角矩形
+//        mBackgroundPaint.setShader(backGradient);
+//        //绘制背景 圆角矩形
 //        if (mBackGroundRect != null) {
-//            canvas.drawRoundRect(mBackGroundRect, round, round, mBackgroundPaint);
+            canvas.drawRoundRect(mBackGroundRect, 20, 20, mBackgroundPaint);
 //        }
-        //绘制文字
+//        //绘制文字
         mTextPaint.setTextSize(22);
-        mTextPaint.setColor(mTextColor);
+        mTextPaint.setColor(Color.RED);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();
         float baseline = mBackGroundRect.top + (mBackGroundRect.bottom - mBackGroundRect.top - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-        canvas.drawText(text.toString(), canvas.getWidth() / 2, baseline, mTextPaint);
+        canvas.drawText("床前明月光", canvas.getWidth() / 2, baseline, mTextPaint);
+
 
     }
 

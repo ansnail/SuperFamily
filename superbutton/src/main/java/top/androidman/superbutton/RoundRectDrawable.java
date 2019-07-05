@@ -2,16 +2,14 @@ package top.androidman.superbutton;
 
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
-import android.graphics.LinearGradient;
 import android.graphics.Outline;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -34,7 +32,7 @@ class RoundRectDrawable extends Drawable {
     RoundRectDrawable(ColorStateList backgroundColor, float radius) {
         this.mTintMode = Mode.SRC_IN;
         this.mRadius = radius;
-        this.mPaint = new Paint(5);
+        this.mPaint = new Paint();
         this.setBackground(backgroundColor);
         this.mBoundsF = new RectF();
         this.mBoundsI = new Rect();
@@ -63,6 +61,7 @@ class RoundRectDrawable extends Drawable {
     public void draw(Canvas canvas) {
 //        LinearGradient backGradient = new LinearGradient(0, 0, 200, 200, new int[]{Color.RED, Color.GREEN}, null, Shader.TileMode.CLAMP);
         Paint paint = this.mPaint;
+        paint.setStyle(Paint.Style.FILL);
 //        paint.setShader(backGradient);
         boolean clearColorFilter;
         if (this.mTintFilter != null && paint.getColorFilter() == null) {
@@ -126,7 +125,7 @@ class RoundRectDrawable extends Drawable {
 
     @Override
     public int getOpacity() {
-        return -3;
+        return PixelFormat.TRANSLUCENT;
     }
 
     public float getRadius() {
