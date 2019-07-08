@@ -1,20 +1,15 @@
 package top.androidman.superbutton;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,7 +48,7 @@ public class SuperButton extends LinearLayout {
     /**
      * 默认背景颜色
      */
-    private Drawable mColorNormal;
+    private int mColorNormal;
     /**
      * 默认背景颜色
      */
@@ -96,10 +91,10 @@ public class SuperButton extends LinearLayout {
     /**
      * 四个角角度半径
      */
-    private int mCornerLeftTop;
-    private int mCornerLeftBottom;
-    private int mCornerRightTop;
-    private int mCornerRightBottom;
+    private int mCornerTopLeft = ResourceId.VALUE_NULL;
+    private int mCornerBottomLeft = ResourceId.VALUE_NULL;
+    private int mCornerTopRight = ResourceId.VALUE_NULL;
+    private int mCornerBottomRight = ResourceId.VALUE_NULL;
     /**
      * 边框颜色
      */
@@ -114,25 +109,6 @@ public class SuperButton extends LinearLayout {
      */
     private TextView mTextIconContainer;
 
-
-    private int colorStart;
-    private int colorEnd;
-    private int colorPressStart;
-    private int colorPressEnd;
-    private int colorS;
-    private int colorE;
-    private int textColor;
-    private float textSize;
-    private float round;
-    private boolean clickEffect;
-    private RectF mBackGroundRect;
-    private LinearGradient backGradient;
-    /**
-     * 背景画笔
-     */
-    private Paint mBackgroundPaint = PaintFactory.creatPaint();
-    private Paint mTextPaint = PaintFactory.creatPaint();
-
     public SuperButton(Context context) {
         this(context, null);
     }
@@ -142,30 +118,39 @@ public class SuperButton extends LinearLayout {
     }
 
     public SuperButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public SuperButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        //自有属性
-        setGravity(Gravity.CENTER);
+        super(context, attrs, defStyleAttr, 0);
         setClickable(true);
-        mBackgroundPaint.setStyle(Paint.Style.FILL);
-        mBackgroundPaint.setColor(Color.GRAY);
+        setGravity(Gravity.CENTER);
+        mTextIconContainer = new TextView(context);
         //解析属性
-        parseAttrs(context, attrs, defStyleAttr, defStyleRes);
-        //设置文字和icon相关属性
-        setBackgroundColor(Color.WHITE);
-        mTextIconContainer = new TextView(getContext());
+        parseAttrs(context, attrs);
+
+        //按钮背景
+        GradientDrawable buttonBackground = new GradientDrawable();
+        buttonBackground.setShape(GradientDrawable.OVAL);
+        //设置填充颜色
+        buttonBackground.setColor(ColorStateList.valueOf(mColorNormal));
+        //ordered top-left, top-right, bottom-right, bottom-left
+        buttonBackground.setCornerRadii(new float[]{
+                mCornerTopLeft != ResourceId.VALUE_NULL ? mCornerTopLeft : mCorner, mCornerTopLeft != ResourceId.VALUE_NULL ? mCornerTopLeft : mCorner,
+                mCornerTopRight != ResourceId.VALUE_NULL ? mCornerTopRight : mCorner, mCornerTopRight != ResourceId.VALUE_NULL ? mCornerTopRight : mCorner,
+                mCornerBottomRight != ResourceId.VALUE_NULL ? mCornerBottomRight : mCorner, mCornerBottomRight != ResourceId.VALUE_NULL ? mCornerBottomRight : mCorner,
+                mCornerBottomLeft != ResourceId.VALUE_NULL ? mCornerBottomLeft : mCorner, mCornerBottomLeft != ResourceId.VALUE_NULL ? mCornerBottomLeft : mCorner});
+
+        //设置边框颜色和边框宽度
+        buttonBackground.setStroke(mBorderWidth, mBorderColor);
+        //最终设置
+        setBackground(buttonBackground);
+
+        //设置文字
         mTextIconContainer.setText(text);
-        mTextIconContainer.setTextSize(mTextSize);
-        mTextIconContainer.setTextColor(Color.GREEN);
-//        mTextIconContainer.setBackgroundColor(Color.RED);
-        removeAllViews();
-        LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        addView(mTextIconContainer, layoutParams);
-//        ColorStateList backgroundColor = ColorStateList.valueOf(Color.BLUE);
-//        RoundRectDrawable background = new RoundRectDrawable(backgroundColor, 20);
+        //设置文字大小
+        mTextIconContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+        //设置文字颜色
+        mTextIconContainer.setTextColor(mTextColor);
+        mTextIconContainer.setSingleLine();
+        mTextIconContainer.setGravity(Gravity.CENTER);
+        addView(mTextIconContainer);
     }
 
     /**
@@ -182,8 +167,8 @@ public class SuperButton extends LinearLayout {
     /**
      * 属性解析
      */
-    private void parseAttrs(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SuperButton, defStyleAttr, defStyleRes);
+    private void parseAttrs(Context context, @Nullable AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SuperButton);
         int length = typedArray.getIndexCount();
         for (int i = 0; i < length; i++) {
             int attr = typedArray.getIndex(i);
@@ -197,11 +182,11 @@ public class SuperButton extends LinearLayout {
             }
             //文字大小
             if (attr == R.styleable.SuperButton_android_textSize) {
-                mTextSize = typedArray.getDimensionPixelSize(attr, 0);
+                mTextSize = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
             }
             //默认背景颜色
             if (attr == R.styleable.SuperButton_color_normal) {
-                mColorNormal = typedArray.getDrawable(attr);
+                mColorNormal = typedArray.getColor(attr, Color.TRANSPARENT);
             }
             //按压状态颜色
             if (attr == R.styleable.SuperButton_color_pressed) {
@@ -229,7 +214,7 @@ public class SuperButton extends LinearLayout {
             }
             //圆形半径
             if (attr == R.styleable.SuperButton_circle_radius) {
-                mCircleRadius = typedArray.getDimensionPixelSize(attr, 0);
+                mCircleRadius = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
             }
             //开始颜色
             if (attr == R.styleable.SuperButton_color_start) {
@@ -249,23 +234,23 @@ public class SuperButton extends LinearLayout {
             }
             //所有角圆角半径
             if (attr == R.styleable.SuperButton_corner) {
-                mCorner = typedArray.getDimensionPixelSize(attr, 0);
+                mCorner = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
             }
             //左上角圆角半径
-            if (attr == R.styleable.SuperButton_corner_left_top) {
-                mCornerLeftTop = typedArray.getDimensionPixelSize(attr, 0);
+            if (attr == R.styleable.SuperButton_corner_top_left) {
+                mCornerTopLeft = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //右上角圆角半径
-            if (attr == R.styleable.SuperButton_corner_right_top) {
-                mCornerRightTop = typedArray.getDimensionPixelSize(attr, 0);
+            if (attr == R.styleable.SuperButton_corner_top_right) {
+                mCornerTopRight = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //左下角圆角半径
-            if (attr == R.styleable.SuperButton_corner_left_bottom) {
-                mCornerLeftBottom = typedArray.getDimensionPixelSize(attr, 0);
+            if (attr == R.styleable.SuperButton_corner_bottom_left) {
+                mCornerBottomLeft = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //右下角圆角半径
-            if (attr == R.styleable.SuperButton_corner_right_bottom) {
-                mCornerRightBottom = typedArray.getDimensionPixelSize(attr, 0);
+            if (attr == R.styleable.SuperButton_corner_bottom_right) {
+                mCornerBottomRight = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //边框宽度
             if (attr == R.styleable.SuperButton_border_width) {
@@ -279,86 +264,24 @@ public class SuperButton extends LinearLayout {
         typedArray.recycle();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        int width;
-        int height;
-
-        if (widthMode == MeasureSpec.EXACTLY) {
-            width = widthSize;
-            height = heightSize;
-        } else {
-            width = widthSize;
-            height = heightSize;
-        }
-        setMeasuredDimension(width, height);
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mBackGroundRect = new RectF(0, 0, w, h);
-        backGradient = new LinearGradient(0, 0, w, 0, new int[]{Color.GREEN, Color.RED}, null, Shader.TileMode.CLAMP);
-    }
-
-    @SuppressLint("DrawAllocation")
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-//        mBackgroundPaint.setShader(backGradient);
-//        //绘制背景 圆角矩形
-//        if (mBackGroundRect != null) {
-            canvas.drawRoundRect(mBackGroundRect, 20, 20, mBackgroundPaint);
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+//        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+//        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+//
+//        int width;
+//        int height;
+//
+//        if (widthMode == MeasureSpec.EXACTLY) {
+//            width = widthSize;
+//            height = heightSize;
+//        } else {
+//            width = widthSize;
+//            height = heightSize;
 //        }
-//        //绘制文字
-        mTextPaint.setTextSize(22);
-        mTextPaint.setColor(Color.RED);
-        mTextPaint.setTextAlign(Paint.Align.CENTER);
-        Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();
-        float baseline = mBackGroundRect.top + (mBackGroundRect.bottom - mBackGroundRect.top - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-        canvas.drawText("床前明月光", canvas.getWidth() / 2, baseline, mTextPaint);
+//        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+//    }
 
-
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (clickEffect) {
-            //刷新
-            invalidate();
-            //判断点击操作
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    colorS = colorPressStart;
-                    colorE = colorPressEnd;
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    break;
-                case MotionEvent.ACTION_UP:
-                    colorS = colorStart;
-                    colorE = colorEnd;
-                    break;
-                case MotionEvent.ACTION_CANCEL:
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return super.onTouchEvent(event);
-    }
-
-
-    public void setText(String text) {
-        if (!TextUtils.isEmpty(text)) {
-            this.text = text;
-            invalidate();
-        }
-    }
 }

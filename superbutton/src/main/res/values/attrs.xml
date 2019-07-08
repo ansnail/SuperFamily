@@ -50,13 +50,13 @@
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" format="dimension" />
         <!--左上角圆角半径-->
-        <attr name="corner_left_top" format="dimension" />
+        <attr name="corner_top_left" format="dimension" />
         <!--左下角圆角半径-->
-        <attr name="corner_left_bottom" format="dimension" />
+        <attr name="corner_bottom_left" format="dimension" />
         <!--右上角圆角半径-->
-        <attr name="corner_right_top" format="dimension" />
+        <attr name="corner_top_right" format="dimension" />
         <!--右下角圆角半径-->
-        <attr name="corner_right_bottom" format="dimension" />
+        <attr name="corner_bottom_right" format="dimension" />
 
         <!--边框宽度-->
         <attr name="border_width" format="dimension" />

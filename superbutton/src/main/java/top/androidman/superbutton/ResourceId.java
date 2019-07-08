@@ -9,6 +9,9 @@ public final class ResourceId {
      */
     public static final @AnyRes int ID_NULL = 0;
 
+    public static final int VALUE_NULL = -1;
+    public static final int VALUE_DEFAULT = 0;
+
     public static boolean isValid(@AnyRes int id) {
         // With the introduction of packages with IDs > 0x7f, resource IDs can be negative when
         // represented as a signed Java int. Some legacy code assumes -1 is an invalid resource ID,
