@@ -21,6 +21,8 @@
         <attr name="drawable_bottom" format="reference|color" />
         <!--图片距文字的距离-->
         <attr name="drawable_padding" format="dimension" />
+        <!--图标根据文字大小自动缩放图标-->
+        <attr name="drawable_auto" format="boolean" />
 
         <!--形状-->
         <attr name="shape" format="enum">
@@ -29,22 +31,30 @@
             <!--矩形-->
             <enum name="RECT" value="2" />
         </attr>
-        <!--圆形半径-->
-        <attr name="circle_radius" format="dimension" />
 
         <!--按钮背景是渐变色时设置-->
         <!--开始颜色-->
         <attr name="color_start" format="color" />
-        <!--中间颜色-->
-        <attr name="color_middle" format="color" />
         <!--结束颜色-->
         <attr name="color_end" format="color" />
         <!--颜色方向-->
         <attr name="color_direction" format="enum">
-            <enum name="LEFT_TO_RIGHT" value="0" />
-            <enum name="RIGHT_TO_LEFT" value="1" />
-            <enum name="TOP_TO_BOTTOM" value="2" />
-            <enum name="BOTTOM_TO_TOP" value="3" />
+            <!--draw the gradient from the top to the bottom-->
+            <enum name="TOP_BOTTOM" value="0x1" />
+            <!--draw the gradient from the top-right to the bottom-left-->
+            <enum name="TR_BL" value="0x2" />
+            <!--draw the gradient from the right to the left-->
+            <enum name="RIGHT_LEFT" value="0x3" />
+            <!--draw the gradient from the bottom-right to the top-left-->
+            <enum name="BR_TL" value="0x4" />
+            <!--draw the gradient from the bottom to the top-->
+            <enum name="BOTTOM_TOP" value="0x5" />
+            <!--draw the gradient from the bottom-left to the top-right-->
+            <enum name="BL_TR" value="0x6" />
+            <!--draw the gradient from the left to the right-->
+            <enum name="LEFT_RIGHT" value="0x7" />
+            <!--draw the gradient from the top-left to the bottom-right-->
+            <enum name="TL_BR" value="0x8" />
         </attr>
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->

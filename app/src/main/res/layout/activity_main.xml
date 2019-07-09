@@ -8,16 +8,20 @@
     tools:context=".MainActivity">
 
     <top.androidman.superbutton.SuperButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
         android:layout_marginTop="50dp"
-        android:text="@string/app_name"
-        android:textColor="@color/color_red"
+        android:text="床前明月光"
+        android:textColor="@color/color_white"
         android:textSize="22dp"
+        app:drawable_left="@mipmap/icon_like"
+        app:drawable_padding="20dp"
         app:color_normal="@color/color_accent"
+        app:color_pressed="@color/color_red"
         app:corner="30dp"
-        app:corner_bottom_right="0dp"
-        app:corner_top_left="0dp" />
+        app:corner_bottom_left="0dp"
+        app:corner_top_right="0dp" />
 
 </LinearLayout>

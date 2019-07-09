@@ -6,10 +6,14 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,13 +30,39 @@ public class SuperButton extends LinearLayout {
      */
     private static final int CIRCLE = 0x1;
     private static final int RECT = 0x2;
+
     /**
-     * 颜色方向
+     * draw the gradient from the top to the bottom
      */
-    private static final int LEFT_TO_RIGHT = 0x1;
-    private static final int RIGHT_TO_LEFT = 0x2;
-    private static final int TOP_TO_BOTTOM = 0x3;
-    private static final int BOTTOM_TO_TOP = 0x4;
+    private static final int TOP_BOTTOM = 0x1;
+    /**
+     * draw the gradient from the top-right to the bottom-left
+     */
+    private static final int TR_BL = 0x2;
+    /**
+     * draw the gradient from the right to the left
+     */
+    private static final int RIGHT_LEFT = 0x3;
+    /**
+     * draw the gradient from the bottom-right to the top-left
+     */
+    private static final int BR_TL = 0x4;
+    /**
+     * draw the gradient from the bottom to the top
+     */
+    private static final int BOTTOM_TOP = 0x5;
+    /**
+     * draw the gradient from the bottom-left to the top-right
+     */
+    private static final int BL_TR = 0x6;
+    /**
+     * draw the gradient from the left to the right
+     */
+    private static final int LEFT_RIGHT = 0x7;
+    /**
+     * draw the gradient from the top-left to the bottom-right
+     */
+    private static final int TL_BR = 0x8;
     /**
      * 文字内容
      */
@@ -48,11 +78,11 @@ public class SuperButton extends LinearLayout {
     /**
      * 默认背景颜色
      */
-    private int mColorNormal;
+    private int mColorNormal = ResourceId.VALUE_NULL;
     /**
      * 默认背景颜色
      */
-    private int mColorPressed;
+    private int mColorPressed = ResourceId.VALUE_NULL;
     /**
      * 图片资源
      */
@@ -60,30 +90,27 @@ public class SuperButton extends LinearLayout {
     private Drawable mDrawableRight = null;
     private Drawable mDrawableTop = null;
     private Drawable mDrawableBottom = null;
+    private boolean mDrawableAuto = true;
+    /**
+     * 图片距离文字距离
+     */
+    private int mDrawablePadding;
     /**
      * 形状
      */
     private int mShape = RECT;
     /**
-     * 形状
-     */
-    private int mCircleRadius;
-    /**
      * 当背景是渐进色时，开始颜色
      */
-    private int mColorStart;
-    /**
-     * 当背景是渐进色时，中间颜色
-     */
-    private int mColorMiddle;
+    private int mColorStart = ResourceId.VALUE_NULL;
     /**
      * 当背景是渐进色时，结束颜色
      */
-    private int mColorEnd;
+    private int mColorEnd = ResourceId.VALUE_NULL;
     /**
      * 颜色方向
      */
-    private int mColorDirection;
+    private int mColorDirection = LEFT_RIGHT;
     /**
      * 所有角圆角半径
      */
@@ -108,6 +135,10 @@ public class SuperButton extends LinearLayout {
      * 文字和图标容器
      */
     private TextView mTextIconContainer;
+    /**
+     * 按钮背景
+     */
+    private GradientDrawable mButtonBackground;
 
     public SuperButton(Context context) {
         this(context, null);
@@ -124,23 +155,50 @@ public class SuperButton extends LinearLayout {
         mTextIconContainer = new TextView(context);
         //解析属性
         parseAttrs(context, attrs);
-
         //按钮背景
-        GradientDrawable buttonBackground = new GradientDrawable();
-        buttonBackground.setShape(GradientDrawable.OVAL);
-        //设置填充颜色
-        buttonBackground.setColor(ColorStateList.valueOf(mColorNormal));
+        mButtonBackground = new GradientDrawable();
+        //设置渐变色
+        if (mColorStart != ResourceId.VALUE_NULL && mColorEnd != ResourceId.VALUE_NULL) {
+            if (mColorDirection == TOP_BOTTOM) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+            } else if (mColorDirection == TR_BL) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.TR_BL);
+            } else if (mColorDirection == RIGHT_LEFT) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.RIGHT_LEFT);
+            } else if (mColorDirection == BR_TL) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.BR_TL);
+            } else if (mColorDirection == BOTTOM_TOP) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+            } else if (mColorDirection == BL_TR) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.BL_TR);
+            } else if (mColorDirection == LEFT_RIGHT) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+            } else if (mColorDirection == TL_BR) {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.TL_BR);
+            } else {
+                mButtonBackground.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+            }
+            mButtonBackground.setColors(new int[]{mColorStart, mColorEnd});
+        } else {
+            //设置填充颜色
+            setButtonBackgroundColor(mColorNormal);
+        }
+        if (mShape == CIRCLE) {
+            mButtonBackground.setShape(GradientDrawable.OVAL);
+        } else {
+            mButtonBackground.setShape(GradientDrawable.RECTANGLE);
+        }
         //ordered top-left, top-right, bottom-right, bottom-left
-        buttonBackground.setCornerRadii(new float[]{
+        mButtonBackground.setCornerRadii(new float[]{
                 mCornerTopLeft != ResourceId.VALUE_NULL ? mCornerTopLeft : mCorner, mCornerTopLeft != ResourceId.VALUE_NULL ? mCornerTopLeft : mCorner,
                 mCornerTopRight != ResourceId.VALUE_NULL ? mCornerTopRight : mCorner, mCornerTopRight != ResourceId.VALUE_NULL ? mCornerTopRight : mCorner,
                 mCornerBottomRight != ResourceId.VALUE_NULL ? mCornerBottomRight : mCorner, mCornerBottomRight != ResourceId.VALUE_NULL ? mCornerBottomRight : mCorner,
                 mCornerBottomLeft != ResourceId.VALUE_NULL ? mCornerBottomLeft : mCorner, mCornerBottomLeft != ResourceId.VALUE_NULL ? mCornerBottomLeft : mCorner});
 
         //设置边框颜色和边框宽度
-        buttonBackground.setStroke(mBorderWidth, mBorderColor);
+        mButtonBackground.setStroke(mBorderWidth, mBorderColor);
         //最终设置
-        setBackground(buttonBackground);
+        setBackground(mButtonBackground);
 
         //设置文字
         mTextIconContainer.setText(text);
@@ -148,20 +206,46 @@ public class SuperButton extends LinearLayout {
         mTextIconContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
         //设置文字颜色
         mTextIconContainer.setTextColor(mTextColor);
+        mTextIconContainer.setCompoundDrawablePadding(mDrawablePadding);
         mTextIconContainer.setSingleLine();
         mTextIconContainer.setGravity(Gravity.CENTER);
-        addView(mTextIconContainer);
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        addView(mTextIconContainer, layoutParams);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
+                break;
+            case MotionEvent.ACTION_UP:
+                setButtonBackgroundColor(mColorNormal);
+                break;
+            default:
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
     /**
-     * 属性绘制排序
+     * 设置正常状态下颜色
      */
-    private void attrsSort() {
-        //形状
-        if (mShape == RECT) {
+    public void setButtonBackgroundColor(@ColorInt int color) {
+        mButtonBackground.setColor(ColorStateList.valueOf(color));
+    }
 
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if (mDrawableAuto) {
+            mDrawableLeft.setBounds(0, 0, mTextIconContainer.getHeight(), mTextIconContainer.getHeight());
+            //设置文字drawable
+            mTextIconContainer.setCompoundDrawables(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
+        } else {
+            mTextIconContainer.setCompoundDrawablesWithIntrinsicBounds(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
         }
-
+        Log.e("xxx", "width = " + mTextIconContainer.getWidth() + ", height = " + mTextIconContainer.getHeight());
     }
 
     /**
@@ -186,11 +270,11 @@ public class SuperButton extends LinearLayout {
             }
             //默认背景颜色
             if (attr == R.styleable.SuperButton_color_normal) {
-                mColorNormal = typedArray.getColor(attr, Color.TRANSPARENT);
+                mColorNormal = typedArray.getColor(attr, ResourceId.VALUE_NULL);
             }
             //按压状态颜色
             if (attr == R.styleable.SuperButton_color_pressed) {
-                mColorPressed = typedArray.getColor(attr, Color.TRANSPARENT);
+                mColorPressed = typedArray.getColor(attr, ResourceId.VALUE_NULL);
             }
             //图片在文字左边
             if (attr == R.styleable.SuperButton_drawable_left) {
@@ -208,29 +292,28 @@ public class SuperButton extends LinearLayout {
             if (attr == R.styleable.SuperButton_drawable_bottom) {
                 mDrawableBottom = typedArray.getDrawable(attr);
             }
-            //形状
-            if (attr == R.styleable.SuperButton_drawable_bottom) {
-                mShape = typedArray.getInt(attr, RECT);
+            if (attr == R.styleable.SuperButton_drawable_auto) {
+                mDrawableAuto = typedArray.getBoolean(attr, true);
             }
-            //圆形半径
-            if (attr == R.styleable.SuperButton_circle_radius) {
-                mCircleRadius = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
+            //图片距离文字距离
+            if (attr == R.styleable.SuperButton_drawable_padding) {
+                mDrawablePadding = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
+            }
+            //形状
+            if (attr == R.styleable.SuperButton_shape) {
+                mShape = typedArray.getInt(attr, RECT);
             }
             //开始颜色
             if (attr == R.styleable.SuperButton_color_start) {
                 mColorStart = typedArray.getColor(attr, Color.TRANSPARENT);
             }
-            //中间颜色
-            if (attr == R.styleable.SuperButton_color_middle) {
-                mColorMiddle = typedArray.getColor(attr, Color.TRANSPARENT);
-            }
             //结束颜色
             if (attr == R.styleable.SuperButton_color_end) {
                 mColorEnd = typedArray.getColor(attr, Color.TRANSPARENT);
             }
-            //形状
+            //颜色方向
             if (attr == R.styleable.SuperButton_color_direction) {
-                mColorDirection = typedArray.getInt(attr, LEFT_TO_RIGHT);
+                mColorDirection = typedArray.getInt(attr, LEFT_RIGHT);
             }
             //所有角圆角半径
             if (attr == R.styleable.SuperButton_corner) {
@@ -263,25 +346,5 @@ public class SuperButton extends LinearLayout {
         }
         typedArray.recycle();
     }
-
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-//        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-//        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-//        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-//
-//        int width;
-//        int height;
-//
-//        if (widthMode == MeasureSpec.EXACTLY) {
-//            width = widthSize;
-//            height = heightSize;
-//        } else {
-//            width = widthSize;
-//            height = heightSize;
-//        }
-//        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
-//    }
 
 }
