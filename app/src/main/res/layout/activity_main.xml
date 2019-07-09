@@ -8,6 +8,8 @@
     tools:context=".MainActivity">
 
     <top.androidman.superbutton.SuperButton
+        android:id="@+id/super_button"
+        android:onClick="test"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
@@ -18,6 +20,7 @@
         android:textSize="22dp"
         app:drawable_left="@mipmap/icon_like"
         app:drawable_padding="20dp"
+        app:button_click_able="false"
         app:color_normal="@color/color_accent"
         app:color_pressed="@color/color_red"
         app:corner="30dp"

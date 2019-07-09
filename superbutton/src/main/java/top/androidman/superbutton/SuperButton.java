@@ -9,7 +9,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -139,6 +138,10 @@ public class SuperButton extends LinearLayout {
      * 按钮背景
      */
     private GradientDrawable mButtonBackground;
+    /**
+     * 按钮是否可以点击
+     */
+    private boolean mButtonClickable = true;
 
     public SuperButton(Context context) {
         this(context, null);
@@ -150,7 +153,6 @@ public class SuperButton extends LinearLayout {
 
     public SuperButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr, 0);
-        setClickable(true);
         setGravity(Gravity.CENTER);
         mTextIconContainer = new TextView(context);
         //解析属性
@@ -215,6 +217,9 @@ public class SuperButton extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!mButtonClickable) {
+            return true;
+        }
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
@@ -245,7 +250,35 @@ public class SuperButton extends LinearLayout {
         } else {
             mTextIconContainer.setCompoundDrawablesWithIntrinsicBounds(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
         }
-        Log.e("xxx", "width = " + mTextIconContainer.getWidth() + ", height = " + mTextIconContainer.getHeight());
+    }
+
+    /**
+     * 修改文字
+     */
+    public void setText(CharSequence text) {
+        if (text == null) {
+            return;
+        }
+        mTextIconContainer.setText(text);
+    }
+
+    /**
+     * 修改文字颜色
+     */
+    public void setTextColor(@ColorInt int textColor) {
+        mTextIconContainer.setTextColor(textColor);
+    }
+
+    /**
+     * 修改默认背景颜色
+     */
+    public void setColorNormal(@ColorInt int colorNormal) {
+        mButtonBackground.setColor(ColorStateList.valueOf(colorNormal));
+        setBackground(mButtonBackground);
+    }
+
+    public void setButtonClickable(boolean buttonClickable) {
+        this.mButtonClickable = buttonClickable;
     }
 
     /**
@@ -342,6 +375,10 @@ public class SuperButton extends LinearLayout {
             //边框颜色
             if (attr == R.styleable.SuperButton_border_color) {
                 mBorderColor = typedArray.getColor(attr, Color.TRANSPARENT);
+            }
+            //按钮是否可以点击
+            if (attr == R.styleable.SuperButton_button_click_able) {
+                mButtonClickable = typedArray.getBoolean(attr, true);
             }
         }
         typedArray.recycle();

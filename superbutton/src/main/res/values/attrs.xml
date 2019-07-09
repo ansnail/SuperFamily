@@ -72,6 +72,8 @@
         <attr name="border_width" format="dimension" />
         <!--边框颜色-->
         <attr name="border_color" format="color" />
+        <!--按钮是否可以点击-->
+        <attr name="button_click_able" format="boolean" />
 
     </declare-styleable>
 </resources>
