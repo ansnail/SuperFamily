@@ -286,7 +286,7 @@ public class SuperButton extends LinearLayout {
     /**
      * 设置正常状态下颜色
      */
-    public void setButtonBackgroundColor(@ColorInt int color) {
+    private void setButtonBackgroundColor(@ColorInt int color) {
         mButtonBackground.setColor(ColorStateList.valueOf(color));
     }
 
@@ -323,7 +323,7 @@ public class SuperButton extends LinearLayout {
     }
 
     /**
-     * 修改默认背景颜色
+     * 修改按钮背景颜色
      */
     public void setColorNormal(@ColorInt int colorNormal) {
         mButtonBackground.setColor(ColorStateList.valueOf(colorNormal));

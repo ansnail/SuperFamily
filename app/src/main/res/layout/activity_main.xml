@@ -127,10 +127,18 @@
             app:drawable_middle="@mipmap/icon_like"
             app:drawable_middle_height="50dp"
             app:drawable_middle_width="50dp"
-            app:shape="CIRCLE"
-            app:text="@string/poetry_1"
-            app:textColor="@color/color_white"
-            app:textSize="22sp" />
+            app:shape="CIRCLE" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:onClick="test"
+            app:color_normal="@color/color_accent"
+            app:corner="10dp"
+            app:drawable_middle="@mipmap/icon_like"
+            app:drawable_middle_height="50dp"
+            app:drawable_middle_width="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
