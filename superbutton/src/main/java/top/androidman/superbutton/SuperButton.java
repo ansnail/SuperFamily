@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -65,7 +66,7 @@ public class SuperButton extends LinearLayout {
     /**
      * 文字内容
      */
-    private CharSequence text;
+    private CharSequence text = null;
     /**
      * 文字颜色
      */
@@ -74,6 +75,10 @@ public class SuperButton extends LinearLayout {
      * 文字大小
      */
     private int mTextSize;
+    /**
+     * 文字是否单行显示，默认单行
+     */
+    private boolean mSingleLine = true;
     /**
      * 默认背景颜色
      */
@@ -89,7 +94,13 @@ public class SuperButton extends LinearLayout {
     private Drawable mDrawableRight = null;
     private Drawable mDrawableTop = null;
     private Drawable mDrawableBottom = null;
+    private Drawable mDrawableMiddle = null;
     private boolean mDrawableAuto = true;
+    /**
+     * 图片中间时的宽高
+     */
+    private int mDrawableMiddleWidth = ResourceId.VALUE_NULL;
+    private int mDrawableMiddleHeight = ResourceId.VALUE_NULL;
     /**
      * 图片距离文字距离
      */
@@ -117,10 +128,10 @@ public class SuperButton extends LinearLayout {
     /**
      * 四个角角度半径
      */
-    private int mCornerTopLeft = ResourceId.VALUE_NULL;
-    private int mCornerBottomLeft = ResourceId.VALUE_NULL;
-    private int mCornerTopRight = ResourceId.VALUE_NULL;
-    private int mCornerBottomRight = ResourceId.VALUE_NULL;
+    private int mCornerLeftTop = ResourceId.VALUE_NULL;
+    private int mCornerLeftBottom = ResourceId.VALUE_NULL;
+    private int mCornerRightTop = ResourceId.VALUE_NULL;
+    private int mCornerRightBottom = ResourceId.VALUE_NULL;
     /**
      * 边框颜色
      */
@@ -153,6 +164,7 @@ public class SuperButton extends LinearLayout {
 
     public SuperButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr, 0);
+        setClickable(true);
         setGravity(Gravity.CENTER);
         mTextIconContainer = new TextView(context);
         //解析属性
@@ -192,10 +204,10 @@ public class SuperButton extends LinearLayout {
         }
         //ordered top-left, top-right, bottom-right, bottom-left
         mButtonBackground.setCornerRadii(new float[]{
-                mCornerTopLeft != ResourceId.VALUE_NULL ? mCornerTopLeft : mCorner, mCornerTopLeft != ResourceId.VALUE_NULL ? mCornerTopLeft : mCorner,
-                mCornerTopRight != ResourceId.VALUE_NULL ? mCornerTopRight : mCorner, mCornerTopRight != ResourceId.VALUE_NULL ? mCornerTopRight : mCorner,
-                mCornerBottomRight != ResourceId.VALUE_NULL ? mCornerBottomRight : mCorner, mCornerBottomRight != ResourceId.VALUE_NULL ? mCornerBottomRight : mCorner,
-                mCornerBottomLeft != ResourceId.VALUE_NULL ? mCornerBottomLeft : mCorner, mCornerBottomLeft != ResourceId.VALUE_NULL ? mCornerBottomLeft : mCorner});
+                mCornerLeftTop != ResourceId.VALUE_NULL ? mCornerLeftTop : mCorner, mCornerLeftTop != ResourceId.VALUE_NULL ? mCornerLeftTop : mCorner,
+                mCornerRightTop != ResourceId.VALUE_NULL ? mCornerRightTop : mCorner, mCornerRightTop != ResourceId.VALUE_NULL ? mCornerRightTop : mCorner,
+                mCornerRightBottom != ResourceId.VALUE_NULL ? mCornerRightBottom : mCorner, mCornerRightBottom != ResourceId.VALUE_NULL ? mCornerRightBottom : mCorner,
+                mCornerLeftBottom != ResourceId.VALUE_NULL ? mCornerLeftBottom : mCorner, mCornerLeftBottom != ResourceId.VALUE_NULL ? mCornerLeftBottom : mCorner});
 
         //设置边框颜色和边框宽度
         mButtonBackground.setStroke(mBorderWidth, mBorderColor);
@@ -209,10 +221,48 @@ public class SuperButton extends LinearLayout {
         //设置文字颜色
         mTextIconContainer.setTextColor(mTextColor);
         mTextIconContainer.setCompoundDrawablePadding(mDrawablePadding);
-        mTextIconContainer.setSingleLine();
+        //是否单行
+        if (mSingleLine) {
+            mTextIconContainer.setSingleLine();
+        }
         mTextIconContainer.setGravity(Gravity.CENTER);
+        //设置图标
+        int iconSize = (int) (mTextSize * 1.2f);
+        if (mDrawableAuto) {
+            if (mDrawableLeft != null) {
+                mDrawableLeft.setBounds(0, 0, iconSize, iconSize);
+            }
+            if (mDrawableTop != null) {
+                mDrawableTop.setBounds(0, 0, iconSize, iconSize);
+            }
+            if (mDrawableRight != null) {
+                mDrawableRight.setBounds(0, 0, iconSize, iconSize);
+            }
+            if (mDrawableBottom != null) {
+                mDrawableBottom.setBounds(0, 0, iconSize, iconSize);
+            }
+            //设置文字drawable
+            mTextIconContainer.setCompoundDrawables(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
+        } else {
+            mTextIconContainer.setCompoundDrawablesWithIntrinsicBounds(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
+        }
+
         LinearLayout.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        addView(mTextIconContainer, layoutParams);
+        if (mDrawableMiddle != null) {
+            ImageView imageView = new ImageView(getContext());
+            if (mDrawableMiddleWidth == ResourceId.VALUE_NULL || mDrawableMiddleHeight == ResourceId.VALUE_NULL){
+                layoutParams.width = 40;
+                layoutParams.height = 40;
+            }else {
+                layoutParams.width = mDrawableMiddleWidth;
+                layoutParams.height = mDrawableMiddleHeight;
+            }
+            imageView.setImageDrawable(mDrawableMiddle);
+            addView(imageView, layoutParams);
+        } else {
+            addView(mTextIconContainer, layoutParams);
+        }
+
     }
 
     @Override
@@ -240,16 +290,19 @@ public class SuperButton extends LinearLayout {
         mButtonBackground.setColor(ColorStateList.valueOf(color));
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-        if (mDrawableAuto) {
-            mDrawableLeft.setBounds(0, 0, mTextIconContainer.getHeight(), mTextIconContainer.getHeight());
-            //设置文字drawable
-            mTextIconContainer.setCompoundDrawables(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
-        } else {
-            mTextIconContainer.setCompoundDrawablesWithIntrinsicBounds(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
-        }
+    /**
+     * 设置不可点击颜色，此时按钮点击无反应
+     */
+    public void setUnableColor(@ColorInt int color) {
+        mButtonBackground.setColor(ColorStateList.valueOf(color));
+        setButtonClickable(false);
+    }
+
+    /**
+     * 设置按钮是否可以点击
+     */
+    public void setButtonClickable(boolean buttonClickable) {
+        this.mButtonClickable = buttonClickable;
     }
 
     /**
@@ -277,10 +330,6 @@ public class SuperButton extends LinearLayout {
         setBackground(mButtonBackground);
     }
 
-    public void setButtonClickable(boolean buttonClickable) {
-        this.mButtonClickable = buttonClickable;
-    }
-
     /**
      * 属性解析
      */
@@ -290,15 +339,15 @@ public class SuperButton extends LinearLayout {
         for (int i = 0; i < length; i++) {
             int attr = typedArray.getIndex(i);
             //文字内容
-            if (attr == R.styleable.SuperButton_android_text) {
+            if (attr == R.styleable.SuperButton_text) {
                 text = typedArray.getText(attr);
             }
             //文字颜色
-            if (attr == R.styleable.SuperButton_android_textColor) {
+            if (attr == R.styleable.SuperButton_textColor) {
                 mTextColor = typedArray.getColor(attr, Color.TRANSPARENT);
             }
             //文字大小
-            if (attr == R.styleable.SuperButton_android_textSize) {
+            if (attr == R.styleable.SuperButton_textSize) {
                 mTextSize = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
             }
             //默认背景颜色
@@ -325,8 +374,25 @@ public class SuperButton extends LinearLayout {
             if (attr == R.styleable.SuperButton_drawable_bottom) {
                 mDrawableBottom = typedArray.getDrawable(attr);
             }
+            //图片在中间
+            if (attr == R.styleable.SuperButton_drawable_middle) {
+                mDrawableMiddle = typedArray.getDrawable(attr);
+            }
+            //图片的宽度
+            if (attr == R.styleable.SuperButton_drawable_middle_width) {
+                mDrawableMiddleWidth = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
+            }
+            //图片的高度
+            if (attr == R.styleable.SuperButton_drawable_middle_height) {
+                mDrawableMiddleHeight = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
+            }
+            //自动适应文字的大小
             if (attr == R.styleable.SuperButton_drawable_auto) {
                 mDrawableAuto = typedArray.getBoolean(attr, true);
+            }
+            //文字是否单行
+            if (attr == R.styleable.SuperButton_singleLine) {
+                mSingleLine = typedArray.getBoolean(attr, true);
             }
             //图片距离文字距离
             if (attr == R.styleable.SuperButton_drawable_padding) {
@@ -353,20 +419,20 @@ public class SuperButton extends LinearLayout {
                 mCorner = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_DEFAULT);
             }
             //左上角圆角半径
-            if (attr == R.styleable.SuperButton_corner_top_left) {
-                mCornerTopLeft = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
+            if (attr == R.styleable.SuperButton_corner_left_top) {
+                mCornerLeftTop = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //右上角圆角半径
-            if (attr == R.styleable.SuperButton_corner_top_right) {
-                mCornerTopRight = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
+            if (attr == R.styleable.SuperButton_corner_right_top) {
+                mCornerRightTop = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //左下角圆角半径
-            if (attr == R.styleable.SuperButton_corner_bottom_left) {
-                mCornerBottomLeft = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
+            if (attr == R.styleable.SuperButton_corner_left_bottom) {
+                mCornerLeftBottom = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //右下角圆角半径
-            if (attr == R.styleable.SuperButton_corner_bottom_right) {
-                mCornerBottomRight = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
+            if (attr == R.styleable.SuperButton_corner_right_bottom) {
+                mCornerRightBottom = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
             //边框宽度
             if (attr == R.styleable.SuperButton_border_width) {

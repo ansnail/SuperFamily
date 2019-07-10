@@ -1,30 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <top.androidman.superbutton.SuperButton
-        android:id="@+id/super_button"
-        android:onClick="test"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="30dp"
-        android:layout_marginTop="50dp"
-        android:text="床前明月光"
-        android:textColor="@color/color_white"
-        android:textSize="22dp"
-        app:drawable_left="@mipmap/icon_like"
-        app:drawable_padding="20dp"
-        app:button_click_able="false"
-        app:color_normal="@color/color_accent"
-        app:color_pressed="@color/color_red"
-        app:corner="30dp"
-        app:corner_bottom_left="0dp"
-        app:corner_top_right="0dp" />
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="基本使用"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_accent"
+            app:corner="10dp"
+            app:text="@string/poetry_1"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_red"
+            app:corner="20dp"
+            app:text="@string/poetry_2"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_ffB419"
+            app:corner="30dp"
+            app:text="@string/poetry_3"
+            app:textColor="@color/color_red"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_6596ff"
+            app:corner="40dp"
+            app:text="@string/poetry_4"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="单独设置每个圆角"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_6596ff"
+            app:corner="40dp"
+            app:corner_left_bottom="0dp"
+            app:text="单独设置左下角为0dp"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_6596ff"
+            app:corner="40dp"
+            app:corner_left_bottom="0dp"
+            app:corner_right_top="0dp"
+            app:text="单独设置左下角和右上角为0dp"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Selector"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:onClick="test"
+            app:color_normal="@color/color_accent"
+            app:color_pressed="@color/color_ffB419"
+            app:corner="10dp"
+            app:text="点击会变色哦"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="圆形按钮"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_margin="20dp"
+            android:onClick="test"
+            app:color_normal="@color/color_accent"
+            app:drawable_middle="@mipmap/icon_like"
+            app:drawable_middle_height="50dp"
+            app:drawable_middle_width="50dp"
+            app:shape="CIRCLE"
+            app:text="@string/poetry_1"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="渐变背景的按钮"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_end="@color/color_14c7de"
+            app:color_start="@color/color_red"
+            app:corner="10dp"
+            app:text="从左到右渐变"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:border_color="#00ff00"
+            app:border_width="2dp"
+            app:color_direction="RIGHT_LEFT"
+            app:color_end="@color/color_14c7de"
+            app:color_start="@color/color_red"
+            app:corner="20dp"
+            app:text="从右到左渐变"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_direction="TOP_BOTTOM"
+            app:color_end="@color/color_14c7de"
+            app:color_start="@color/color_red"
+            app:corner="30dp"
+            app:text="从上到下渐变"
+            app:textColor="@color/color_red"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_direction="BOTTOM_TOP"
+            app:color_end="@color/color_14c7de"
+            app:color_start="@color/color_red"
+            app:corner="40dp"
+            app:text="从下到上渐变"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="有边框按钮"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:border_color="@color/color_red"
+            app:border_width="2dp"
+            app:color_normal="@color/color_accent"
+            app:corner="10dp"
+            app:text="@string/poetry_1"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:border_color="@color/color_red"
+            app:border_width="10dp"
+            app:color_normal="@color/color_white"
+            app:corner="20dp"
+            app:text="@string/poetry_2"
+            app:textColor="@color/color_14c7de"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:border_color="@color/color_red"
+            app:border_width="2dp"
+            app:color_normal="@color/color_white"
+            app:corner="20dp"
+            app:corner_left_bottom="0dp"
+            app:corner_right_top="0dp"
+            app:text="@string/poetry_3"
+            app:textColor="@color/color_red"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:border_color="@color/color_text_grey_input"
+            app:border_width="2dp"
+            app:color_normal="@color/color_white"
+            app:text="@string/poetry_4"
+            app:textColor="@color/color_red"
+            app:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="按钮不可点击"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:onClick="test"
+            app:button_click_able="false"
+            app:color_normal="@color/color_accent"
+            app:corner="10dp"
+            app:drawable_padding="20dp"
+            app:singleLine="false"
+            app:text="app:button_click_able=false\n也可以代码设置"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="带图标的按钮"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_accent"
+            app:corner="10dp"
+            app:drawable_left="@mipmap/icon_like"
+            app:drawable_padding="20dp"
+            app:text="图标在左边"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_red"
+            app:corner="20dp"
+            app:drawable_padding="20dp"
+            app:drawable_right="@mipmap/icon_like"
+            app:text="图标在右边"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_ffB419"
+            app:corner="30dp"
+            app:drawable_padding="5dp"
+            app:drawable_top="@mipmap/icon_like"
+            app:text="图标在上边"
+            app:textColor="@color/color_red"
+            app:textSize="22sp" />
+
+        <top.androidman.superbutton.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            app:color_normal="@color/color_6596ff"
+            app:corner="40dp"
+            app:drawable_bottom="@mipmap/icon_like"
+            app:drawable_padding="5dp"
+            app:text="图标在下边"
+            app:textColor="@color/color_white"
+            app:textSize="22sp" />
+
+
+    </LinearLayout>
+</ScrollView>

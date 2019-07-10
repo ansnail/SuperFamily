@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SuperButton</string>
+    <string name="poetry_1">床前明月光</string>
+    <string name="poetry_2">疑是地上霜</string>
+    <string name="poetry_3">举头望明月</string>
+    <string name="poetry_4">低头思故乡</string>
 </resources>

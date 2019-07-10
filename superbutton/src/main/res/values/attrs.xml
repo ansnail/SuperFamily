@@ -2,9 +2,10 @@
 <resources>
     <declare-styleable name="SuperButton">
         <!--默认配置-->
-        <attr name="android:text" />
-        <attr name="android:textColor" />
-        <attr name="android:textSize" />
+        <attr name="text" format="reference|string" />
+        <attr name="textColor" format="reference|color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="singleLine" format="boolean" />
 
         <!--默认背景颜色-->
         <attr name="color_normal" format="reference|color" />
@@ -23,6 +24,13 @@
         <attr name="drawable_padding" format="dimension" />
         <!--图标根据文字大小自动缩放图标-->
         <attr name="drawable_auto" format="boolean" />
+
+        <!--只有图片的情况,此时会忽略文字，即便设置-->
+        <attr name="drawable_middle" format="reference|color" />
+        <!--图片在中间时宽-->
+        <attr name="drawable_middle_width" format="dimension" />
+        <!--图片在中间时高-->
+        <attr name="drawable_middle_height" format="dimension" />
 
         <!--形状-->
         <attr name="shape" format="enum">
@@ -60,13 +68,13 @@
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" format="dimension" />
         <!--左上角圆角半径-->
-        <attr name="corner_top_left" format="dimension" />
+        <attr name="corner_left_top" format="dimension" />
         <!--左下角圆角半径-->
-        <attr name="corner_bottom_left" format="dimension" />
+        <attr name="corner_left_bottom" format="dimension" />
         <!--右上角圆角半径-->
-        <attr name="corner_top_right" format="dimension" />
+        <attr name="corner_right_top" format="dimension" />
         <!--右下角圆角半径-->
-        <attr name="corner_bottom_right" format="dimension" />
+        <attr name="corner_right_bottom" format="dimension" />
 
         <!--边框宽度-->
         <attr name="border_width" format="dimension" />
