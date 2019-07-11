@@ -1,4 +1,4 @@
-package top.androidman.superbutton;
+package top.androidman;
 
 import android.support.annotation.AnyRes;
 

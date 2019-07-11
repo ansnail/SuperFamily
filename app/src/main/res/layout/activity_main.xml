@@ -18,7 +18,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -28,7 +28,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -38,7 +38,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -48,7 +48,7 @@
             app:textColor="@color/color_red"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -66,7 +66,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -77,7 +77,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -97,7 +97,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -118,7 +118,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_margin="20dp"
@@ -140,7 +140,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -151,7 +151,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -165,7 +165,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -177,7 +177,7 @@
             app:textColor="@color/color_red"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -197,7 +197,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -209,7 +209,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -221,7 +221,7 @@
             app:textColor="@color/color_14c7de"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -235,7 +235,7 @@
             app:textColor="@color/color_red"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -254,7 +254,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -276,7 +276,7 @@
             android:textColor="@color/color_text_black"
             android:textSize="22dp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -288,7 +288,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -300,7 +300,7 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_margin="20dp"
@@ -312,7 +312,7 @@
             app:textColor="@color/color_red"
             app:textSize="22sp" />
 
-        <top.androidman.superbutton.SuperButton
+        <top.androidman.SuperButton
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_margin="20dp"
