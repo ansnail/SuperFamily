@@ -26,19 +26,20 @@
 
 ### 实现效果
 
-<table>
-<tr>
-<td align="center" >效果</td><td align="center" >典型代码</td><td align="center" >说明</td>
-</tr>
+基本使用|单独设置每个圆角|Selector|圆形按钮
+:---:|:---:|:---:|:---:
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711155020.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711171924.png" width="200"/>|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172054.gif" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172121.png" width="200" />
+渐变背景的按钮|有边框按钮|按钮不可点击|带图标按钮
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172358.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172416.png" width="200"/>|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172439.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172519.png" width="200" />
 
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/20190710220650.png" />
-</td>
-<td width="35%">
+### 代码解释
 
+#### 0x1 基本使用
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711155020.png"/>
+##### 代码
 ```
-  <top.androidman.superbutton.SuperButton
+ <top.androidman.SuperButton
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
@@ -47,244 +48,214 @@
         app:text="@string/poetry_1"
         app:textColor="@color/color_white"
         app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    按钮文字<br>
-    text<br><br>
-    按钮文字颜色<br>
-    textColor<br><br>
-    按钮文字大小<br>
-    textSize<br><br>
-    按钮背景颜色<br>
-    color_normal<br><br>
-    按钮四个角的圆角角度<br>
-    corner
-</td>
-</tr>
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/20190710220532.png" />
-</td>
-<td width="35%">
-
 ```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        app:color_normal="@color/color_6596ff"
-        app:corner="40dp"
-        app:corner_left_bottom="0dp"
-        app:text="单独设置左下角为0dp"
-        app:textColor="@color/color_white"
-        app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    单独设置左下角角度<br>
-    corner_left_bottom<br><br>
-    单独设置左上角角度<br>
-    corner_left_top<br><br>
-    单独设置右上角角度<br>
-    corner_right_top<br><br>
-    单独设置右下角角度<br>
-    corner_right_bottom<br><br>
-    <font color="red">注意：单独设置角度会覆盖corner属性</font>
-</td>
-</tr>
-
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/image/20190711002844.gif" />
-</td>
-<td width="35%">
-
-```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:onClick="test"
-        app:color_normal="@color/color_accent"
-        app:color_pressed="@color/color_ffB419"
-        app:corner="10dp"
-        app:text="点击会变色哦"
-        app:textColor="@color/color_white"
-        app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    设置此属性当点击的时候会有相应效果<br>
-    color_pressed<br>
+##### 属性解释
+- 按钮文字
+    app:text="床前明月光"
+- 按钮文字颜色
+    app:textColor="@color/color_white"
+- 按钮文字大小<br>
+    app:textSize="22sp" 
+- 按钮背景颜色
+    app:color_normal="@color/color_accent"
     
-</td>
-</tr>
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/image/20190711020844.png" />
-</td>
-<td width="35%">
-
+### 0x2 单独设置每个圆角
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711171924.png"/>
+##### 代码
 ```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_margin="20dp"
-        android:onClick="test"
-        app:color_normal="@color/color_accent"
-        app:drawable_middle="@mipmap/icon_like"
-        app:drawable_middle_height="50dp"
-        app:drawable_middle_width="50dp"
-        app:shape="CIRCLE" />
-  ```
-</td>
-<td width="50%">
-    设置此属性只有图标没有文字<br>
-    drawable_middle<br>
-    图片宽<br>
-    drawable_middle_width<br>
-    图片高<br>
-    drawable_middle_height<br>
-    按钮形状，默认为RECT(矩形)<br>
-    shape<br>
-    <font color="red">注意：当设置此属性时，文字的相关属性将会失效</font>
-</td>
-</tr>
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/image/20190711005025.png" />
-</td>
-<td width="35%">
-
+ <top.androidman.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="20dp"
+    app:color_normal="@color/color_6596ff"
+    app:corner="40dp"
+    app:corner_left_bottom="0dp"
+    app:text="单独设置左下角为0dp"
+    app:textColor="@color/color_white"
+    app:textSize="22sp" />
 ```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        app:color_direction="RIGHT_LEFT"
-        app:color_end="@color/color_14c7de"
-        app:color_start="@color/color_red"
-        app:corner="20dp"
-        app:text="从右到左渐变"
-        app:textColor="@color/color_white"
-        app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    开始颜色<br>
-    color_start<br>
-    结束颜色<br>
-    color_end<br>
-    颜色渐变方向<br>
-    color_direction<br>
-    <font color="red">注意：当设置颜色渐变时，color_normal设置将失效</font>
+##### 属性解释
+- 单独设置左下角角度
+    app:corner_left_bottom="0dp"
+- 单独设置左上角角度
+    app:corner_left_top="5dp"
+- 单独设置右上角角度
+    app:corner_right_top="22dp" 
+- 单独设置右下角角度
+    app:corner_right_bottom="0dp"
+- 按钮四个角的圆角角度
+    app:corner="10dp"
+    
+<font color="red">注意：单独设置角度会覆盖corner属性</font>
     
     
-</td>
-</tr>
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/image/20190711005235.png" />
-</td>
-<td width="35%">
-
+### 0x3 Selector
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172054.gif"/>
+##### 代码
 ```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        app:border_color="@color/color_red"
-        app:border_width="2dp"
-        app:color_normal="@color/color_accent"
-        app:corner="10dp"
-        app:text="@string/poetry_1"
-        app:textColor="@color/color_white"
-        app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    边框颜色<br>
-    border_color<br>
-    边框宽度<br>
-    border_width<br>
+ <top.androidman.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="20dp"
+    android:onClick="test"
+    app:color_normal="@color/color_accent"
+    app:color_pressed="@color/color_ffB419"
+    app:corner="10dp"
+    app:text="点击会变色哦"
+    app:textColor="@color/color_white"
+    app:textSize="22sp" />
+```
+##### 属性解释
+- 当按钮点下时会显示设置的颜色效果
+    app:color_normal="@color/color_accent"
+
     
-</td>
-</tr>
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/image/20190711005453.png" />
-</td>
-<td width="35%">
-
+### 0x4 圆形按钮
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172121.png"/>
+##### 代码
 ```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:onClick="test"
-        app:button_click_able="false"
-        app:color_normal="@color/color_accent"
-        app:corner="10dp"
-        app:singleLine="false"
-        app:text="app:button_click_able=false\n也可以代码设置"
-        app:textColor="@color/color_white"
-        app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    按钮是否可以点击，默认可以点击<br>
-    button_click_able<br>
-    按钮文字是否单行，默认是单行<br>
-    singleLine<br>
-    <font color="red">注意：按钮提供有方法对点击事件进行控制，请使用相关方法</font>
-</td>
-</tr>
-
-<tr>
-<td width="40%">
-<img src="https://raw.githubusercontent.com/ansnail/tc/master/image/20190711005743.png" />
-</td>
-<td width="35%">
-
+ <top.androidman.SuperButton
+    android:layout_width="160dp"
+    android:layout_height="160dp"
+    android:layout_margin="20dp"
+    android:onClick="test"
+    app:color_normal="@color/color_accent"
+    app:drawable_middle="@mipmap/icon_like"
+    app:drawable_middle_height="50dp"
+    app:drawable_middle_width="50dp"
+    app:shape="CIRCLE" />
 ```
-  <top.androidman.superbutton.SuperButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        app:color_normal="@color/color_red"
-        app:corner="20dp"
-        app:drawable_padding="20dp"
-        app:drawable_right="@mipmap/icon_like"
-        app:text="图标在右边"
-        app:textColor="@color/color_white"
-        app:textSize="22sp" />
-  ```
-</td>
-<td width="50%">
-    图标在文字右边<br>
-    drawable_right<br><br>
-    图标在文字左边<br>
-    drawable_left<br><br>
-    图标在文字上边<br>
-    drawable_top<br><br>
-    图标在文字下边<br>
-    drawable_bottom<br><br>
-    图标距文字距离<br>
-    drawable_padding<br><br>
-    根据文字大小缩放图标，默认为true<br>
-    drawable_auto<br><br>
+##### 属性解释
+- 按钮上只有图标没有文字
+    app:drawable_middle="@mipmap/icon_like"
+- 按钮上图标高度
+    app:drawable_middle_height="50dp"
+- 按钮上图标宽度
+    app:drawable_middle_width="50dp"
     
-</td>
-</tr>
+<font color="red">注意：当设置此属性时，文字的相关属性将会失效</font>
 
-</table>
+
+### 0x5 渐变背景的按钮
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172358.png"/>
+##### 代码
+```
+ <top.androidman.superbutton.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="20dp"
+    app:color_direction="RIGHT_LEFT"
+    app:color_end="@color/color_14c7de"
+    app:color_start="@color/color_red"
+    app:corner="20dp"
+    app:text="从右到左渐变"
+    app:textColor="@color/color_white"
+    app:textSize="22sp" />
+```
+##### 属性解释
+- 开始颜色
+    app:color_start="@color/color_14c7de"
+- 结束颜色
+    app:color_end="@color/color_red"
+- 颜色渐变方向
+    app:color_direction="RIGHT_LEFT"
+    - TOP_BOTTOM 从上到下
+    - BOTTOM_TOP 从下到上
+    - LEFT_RIGHT 从左到右
+    - RIGHT_LEFT 从右到左
+    - TR_BL 从右上到左下
+    - BL_TR 从左下到右上
+    - BR_TL 从右下到左上
+    - TL_BR 从左上到右下
+
+<font color="red">注意：当设置颜色渐变时，color_normal，color_pressed设置将失效</font>
+
+### 0x6 有边框按钮
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172416.png"/>
+##### 代码
+```
+ <top.androidman.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="20dp"
+    app:border_color="@color/color_red"
+    app:border_width="2dp"
+    app:color_normal="@color/color_accent"
+    app:corner="10dp"
+    app:text="@string/poetry_1"
+    app:textColor="@color/color_white"
+    app:textSize="22sp" />
+```
+##### 属性解释
+- 边框宽度
+    app:border_width="2dp"
+- 边框颜色
+    app:border_color="@color/color_red"
+
+### 0x7 按钮不可点击
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172439.png"/>
+##### 代码
+```
+<top.androidman.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="20dp"
+    android:onClick="test"
+    app:button_click_able="false"
+    app:color_normal="@color/color_accent"
+    app:corner="10dp"
+    app:singleLine="false"
+    app:text="app:button_click_able=false\n也可以代码设置"
+    app:textColor="@color/color_white"
+    app:textSize="22sp" />
+```
+##### 属性解释
+    
+- 按钮是否可以点击，默认为true可以点击
+    app:button_click_able="false"
+- 按钮文字是否单行，默认为true单行
+    app:singleLine="false"
+    
+<font color="red">注意：按钮提供有方法对点击事件进行控制，请参考高级使用里面相关方法</font>
+
+### 0x8 带图标按钮
+##### 效果
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172519.png"/>
+##### 代码
+```
+<top.androidman.superbutton.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="20dp"
+    app:color_normal="@color/color_red"
+    app:corner="20dp"
+    app:drawable_padding="20dp"
+    app:drawable_right="@mipmap/icon_like"
+    app:text="图标在右边"
+    app:textColor="@color/color_white"
+    app:textSize="22sp" />
+```
+##### 属性解释
+    
+- 图标在文字右边
+    app:drawable_right="@mipmap/icon_like"
+- 图标在文字左边
+    app:drawable_left="@mipmap/icon_like"
+- 图标在文字上边
+    app:drawable_top="@mipmap/icon_like"
+- 图标在文字下边
+    app:drawable_bottom="@mipmap/icon_like"
+- 图标距文字距离
+    app:drawable_padding="20dp"
+- 根据文字大小缩放图标，默认为true,当为false时显示原图标大小
+    app:drawable_auto="true"
+
 
 ### 按钮支持的所有属性
 ```
@@ -340,21 +311,21 @@
         <attr name="color_end" format="color" />
         <!--颜色方向-->
         <attr name="color_direction" format="enum">
-            <!--draw the gradient from the top to the bottom-->
+            <!--从上到下-->
             <enum name="TOP_BOTTOM" value="0x1" />
-            <!--draw the gradient from the top-right to the bottom-left-->
+            <!--从右上到左下-->
             <enum name="TR_BL" value="0x2" />
-            <!--draw the gradient from the right to the left-->
+            <!--从右到左-->
             <enum name="RIGHT_LEFT" value="0x3" />
-            <!--draw the gradient from the bottom-right to the top-left-->
+            <!--从右下到左上-->
             <enum name="BR_TL" value="0x4" />
-            <!--draw the gradient from the bottom to the top-->
+            <!--从下到上-->
             <enum name="BOTTOM_TOP" value="0x5" />
-            <!--draw the gradient from the bottom-left to the top-right-->
+            <!--从左下到右上-->
             <enum name="BL_TR" value="0x6" />
-            <!--draw the gradient from the left to the right-->
+            <!--从左到右-->
             <enum name="LEFT_RIGHT" value="0x7" />
-            <!--draw the gradient from the top-left to the bottom-right-->
+            <!--从左上到右下-->
             <enum name="TL_BR" value="0x8" />
         </attr>
 
@@ -378,6 +349,7 @@
 
     </declare-styleable>
 </resources>
+
 ```
 
 ### 高级应用

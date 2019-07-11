@@ -50,21 +50,21 @@
         <attr name="color_end" format="color" />
         <!--颜色方向-->
         <attr name="color_direction" format="enum">
-            <!--draw the gradient from the top to the bottom-->
+            <!--从上到下-->
             <enum name="TOP_BOTTOM" value="0x1" />
-            <!--draw the gradient from the top-right to the bottom-left-->
+            <!--从右上到左下-->
             <enum name="TR_BL" value="0x2" />
-            <!--draw the gradient from the right to the left-->
+            <!--从右到左-->
             <enum name="RIGHT_LEFT" value="0x3" />
-            <!--draw the gradient from the bottom-right to the top-left-->
+            <!--从右下到左上-->
             <enum name="BR_TL" value="0x4" />
-            <!--draw the gradient from the bottom to the top-->
+            <!--从下到上-->
             <enum name="BOTTOM_TOP" value="0x5" />
-            <!--draw the gradient from the bottom-left to the top-right-->
+            <!--从左下到右上-->
             <enum name="BL_TR" value="0x6" />
-            <!--draw the gradient from the left to the right-->
+            <!--从左到右-->
             <enum name="LEFT_RIGHT" value="0x7" />
-            <!--draw the gradient from the top-left to the bottom-right-->
+            <!--从左上到右下-->
             <enum name="TL_BR" value="0x8" />
         </attr>
 
