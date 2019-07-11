@@ -3,8 +3,11 @@
     <declare-styleable name="SuperButton">
         <!--默认配置-->
         <attr name="text" format="reference|string" />
+        <!--按钮文字颜色-->
         <attr name="textColor" format="reference|color" />
+        <!--按钮文字大小-->
         <attr name="textSize" format="dimension" />
+        <!--文字是否单行，默认单行-->
         <attr name="singleLine" format="boolean" />
 
         <!--默认背景颜色-->
