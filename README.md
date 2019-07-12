@@ -37,15 +37,15 @@ implementation 'top.androidman:superbutton:1.0.1'
 
 基本使用|单独设置每个圆角|Selector|圆形按钮
 :---:|:---:|:---:|:---:
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711155020.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711171924.png" width="200"/>|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172054.gif" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172121.png" width="200" />
+<img src="./image/20190711155020.png" width="200" />|<img src="./image/20190711171924.png" width="200"/>|<img src="./image/20190711172054.gif" width="200" />|<img src="./image/20190711172121.png" width="200" />
 渐变背景的按钮|有边框按钮|按钮不可点击|带图标按钮
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172358.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172416.png" width="200"/>|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172439.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172519.png" width="200" />
+<img src="./image/20190711172358.png" width="200" />|<img src="./image/20190711172416.png" width="200"/>|<img src="./image/20190711172439.png" width="200" />|<img src="./image/20190711172519.png" width="200" />
 
 ### 代码解释
 
 #### 0x1 基本使用
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711155020.png"/>
+<img src="./image/20190711155020.png"/>
 
 ##### 代码
 ```
@@ -71,7 +71,7 @@ implementation 'top.androidman:superbutton:1.0.1'
     
 ### 0x2 单独设置每个圆角
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711171924.png"/>
+<img src="./image/20190711171924.png"/>
 
 ##### 代码
 ```
@@ -103,7 +103,7 @@ implementation 'top.androidman:superbutton:1.0.1'
     
 ### 0x3 Selector
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172054.gif"/>
+<img src="./image/20190711172054.gif"/>
 
 ##### 代码
 ```
@@ -126,7 +126,7 @@ implementation 'top.androidman:superbutton:1.0.1'
     
 ### 0x4 圆形按钮
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172121.png"/>
+<img src="./image/20190711172121.png"/>
 
 ##### 代码
 ```
@@ -154,7 +154,7 @@ implementation 'top.androidman:superbutton:1.0.1'
 
 ### 0x5 渐变背景的按钮
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172358.png"/>
+<img src="./image/20190711172358.png"/>
 
 ##### 代码
 ```
@@ -190,7 +190,7 @@ implementation 'top.androidman:superbutton:1.0.1'
 
 ### 0x6 有边框按钮
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172416.png"/>
+<img src="./image/20190711172416.png"/>
 
 ##### 代码
 ```
@@ -214,7 +214,7 @@ implementation 'top.androidman:superbutton:1.0.1'
 
 ### 0x7 按钮不可点击
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172439.png"/>
+<img src="./image/20190711172439.png"/>
 
 ##### 代码
 ```
@@ -242,7 +242,7 @@ implementation 'top.androidman:superbutton:1.0.1'
 
 ### 0x8 带图标按钮
 ##### 效果
-<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172519.png"/>
+<img src="./image/20190711172519.png"/>
 
 ##### 代码
 ```
