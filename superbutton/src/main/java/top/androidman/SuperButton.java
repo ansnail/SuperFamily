@@ -6,8 +6,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,7 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import top.androidman.superbutton.R;
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 
 /**
@@ -34,35 +33,35 @@ public class SuperButton extends LinearLayout {
     private static final int RECT = 0x2;
 
     /**
-     * draw the gradient from the top to the bottom
+     * 从上到下
      */
     private static final int TOP_BOTTOM = 0x1;
     /**
-     * draw the gradient from the top-right to the bottom-left
+     * 从右上到左下
      */
     private static final int TR_BL = 0x2;
     /**
-     * draw the gradient from the right to the left
+     * 从右到左
      */
     private static final int RIGHT_LEFT = 0x3;
     /**
-     * draw the gradient from the bottom-right to the top-left
+     * d从右下到左上
      */
     private static final int BR_TL = 0x4;
     /**
-     * draw the gradient from the bottom to the top
+     * 从下到上
      */
     private static final int BOTTOM_TOP = 0x5;
     /**
-     * draw the gradient from the bottom-left to the top-right
+     * 从左下到右上
      */
     private static final int BL_TR = 0x6;
     /**
-     * draw the gradient from the left to the right
+     * 从左到右
      */
     private static final int LEFT_RIGHT = 0x7;
     /**
-     * draw the gradient from the top-left to the bottom-right
+     * 从左上到右下
      */
     private static final int TL_BR = 0x8;
     /**
@@ -252,10 +251,10 @@ public class SuperButton extends LinearLayout {
         LinearLayout.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if (mDrawableMiddle != null) {
             ImageView imageView = new ImageView(getContext());
-            if (mDrawableMiddleWidth == ResourceId.VALUE_NULL || mDrawableMiddleHeight == ResourceId.VALUE_NULL){
+            if (mDrawableMiddleWidth == ResourceId.VALUE_NULL || mDrawableMiddleHeight == ResourceId.VALUE_NULL) {
                 layoutParams.width = 40;
                 layoutParams.height = 40;
-            }else {
+            } else {
                 layoutParams.width = mDrawableMiddleWidth;
                 layoutParams.height = mDrawableMiddleHeight;
             }
@@ -288,7 +287,7 @@ public class SuperButton extends LinearLayout {
     /**
      * 设置正常状态下颜色
      */
-    private void setButtonBackgroundColor(@ColorInt int color) {
+    public void setButtonBackgroundColor(@ColorInt int color) {
         mButtonBackground.setColor(ColorStateList.valueOf(color));
     }
 
@@ -325,7 +324,7 @@ public class SuperButton extends LinearLayout {
     }
 
     /**
-     * 修改按钮背景颜色
+     * 修改默认背景颜色
      */
     public void setColorNormal(@ColorInt int colorNormal) {
         mButtonBackground.setColor(ColorStateList.valueOf(colorNormal));

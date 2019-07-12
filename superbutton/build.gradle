@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion 28
@@ -25,9 +26,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+
+//添加
+publish {
+    userOrg = 'androidman'//bintray.com用户名
+    groupId = 'top.androidman'//jcenter上的路径
+    artifactId = 'superbutton'//项目名称
+    publishVersion = '1.0.1'//版本号
+    desc = '让按钮使用更简单'//描述，不重要
+    website = 'https://github.com/ansnail/SuperButton'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
