@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -35,7 +35,7 @@ publish {
     userOrg = 'androidman'//bintray.com用户名
     groupId = 'top.androidman'//jcenter上的路径
     artifactId = 'superbutton'//项目名称
-    publishVersion = '1.0.1'//版本号
-    desc = '让按钮使用更简单'//描述，不重要
-    website = 'https://github.com/ansnail/SuperButton'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+    publishVersion = '1.0.2'//版本号
+    desc = '让按钮使用更简单'//描述
+    website = 'https://github.com/ansnail/SuperButton'
 }
