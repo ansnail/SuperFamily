@@ -33,7 +33,7 @@
             android:layout_height="60dp"
             android:layout_margin="20dp"
             app:color_normal="@color/color_red"
-            app:corner="20dp"
+            app:corner="6dp"
             app:text="@string/poetry_2"
             app:textColor="@color/color_white"
             app:textSize="22sp" />
@@ -332,6 +332,22 @@
             app:textColor="@color/color_white"
             app:textSize="22sp" />
 
-
+        <top.androidman.SuperButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:onClick="test"
+            app:color_normal="@color/toast_bg_error"
+            app:corner="12dp"
+            app:deltaX="2dp"
+            app:deltaY="6dp"
+            app:drawable_padding="20dp"
+            app:enableShadow="true"
+            app:shadowColor="@color/light_red"
+            app:shadowRadius="4dp"
+            app:singleLine="false"
+            app:text="shadow"
+            app:textColor="@color/color_ffB419"
+            app:textSize="22sp" />
     </LinearLayout>
 </ScrollView>

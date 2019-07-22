@@ -3,9 +3,12 @@ package top.androidman;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -155,6 +158,29 @@ public class SuperButton extends LinearLayout {
      */
     private boolean mButtonClickable = true;
 
+    /**
+     * 阴影圆角
+     */
+    private float shadowRadius;
+    /**
+     * 是否显示阴影
+     */
+    private boolean enableShadow;
+
+    /**
+     * 阴影颜色
+     */
+    private int shadowColor;
+    /**
+     * 阴影在X方向偏移量
+     */
+    private int deltaX;
+    /**
+     * 阴影在Y方向偏移量
+     */
+    private int deltaY;
+
+
     public SuperButton(Context context) {
         this(context, null);
     }
@@ -198,6 +224,7 @@ public class SuperButton extends LinearLayout {
             //设置填充颜色
             setButtonBackgroundColor(mColorNormal);
         }
+
         if (mShape == CIRCLE) {
             mButtonBackground.setShape(GradientDrawable.OVAL);
         } else {
@@ -212,8 +239,10 @@ public class SuperButton extends LinearLayout {
 
         //设置边框颜色和边框宽度
         mButtonBackground.setStroke(mBorderWidth, mBorderColor);
-        //最终设置
-        setBackground(mButtonBackground);
+
+        if (!enableShadow) {
+            setBackground(mButtonBackground);
+        }
 
         //设置文字
         mTextIconContainer.setText(text);
@@ -227,21 +256,14 @@ public class SuperButton extends LinearLayout {
             mTextIconContainer.setSingleLine();
         }
         mTextIconContainer.setGravity(Gravity.CENTER);
-        //设置图标
-        int iconSize = (int) (mTextSize * 1.2f);
+
         if (mDrawableAuto) {
-            if (mDrawableLeft != null) {
-                mDrawableLeft.setBounds(0, 0, iconSize, iconSize);
-            }
-            if (mDrawableTop != null) {
-                mDrawableTop.setBounds(0, 0, iconSize, iconSize);
-            }
-            if (mDrawableRight != null) {
-                mDrawableRight.setBounds(0, 0, iconSize, iconSize);
-            }
-            if (mDrawableBottom != null) {
-                mDrawableBottom.setBounds(0, 0, iconSize, iconSize);
-            }
+            //设置图标
+            int iconSize = (int) (mTextSize * 1.2f);
+            setBounds(mDrawableLeft, iconSize);
+            setBounds(mDrawableTop, iconSize);
+            setBounds(mDrawableRight, iconSize);
+            setBounds(mDrawableBottom, iconSize);
             //设置文字drawable
             mTextIconContainer.setCompoundDrawables(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom);
         } else {
@@ -264,7 +286,18 @@ public class SuperButton extends LinearLayout {
             addView(mTextIconContainer, layoutParams);
         }
 
+
     }
+
+
+    //设置drawable边框
+    private void setBounds(Drawable drawable, int size) {
+        if (drawable == null) {
+            return;
+        }
+        drawable.setBounds(0, 0, size, size);
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -283,6 +316,38 @@ public class SuperButton extends LinearLayout {
         }
         return super.onTouchEvent(event);
     }
+
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        if (enableShadow) {
+            if (getLayerType() != LAYER_TYPE_SOFTWARE) {
+                setLayerType(LAYER_TYPE_SOFTWARE, null);
+            }
+
+            int width = getWidth();
+            int height = getHeight();
+
+            Paint mShadowPaint = new Paint();
+            mShadowPaint.setStyle(Paint.Style.FILL);
+            mShadowPaint.setAntiAlias(true);
+            mShadowPaint.setColor(mColorNormal);
+            /**
+             * radius:模糊半径，radius越大越模糊，越小越清晰，但是如果radius设置为0，则阴影消失不见
+             * dx:阴影的横向偏移距离，正值向右偏移，负值向左偏移
+             * dy:阴影的纵向偏移距离，正值向下偏移，负值向上偏移
+             * color: 绘制阴影的画笔颜色，即阴影的颜色（对图片阴影无效）
+             */
+            mShadowPaint.setShadowLayer(shadowRadius, deltaX, deltaY, shadowColor);
+            //TODO 其它版本自己想办法
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                canvas.drawRoundRect(0, deltaY, width - deltaX, height - deltaY, mCorner, mCorner, mShadowPaint);
+            }
+        }
+
+        super.dispatchDraw(canvas);
+    }
+
 
     /**
      * 设置正常状态下颜色
@@ -447,6 +512,29 @@ public class SuperButton extends LinearLayout {
             if (attr == R.styleable.SuperButton_button_click_able) {
                 mButtonClickable = typedArray.getBoolean(attr, true);
             }
+
+
+            //-------------------shadow----------------------
+            if (attr == R.styleable.SuperButton_shadowColor) {
+                shadowColor = typedArray.getColor(attr, Color.TRANSPARENT);
+            }
+
+            if (attr == R.styleable.SuperButton_shadowRadius) {
+                shadowRadius = typedArray.getDimensionPixelSize(attr, 0);
+            }
+
+            if (attr == R.styleable.SuperButton_deltaX) {
+                deltaX = typedArray.getDimensionPixelSize(attr, 0);
+            }
+
+            if (attr == R.styleable.SuperButton_deltaY) {
+                deltaY = typedArray.getDimensionPixelSize(attr, 0);
+            }
+            if (attr == R.styleable.SuperButton_enableShadow) {
+                enableShadow = typedArray.getBoolean(attr, false);
+            }
+            //-------------------shadow----------------------
+
         }
         typedArray.recycle();
     }
