@@ -34,7 +34,7 @@ implementation 'top.androidman:superbutton:1.1.0'
 
 [Github传送门](https://github.com/ansnail/SuperButton)
 
-### 实现效果
+### 实现效果（目前最低版本支持到16）
 
 基本使用|单独设置每个圆角|Selector|圆形按钮
 :---:|:---:|:---:|:---:
