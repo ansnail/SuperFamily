@@ -26,11 +26,12 @@
 
 ### 引入
 
-[ ![Download](https://api.bintray.com/packages/androidman/maven/superbutton/images/download.svg?version=1.0.1) ](https://bintray.com/androidman/maven/superbutton/1.0.1/link)
+[ ![Download](https://api.bintray.com/packages/androidman/maven/superbutton/images/download.svg?version=1.1.0) ](https://bintray.com/androidman/maven/superbutton/1.1.0/link)
 
 ```
-implementation 'top.androidman:superbutton:1.0.1'
+implementation 'top.androidman:superbutton:1.1.0'
 ```
+
 [Github传送门](https://github.com/ansnail/SuperButton)
 
 ### 实现效果
