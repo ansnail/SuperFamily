@@ -239,7 +239,7 @@ public class RoundRectDrawableWithShadow extends Drawable {
             throw new IllegalArgumentException("Invalid radius " + radius + ". Must be >= 0");
         }
         radius = (int) (radius + .5f);
-        if (mCornerRadius == radius) {
+        if (mCornerRadius - radius == 0) {
             return;
         }
         mCornerRadius = radius;

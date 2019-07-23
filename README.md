@@ -40,6 +40,8 @@ implementation 'top.androidman:superbutton:1.0.1'
 <img src="./image/20190711155020.png" width="200" />|<img src="./image/20190711171924.png" width="200"/>|<img src="./image/20190711172054.gif" width="200" />|<img src="./image/20190711172121.png" width="200" />
 渐变背景的按钮|有边框按钮|按钮不可点击|带图标按钮
 <img src="./image/20190711172358.png" width="200" />|<img src="./image/20190711172416.png" width="200"/>|<img src="./image/20190711172439.png" width="200" />|<img src="./image/20190711172519.png" width="200" />
+带阴影的按钮|||
+<img src="./image/20190724003633.png" width="200" />|||
 
 ### 代码解释
 
@@ -121,7 +123,7 @@ implementation 'top.androidman:superbutton:1.0.1'
 ```
 ##### 属性解释
 - 当按钮点下时会显示设置的颜色效果<br>
-    app:color_normal="@color/color_accent"
+    app:color_pressed="@color/color_accent"
 
     
 ### 0x4 圆形按钮
@@ -273,6 +275,36 @@ implementation 'top.androidman:superbutton:1.0.1'
 - 根据文字大小缩放图标，默认为true,当为false时显示原图标大小<br>
     app:drawable_auto="true"
 
+### 0x9 带阴影的按钮
+##### 效果
+<img src="./image/20190724003633.png"/>
+
+##### 代码
+```
+<top.androidman.SuperButton
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="20dp"
+    app:color_normal="@color/color_accent"
+    app:color_shadow_end="@color/color_grey_divider_line"
+    app:color_shadow_start="@color/color_text_grey"
+    app:corner="10dp"
+    app:shadow_size="10dp"
+    app:text="Shadow"
+    app:textColor="@color/color_white"
+    app:textSize="22dp" />
+```
+##### 属性解释
+    
+- 阴影开始颜色<br>
+    app:color_shadow_start="@color/color_text_grey"
+- 阴影开始颜色<br>
+    app:color_shadow_end="@color/color_grey_divider_line"
+- 阴影尺寸<br>
+    app:shadow_size="10dp"
+
+<font color="red">注意：需要这三个属性同时设置，阴影效果才会展示，当设置阴影时不支持设置shape相关属性，border相关属性，另外需要注意，阴影的尺寸会占用组件的大小，所以在设置阴影的时候需要注意</font>
+
 
 ### 按钮支持的所有属性
 ```
@@ -406,5 +438,9 @@ implementation 'top.androidman:superbutton:1.0.1'
 
 ### 未来展望
 
-未来准备把按钮阴影加入进来，这样这个按钮的使用就更加方便啦！ 
-所以如果大家有好的想法和需求，欢迎大家提issue。
+现在已经把按钮阴影加入进来，这个按钮的使用也更加方便啦！ 
+大家有好的想法和需求，欢迎大家提issue。
+
+### GitHub传送门
+
+[客官点这里](https://github.com/ansnail/SuperButton)
