@@ -20,6 +20,8 @@
     <color name="color_14c7de">#FF14C7DE</color>
     <color name="toast_bg_error">#FFF8388D</color>
 
+    <color name="light_red">#55F8388D</color>
+
     <color name="color_start">#FFC165DD</color>
     <color name="color_end">#FF5C27F1</color>
 </resources>

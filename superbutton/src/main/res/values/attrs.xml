@@ -86,5 +86,19 @@
         <!--按钮是否可以点击-->
         <attr name="button_click_able" format="boolean" />
 
+
+        <!--阴影颜色-->
+        <attr name="shadowColor" format="color" />、
+        <!--阴影圆角-->
+        <attr name="shadowRadius" format="dimension" />
+        <!--阴影在X方向偏移量，X>0?向右:向左-->
+        <attr name="deltaX" format="dimension" />
+        <!--阴影在Y方向偏移量，Y>0向下:向上-->
+        <attr name="deltaY" format="dimension" />
+        <!--是否启用阴影效果，默认为false-->
+        <attr name="enableShadow" format="boolean" />
+
+
+
     </declare-styleable>
 </resources>
