@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "top.androidman.superbutton"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 28
 
         multiDexEnabled true
@@ -25,5 +25,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
-    implementation 'top.androidman:superbutton:1.0.1'
+    implementation project(":superbutton")
 }

@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="color_primary">#FFFFFFFF</color>
+    <color name="color_accent">#FF14C7DE</color>
+    <color name="color_accent_alpha80">#FF8AE3EF</color>
+
+    <color name="color_white">#FFFFFFFF</color>
+    <color name="color_red">#FFFF5050</color>
+    <color name="color_default_shadow">#88757575</color>
+    <color name="color_text_black">#FF333333</color>
+    <color name="color_text_grey">#FF9B9B9B</color>
+    <color name="color_text_grey_hint">#FFD4D4D4</color>
+    <color name="color_text_grey_input">#FF555555</color>
+    <color name="color_grey_divider_line">#FFE6E6E6</color>
+    <color name="color_text_unline">#FFC1C1C1</color>
+
+    <color name="color_f7f7f7">#FFF7F7F7</color>
+    <color name="color_ffB419">#FFFFB419</color>
+    <color name="color_6596ff">#FF6596FF</color>
+    <color name="color_14c7de">#FF14C7DE</color>
+    <color name="toast_bg_error">#FFF8388D</color>
+
+    <color name="light_red">#55F8388D</color>
+
+    <color name="color_start">#FFC165DD</color>
+    <color name="color_end">#FF5C27F1</color>
 </resources>

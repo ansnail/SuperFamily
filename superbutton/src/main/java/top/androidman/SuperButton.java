@@ -3,9 +3,7 @@ package top.androidman;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -144,7 +142,6 @@ public class SuperButton extends LinearLayout {
      * 边框宽度
      */
     private int mBorderWidth;
-
     /**
      * 文字和图标容器
      */
@@ -157,28 +154,18 @@ public class SuperButton extends LinearLayout {
      * 按钮是否可以点击
      */
     private boolean mButtonClickable = true;
-
-    /**
-     * 阴影圆角
-     */
-    private float shadowRadius;
-    /**
-     * 是否显示阴影
-     */
-    private boolean enableShadow;
-
     /**
      * 阴影颜色
      */
-    private int shadowColor;
+    private int mShadowStartColor = ResourceId.VALUE_NULL;
     /**
-     * 阴影在X方向偏移量
+     * 阴影颜色
      */
-    private int deltaX;
+    private int mShadowEndColor = ResourceId.VALUE_NULL;
     /**
-     * 阴影在Y方向偏移量
+     * 阴影大小
      */
-    private int deltaY;
+    private int mShadowSize = ResourceId.VALUE_NULL;
 
 
     public SuperButton(Context context) {
@@ -190,7 +177,15 @@ public class SuperButton extends LinearLayout {
     }
 
     public SuperButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        initButton(context, attrs);
+    }
+
+
+    /**
+     * 初始化按钮
+     */
+    private void initButton(Context context, @Nullable AttributeSet attrs) {
         setClickable(true);
         setGravity(Gravity.CENTER);
         mTextIconContainer = new TextView(context);
@@ -239,10 +234,8 @@ public class SuperButton extends LinearLayout {
 
         //设置边框颜色和边框宽度
         mButtonBackground.setStroke(mBorderWidth, mBorderColor);
-
-        if (!enableShadow) {
-            setBackground(mButtonBackground);
-        }
+        //设置背景
+        setBackground(mButtonBackground);
 
         //设置文字
         mTextIconContainer.setText(text);
@@ -286,11 +279,22 @@ public class SuperButton extends LinearLayout {
             addView(mTextIconContainer, layoutParams);
         }
 
-
+        //当设置的有阴影效果时
+        if (mShadowSize != ResourceId.VALUE_NULL &&
+                mShadowStartColor != ResourceId.VALUE_NULL && mShadowEndColor != ResourceId.VALUE_NULL) {
+            RoundRectHelperUtil.help();
+            RoundRectDrawableWithShadow shadowBackground = new RoundRectDrawableWithShadow(
+                    ColorStateList.valueOf(mColorNormal), mCorner,
+                    mShadowStartColor, mShadowEndColor,
+                    mShadowSize, mShadowSize);
+            setBackground(shadowBackground);
+        }
     }
 
 
-    //设置drawable边框
+    /**
+     * 在自动缩放模式下设置drawable边框
+     */
     private void setBounds(Drawable drawable, int size) {
         if (drawable == null) {
             return;
@@ -299,68 +303,12 @@ public class SuperButton extends LinearLayout {
     }
 
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (!mButtonClickable) {
-            return true;
-        }
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
-                break;
-            case MotionEvent.ACTION_UP:
-                setButtonBackgroundColor(mColorNormal);
-                break;
-            default:
-                break;
-        }
-        return super.onTouchEvent(event);
-    }
-
-
-    @Override
-    protected void dispatchDraw(Canvas canvas) {
-        if (enableShadow) {
-            if (getLayerType() != LAYER_TYPE_SOFTWARE) {
-                setLayerType(LAYER_TYPE_SOFTWARE, null);
-            }
-
-            int width = getWidth();
-            int height = getHeight();
-
-            Paint mShadowPaint = new Paint();
-            mShadowPaint.setStyle(Paint.Style.FILL);
-            mShadowPaint.setAntiAlias(true);
-            mShadowPaint.setColor(mColorNormal);
-            /**
-             * radius:模糊半径，radius越大越模糊，越小越清晰，但是如果radius设置为0，则阴影消失不见
-             * dx:阴影的横向偏移距离，正值向右偏移，负值向左偏移
-             * dy:阴影的纵向偏移距离，正值向下偏移，负值向上偏移
-             * color: 绘制阴影的画笔颜色，即阴影的颜色（对图片阴影无效）
-             */
-            mShadowPaint.setShadowLayer(shadowRadius, deltaX, deltaY, shadowColor);
-            //TODO 其它版本自己想办法
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                canvas.drawRoundRect(0, deltaY, width - deltaX, height - deltaY, mCorner, mCorner, mShadowPaint);
-            }
-        }
-
-        super.dispatchDraw(canvas);
-    }
-
-
-    /**
-     * 设置正常状态下颜色
-     */
-    public void setButtonBackgroundColor(@ColorInt int color) {
-        mButtonBackground.setColor(ColorStateList.valueOf(color));
-    }
-
     /**
      * 设置不可点击颜色，此时按钮点击无反应
      */
     public void setUnableColor(@ColorInt int color) {
-        mButtonBackground.setColor(ColorStateList.valueOf(color));
+        this.mColorNormal = color;
+        setButtonBackgroundColor(color);
         setButtonClickable(false);
     }
 
@@ -389,11 +337,49 @@ public class SuperButton extends LinearLayout {
     }
 
     /**
-     * 修改默认背景颜色
+     * 修改按钮默认背景颜色
      */
     public void setColorNormal(@ColorInt int colorNormal) {
-        mButtonBackground.setColor(ColorStateList.valueOf(colorNormal));
+        this.mColorNormal = colorNormal;
+        setButtonBackgroundColor(colorNormal);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!mButtonClickable) {
+            return true;
+        }
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                setButtonBackgroundColor(mColorPressed == ResourceId.VALUE_NULL ? mColorNormal : mColorPressed);
+                break;
+            case MotionEvent.ACTION_UP:
+                setButtonBackgroundColor(mColorNormal);
+                break;
+            default:
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    /**
+     * 设置正常状态下颜色
+     */
+    private void setButtonBackgroundColor(@ColorInt int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mButtonBackground.setColor(ColorStateList.valueOf(color));
+        } else {
+            mButtonBackground.setColor(color);
+        }
         setBackground(mButtonBackground);
+    }
+
+    /**
+     * dp转换px
+     */
+    public int dp2px(float dpValue) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
     /**
@@ -512,28 +498,18 @@ public class SuperButton extends LinearLayout {
             if (attr == R.styleable.SuperButton_button_click_able) {
                 mButtonClickable = typedArray.getBoolean(attr, true);
             }
-
-
-            //-------------------shadow----------------------
-            if (attr == R.styleable.SuperButton_shadowColor) {
-                shadowColor = typedArray.getColor(attr, Color.TRANSPARENT);
+            //阴影开始颜色
+            if (attr == R.styleable.SuperButton_color_shadow_start) {
+                mShadowStartColor = typedArray.getColor(attr, ResourceId.VALUE_NULL);
             }
-
-            if (attr == R.styleable.SuperButton_shadowRadius) {
-                shadowRadius = typedArray.getDimensionPixelSize(attr, 0);
+            //阴影结束颜色
+            if (attr == R.styleable.SuperButton_color_shadow_end) {
+                mShadowEndColor = typedArray.getColor(attr, ResourceId.VALUE_NULL);
             }
-
-            if (attr == R.styleable.SuperButton_deltaX) {
-                deltaX = typedArray.getDimensionPixelSize(attr, 0);
+            //阴影大小
+            if (attr == R.styleable.SuperButton_shadow_size) {
+                mShadowSize = typedArray.getDimensionPixelSize(attr, ResourceId.VALUE_NULL);
             }
-
-            if (attr == R.styleable.SuperButton_deltaY) {
-                deltaY = typedArray.getDimensionPixelSize(attr, 0);
-            }
-            if (attr == R.styleable.SuperButton_enableShadow) {
-                enableShadow = typedArray.getBoolean(attr, false);
-            }
-            //-------------------shadow----------------------
 
         }
         typedArray.recycle();
