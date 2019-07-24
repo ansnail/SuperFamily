@@ -306,6 +306,7 @@ public class SuperButton extends LinearLayout {
     /**
      * 设置不可点击颜色，此时按钮点击无反应
      */
+    @Deprecated
     public void setUnableColor(@ColorInt int color) {
         this.mColorNormal = color;
         setButtonBackgroundColor(color);
@@ -317,6 +318,19 @@ public class SuperButton extends LinearLayout {
      */
     public void setButtonClickable(boolean buttonClickable) {
         this.mButtonClickable = buttonClickable;
+    }
+
+    /**
+     * 设置按钮颜色以及是否可以点击
+     * 不影响color_pressed的值
+     *
+     * @param color           设置按钮的color_normal值
+     * @param buttonClickable 设置按钮是否可点击
+     */
+    public void setButtonClickable(@ColorInt int color, boolean buttonClickable) {
+        this.mColorNormal = color;
+        setButtonBackgroundColor(color);
+        setButtonClickable(buttonClickable);
     }
 
     /**
