@@ -26,10 +26,10 @@
 
 ### 引入
 
-[ ![Download](https://api.bintray.com/packages/androidman/maven/superbutton/images/download.svg?version=1.1.0) ](https://bintray.com/androidman/maven/superbutton/1.1.0/link)
+[ ![Download](https://api.bintray.com/packages/androidman/maven/superbutton/images/download.svg?version=1.1.1) ](https://bintray.com/androidman/maven/superbutton/1.1.1/link)
 
 ```
-implementation 'top.androidman:superbutton:1.1.0'
+implementation 'top.androidman:superbutton:1.1.1'
 ```
 
 [Github传送门](https://github.com/ansnail/SuperButton)
@@ -403,7 +403,7 @@ implementation 'top.androidman:superbutton:1.1.0'
 ```
 
 ### 高级应用
-1.想修改按钮相关调用如下方法：
+1. 想修改按钮相关调用如下方法：
 ```
     /**
      * 修改文字
@@ -422,14 +422,19 @@ implementation 'top.androidman:superbutton:1.1.0'
 
 ```
 
-当某些状态下需要代码控制，将按钮置灰然后不可点击，可以直接调用如下方法：
+2. 如果想同时改变按钮的颜色和点击状态可以调用这个方法，注意，当按钮在不可点击状态恢复成可点击状态时，需要调用此方法同时修改颜色值，否则按钮依然是不可点击时的颜色，不过可以点击
 ```
     /**
-     * 调用此方法后按钮颜色被改变，按钮无法点击
+     * 设置按钮颜色以及是否可以点击
+     * 不影响color_pressed的值
+     *
+     * @param color           设置按钮的color_normal值
+     * @param buttonClickable 设置按钮是否可点击
      */
-    superButton.setUnableColor(@ColorInt int color);
+    superButton.setButtonClickable(@ColorInt int color, boolean buttonClickable)
 ```
-如果只是想设置按钮不可点击，不需要改变按钮颜色，可以使用如下方法
+
+3. 如果只是想设置按钮不可点击，不需要改变按钮颜色，可以使用如下方法
 ```
     /**
      * 设置按钮是否可以点击
