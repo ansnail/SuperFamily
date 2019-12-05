@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
@@ -27,6 +29,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "androidx.core:core-ktx:1.1.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 
@@ -38,4 +42,7 @@ publish {
     publishVersion = '1.1.0'//版本号
     desc = '让按钮使用更简单'//描述
     website = 'https://github.com/ansnail/SuperButton'
+}
+repositories {
+    mavenCentral()
 }

@@ -88,6 +88,7 @@
             android:textSize="22dp" />
 
         <top.androidman.SuperButton
+            android:id="@+id/sb_test"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
