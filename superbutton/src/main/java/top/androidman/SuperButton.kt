@@ -56,13 +56,13 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var mDrawableRight: Drawable? = null
     private var mDrawableTop: Drawable? = null
     private var mDrawableBottom: Drawable? = null
-    private var mDrawableMiddle: Drawable? = null
+    private var mDrawableCenter: Drawable? = null
     private var mDrawableAuto = true
     /**
      * 图片中间时的宽高
      */
-    private var mDrawableMiddleWidth = Constant.VALUE_NULL
-    private var mDrawableMiddleHeight = Constant.VALUE_NULL
+    private var mDrawableCenterWidth = Constant.VALUE_NULL
+    private var mDrawableCenterHeight = Constant.VALUE_NULL
     /**
      * 图片距离文字距离
      */
@@ -104,11 +104,11 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /**
      * 边框颜色
      */
-    private var mBorderColor = 0
+    private var mBorderColor = Constant.VALUE_NULL
     /**
      * 边框宽度
      */
-    private var mBorderWidth = 0
+    private var mBorderWidth = Constant.VALUE_NULL
     /**
      * 文字和图标容器
      */
@@ -205,16 +205,16 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
             mTextIconContainer.setCompoundDrawablesWithIntrinsicBounds(mDrawableLeft, mDrawableTop, mDrawableRight, mDrawableBottom)
         }
         val layoutParams = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        if (mDrawableMiddle != null) {
+        if (mDrawableCenter != null) {
             val imageView = ImageView(context)
-            if (mDrawableMiddleWidth == Constant.VALUE_NULL || mDrawableMiddleHeight == Constant.VALUE_NULL) {
+            if (mDrawableCenterWidth == Constant.VALUE_NULL || mDrawableCenterHeight == Constant.VALUE_NULL) {
                 layoutParams.width = 40
                 layoutParams.height = 40
             } else {
-                layoutParams.width = mDrawableMiddleWidth
-                layoutParams.height = mDrawableMiddleHeight
+                layoutParams.width = mDrawableCenterWidth
+                layoutParams.height = mDrawableCenterHeight
             }
-            imageView.setImageDrawable(mDrawableMiddle)
+            imageView.setImageDrawable(mDrawableCenter)
             addView(imageView, layoutParams)
         } else {
             addView(mTextIconContainer, layoutParams)
@@ -223,7 +223,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         //当设置的有阴影效果时
         if (mShadowSize != Constant.VALUE_NULL && mShadowStartColor != Constant.VALUE_NULL && mShadowEndColor != Constant.VALUE_NULL) {
             val shadowBackground = RoundRectDrawableWithShadow(
-                    ColorStateList.valueOf(mColorNormal), mCorner.toFloat(),
+                    ColorStateList.valueOf(mColorNormal), mCorner,
                     mShadowStartColor, mShadowEndColor,
                     mShadowSize.toFloat(), mShadowSize.toFloat())
             background = shadowBackground
@@ -308,7 +308,6 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      */
     fun setColorPressed(@ColorInt colorPressed: Int) {
         mColorPressed = colorPressed
-        setButtonBackgroundColor(colorPressed)
     }
 
     /**
@@ -413,6 +412,39 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
             setButtonBackgroundColor(mColorNormal)
         }
         invalidateBg()
+    }
+
+    /**
+     * 设置边框
+     */
+    fun setBorder(borderWidth: Int, @ColorInt borderColor: Int) {
+        if (borderWidth <= Constant.VALUE_DEFAULT || borderColor <= Constant.VALUE_DEFAULT) {
+            return
+        }
+        mBorderWidth = borderWidth
+        mBorderColor = borderColor
+        mButtonBackground.setStroke(mBorderWidth, mBorderColor)
+        invalidateBg()
+    }
+
+    /**
+     * 设置阴影效果
+     */
+    fun setShadow(@ColorInt startColor: Int, @ColorInt endColor: Int, shadowWidth: Int) {
+        if (shadowWidth != Constant.VALUE_NULL &&
+                startColor != Constant.VALUE_NULL &&
+                endColor != Constant.VALUE_NULL) {
+
+            mShadowStartColor = startColor
+            mShadowEndColor = endColor
+            mShadowSize = shadowWidth
+
+            val shadowBackground = RoundRectDrawableWithShadow(
+                    ColorStateList.valueOf(mColorNormal), mCorner,
+                    startColor, endColor,
+                    shadowWidth.toFloat(), shadowWidth.toFloat())
+            background = shadowBackground
+        }
     }
 
 
@@ -521,16 +553,16 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 mDrawableBottom = typedArray.getDrawable(attr)
             }
             //图片在中间
-            if (attr == R.styleable.SuperButton_drawable_middle) {
-                mDrawableMiddle = typedArray.getDrawable(attr)
+            if (attr == R.styleable.SuperButton_drawable_center) {
+                mDrawableCenter = typedArray.getDrawable(attr)
             }
             //图片的宽度
-            if (attr == R.styleable.SuperButton_drawable_middle_width) {
-                mDrawableMiddleWidth = typedArray.getDimensionPixelSize(attr, Constant.VALUE_DEFAULT)
+            if (attr == R.styleable.SuperButton_drawable_center_width) {
+                mDrawableCenterWidth = typedArray.getDimensionPixelSize(attr, Constant.VALUE_DEFAULT)
             }
             //图片的高度
-            if (attr == R.styleable.SuperButton_drawable_middle_height) {
-                mDrawableMiddleHeight = typedArray.getDimensionPixelSize(attr, Constant.VALUE_DEFAULT)
+            if (attr == R.styleable.SuperButton_drawable_center_height) {
+                mDrawableCenterHeight = typedArray.getDimensionPixelSize(attr, Constant.VALUE_DEFAULT)
             }
             //自动适应文字的大小
             if (attr == R.styleable.SuperButton_drawable_auto) {
@@ -589,7 +621,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 mBorderColor = typedArray.getColor(attr, Color.TRANSPARENT)
             }
             //按钮是否可以点击
-            if (attr == R.styleable.SuperButton_button_click_able) {
+            if (attr == R.styleable.SuperButton_button_clickable) {
                 mButtonClickable = typedArray.getBoolean(attr, true)
             }
             //阴影开始颜色

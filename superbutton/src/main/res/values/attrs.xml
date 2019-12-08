@@ -29,11 +29,11 @@
         <attr name="drawable_auto" format="boolean" />
 
         <!--只有图片的情况,此时会忽略文字，即便设置-->
-        <attr name="drawable_middle" format="reference|color" />
+        <attr name="drawable_center" format="reference|color" />
         <!--图片在中间时宽-->
-        <attr name="drawable_middle_width" format="dimension" />
+        <attr name="drawable_center_width" format="dimension" />
         <!--图片在中间时高-->
-        <attr name="drawable_middle_height" format="dimension" />
+        <attr name="drawable_center_height" format="dimension" />
 
         <!--形状-->
         <attr name="shape" format="enum">
@@ -84,7 +84,7 @@
         <!--边框颜色-->
         <attr name="border_color" format="color" />
         <!--按钮是否可以点击-->
-        <attr name="button_click_able" format="boolean" />
+        <attr name="button_clickable" format="boolean" />
 
         <!--阴影开始颜色-->
         <attr name="color_shadow_start" format="color" />
