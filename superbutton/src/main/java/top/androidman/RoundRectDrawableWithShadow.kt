@@ -151,7 +151,7 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
         canvas.translate(0f, mRawShadowSize / 2)
         drawShadow(canvas)
         canvas.translate(0f, -mRawShadowSize / 2)
-        sRoundRectHelper!!.drawRoundRect(canvas, mCardBounds, mCornerRadius, mPaint)
+        sRoundRectHelper.drawRoundRect(canvas, mCardBounds, mCornerRadius, mPaint)
     }
 
     private fun drawShadow(canvas: Canvas) {
