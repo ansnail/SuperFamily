@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.ColorUtils
 
 /**
@@ -32,7 +33,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /**
      * 文字颜色
      */
-    private var mTextColor = 0
+    private var mTextColor = Color.GRAY
     /**
      * 文字大小
      */
@@ -112,7 +113,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /**
      * 文字和图标容器
      */
-    private var mTextIconContainer: TextView = TextView(context)
+    private var mTextIconContainer: AppCompatTextView = AppCompatTextView(context)
     /**
      * 按钮背景
      */
@@ -133,12 +134,22 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * 阴影大小
      */
     private var mShadowSize = Constant.VALUE_NULL
+    /**
+     * 关闭默认点击效果
+     */
+    private var mCloseDefaultPressed = false
+    private var mColorDefaultPressed = Constant.VALUE_NULL
+    /**
+     * 点击时效果混合前景颜色
+     */
+    private val mCompositeForegroundColor by lazy {
+        if (mColorDefaultPressed != Constant.VALUE_NULL){
+            return@lazy mColorDefaultPressed
+        }
+        return@lazy if (mCloseDefaultPressed) 0x00000000 else 0x26000000
+    }
 
     companion object {
-        /**
-         * 点击时效果颜色
-         */
-        private const val COMPOSITE_FOREGROUND_COLOR = 0x26FFFFFF
         /**
          * 默认字体大小
          */
@@ -222,11 +233,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
         //当设置的有阴影效果时
         if (mShadowSize != Constant.VALUE_NULL && mShadowStartColor != Constant.VALUE_NULL && mShadowEndColor != Constant.VALUE_NULL) {
-            val shadowBackground = RoundRectDrawableWithShadow(
-                    ColorStateList.valueOf(mColorNormal), mCorner,
-                    mShadowStartColor, mShadowEndColor,
-                    mShadowSize.toFloat(), mShadowSize.toFloat())
-            background = shadowBackground
+            setShadow(mShadowStartColor, mShadowEndColor, mShadowSize)
         }
     }
 
@@ -431,20 +438,15 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * 设置阴影效果
      */
     fun setShadow(@ColorInt startColor: Int, @ColorInt endColor: Int, shadowWidth: Int) {
-        if (shadowWidth != Constant.VALUE_NULL &&
-                startColor != Constant.VALUE_NULL &&
-                endColor != Constant.VALUE_NULL) {
+        mShadowStartColor = startColor
+        mShadowEndColor = endColor
+        mShadowSize = shadowWidth
 
-            mShadowStartColor = startColor
-            mShadowEndColor = endColor
-            mShadowSize = shadowWidth
-
-            val shadowBackground = RoundRectDrawableWithShadow(
-                    ColorStateList.valueOf(mColorNormal), mCorner,
-                    startColor, endColor,
-                    shadowWidth.toFloat(), shadowWidth.toFloat())
-            background = shadowBackground
-        }
+        val shadowBackground = RoundRectDrawableWithShadow(
+                ColorStateList.valueOf(mColorNormal), mCorner,
+                startColor, endColor,
+                shadowWidth.toFloat(), shadowWidth.toFloat())
+        background = shadowBackground
     }
 
 
@@ -456,24 +458,47 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         when (event.actionMasked) {
             //按下
             MotionEvent.ACTION_DOWN -> {
-                //假如有渐变色效果
-                if (mColorStart != Constant.VALUE_NULL && mColorEnd != Constant.VALUE_NULL) {
-                    val startCompositeColor = ColorUtils.compositeColors(COMPOSITE_FOREGROUND_COLOR, mColorStart)
-                    val endCompositeColor = ColorUtils.compositeColors(COMPOSITE_FOREGROUND_COLOR, mColorEnd)
-                    mButtonBackground.colors = intArrayOf(startCompositeColor, endCompositeColor)
-                    background = mButtonBackground
+                //假如有阴影
+                if (mShadowSize != Constant.VALUE_NULL &&
+                        mShadowStartColor != Constant.VALUE_NULL &&
+                        mShadowEndColor != Constant.VALUE_NULL) {
+                    val normalCompositeColor = ColorUtils.compositeColors(mCompositeForegroundColor, mColorNormal)
+                    val shadowBackground = RoundRectDrawableWithShadow(
+                            ColorStateList.valueOf(normalCompositeColor), mCorner,
+                            mShadowStartColor, mShadowEndColor,
+                            mShadowSize.toFloat(), mShadowSize.toFloat())
+                    background = shadowBackground
                 } else {
-                    val compositeColor = ColorUtils.compositeColors(COMPOSITE_FOREGROUND_COLOR, mColorNormal)
-                    setButtonBackgroundColor(if (mColorPressed == Constant.VALUE_NULL) compositeColor else mColorPressed)
+                    //假如有渐变色效果
+                    if (mColorStart != Constant.VALUE_NULL && mColorEnd != Constant.VALUE_NULL) {
+                        val startCompositeColor = ColorUtils.compositeColors(mCompositeForegroundColor, mColorStart)
+                        val endCompositeColor = ColorUtils.compositeColors(mCompositeForegroundColor, mColorEnd)
+                        mButtonBackground.colors = intArrayOf(startCompositeColor, endCompositeColor)
+                        background = mButtonBackground
+                    } else {
+                        val compositeColor = ColorUtils.compositeColors(mCompositeForegroundColor, mColorNormal)
+                        setButtonBackgroundColor(if (mColorPressed == Constant.VALUE_NULL) compositeColor else mColorPressed)
+                    }
                 }
             }
             //抬起
             MotionEvent.ACTION_UP -> {
-                if (mColorStart != Constant.VALUE_NULL && mColorEnd != Constant.VALUE_NULL) {
-                    mButtonBackground.colors = intArrayOf(mColorStart, mColorEnd)
-                    background = mButtonBackground
+                //假如有阴影
+                if (mShadowSize != Constant.VALUE_NULL &&
+                        mShadowStartColor != Constant.VALUE_NULL &&
+                        mShadowEndColor != Constant.VALUE_NULL) {
+                    val shadowBackground = RoundRectDrawableWithShadow(
+                            ColorStateList.valueOf(mColorNormal), mCorner,
+                            mShadowStartColor, mShadowEndColor,
+                            mShadowSize.toFloat(), mShadowSize.toFloat())
+                    background = shadowBackground
                 } else {
-                    setButtonBackgroundColor(mColorNormal)
+                    if (mColorStart != Constant.VALUE_NULL && mColorEnd != Constant.VALUE_NULL) {
+                        mButtonBackground.colors = intArrayOf(mColorStart, mColorEnd)
+                        background = mButtonBackground
+                    } else {
+                        setButtonBackgroundColor(mColorNormal)
+                    }
                 }
             }
         }
@@ -516,6 +541,14 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         val length = typedArray.indexCount
         for (i in 0 until length) {
             val attr = typedArray.getIndex(i)
+            //是否关闭默认点击效果
+            if (attr == R.styleable.SuperButton_close_default_pressed) {
+                mCloseDefaultPressed = typedArray.getBoolean(attr, false)
+            }
+            //设置默认点击效果前景色，即和原颜色混合效果的颜色
+            if (attr == R.styleable.SuperButton_color_default_pressed) {
+                mColorDefaultPressed = typedArray.getColor(attr, Constant.VALUE_NULL)
+            }
             //文字内容
             if (attr == R.styleable.SuperButton_text) {
                 text = typedArray.getText(attr)

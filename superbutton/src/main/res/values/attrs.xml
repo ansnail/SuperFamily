@@ -93,5 +93,10 @@
         <!--阴影大小-->
         <attr name="shadow_size" format="dimension" />
 
+        <!--是否关闭默认的点击效果-->
+        <attr name="close_default_pressed" format="boolean" />
+        <!--设置默认的点击效果颜色-->
+        <attr name="color_default_pressed" format="color" />
+
     </declare-styleable>
 </resources>
