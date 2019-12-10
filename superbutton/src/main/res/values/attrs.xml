@@ -103,7 +103,7 @@
         <attr name="color_default_pressed" format="color" />
 
         <!--自定义背景-->
-        <attr name="background" format="reference" />
+        <attr name="custom_background" format="reference|color" />
 
     </declare-styleable>
 </resources>

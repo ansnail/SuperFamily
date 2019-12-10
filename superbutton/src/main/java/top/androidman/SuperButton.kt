@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.ColorUtils
@@ -153,13 +154,12 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (mColorDefaultPressed != Constant.VALUE_NULL) {
             return@lazy mColorDefaultPressed
         }
-        return@lazy if (mCloseDefaultPressed) 0x00000000 else 0x26000000
+        return@lazy if (mCloseDefaultPressed) 0x00000000 else 0x0D000000
     }
-
     /**
      * 自定义背景
      */
-    private var mBackground = Constant.VALUE_NULL
+    private var mBackground: Drawable? = null
 
     companion object {
         /**
@@ -200,13 +200,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         //设置边框颜色和边框宽度
         mButtonBackground.setStroke(mBorderWidth, mBorderColor)
         //设置背景
-        background = if (mBackground != Constant.VALUE_NULL) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                context.getDrawable(mBackground)
-            } else {
-                resources.getDrawable(mBackground)
-            }
-        } else mButtonBackground
+        background = if (mBackground != null) mBackground else mButtonBackground
 
         //设置文字
         mTextIconContainer.text = mText
@@ -226,7 +220,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
         mTextIconContainer.gravity = Gravity.CENTER
         if (mDrawableAuto) {
-            //设置图标
+            //设置图标大小
             val iconSize = (mTextSize * 1.2f).toInt()
             setBounds(mDrawableLeft, iconSize)
             setBounds(mDrawableTop, iconSize)
@@ -478,6 +472,24 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         background = backgroundDrawable
     }
 
+    /**
+     * 设置自定义文字
+     */
+    fun setTextView(textView: TextView) {
+        val layoutParams = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        removeAllViews()
+        addView(textView, layoutParams)
+    }
+
+    /**
+     * 设置自定义图片
+     */
+    fun setImageView(imageView: ImageView) {
+        val layoutParams = LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        removeAllViews()
+        addView(imageView, layoutParams)
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (!mButtonClickable) {
@@ -706,8 +718,8 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 mShadowSize = typedArray.getDimensionPixelSize(attr, Constant.VALUE_NULL)
             }
             //自定义背景
-            if (attr == R.styleable.SuperButton_background) {
-                mShadowSize = typedArray.getResourceId(attr, Constant.VALUE_NULL)
+            if (attr == R.styleable.SuperButton_custom_background) {
+                mBackground = typedArray.getDrawable(attr)
             }
         }
         typedArray.recycle()
