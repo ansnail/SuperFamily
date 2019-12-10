@@ -5,6 +5,10 @@
         <attr name="text" format="reference|string" />
         <!--按钮文字颜色-->
         <attr name="textColor" format="reference|color" />
+        <!--提示文字-->
+        <attr name="hintText" format="reference|string" />
+        <!--提示文字颜色-->
+        <attr name="hintTextColor" format="reference|color" />
         <!--按钮文字大小-->
         <attr name="textSize" format="dimension" />
         <!--文字是否单行，默认单行-->
@@ -97,6 +101,9 @@
         <attr name="close_default_pressed" format="boolean" />
         <!--设置默认的点击效果颜色-->
         <attr name="color_default_pressed" format="color" />
+
+        <!--自定义背景-->
+        <attr name="background" format="reference" />
 
     </declare-styleable>
 </resources>

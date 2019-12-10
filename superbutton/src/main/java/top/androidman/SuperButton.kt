@@ -14,7 +14,6 @@ import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.ColorUtils
@@ -29,11 +28,19 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /**
      * 文字内容
      */
-    private var text: CharSequence = ""
+    private var mText: CharSequence = ""
     /**
      * 文字颜色
      */
     private var mTextColor = Color.GRAY
+    /**
+     * 提示文字内容
+     */
+    private var mHintText: CharSequence = ""
+    /**
+     * 提示文字颜色
+     */
+    private var mHintTextColor = Color.TRANSPARENT
     /**
      * 文字大小
      */
@@ -143,11 +150,16 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * 点击时效果混合前景颜色
      */
     private val mCompositeForegroundColor by lazy {
-        if (mColorDefaultPressed != Constant.VALUE_NULL){
+        if (mColorDefaultPressed != Constant.VALUE_NULL) {
             return@lazy mColorDefaultPressed
         }
         return@lazy if (mCloseDefaultPressed) 0x00000000 else 0x26000000
     }
+
+    /**
+     * 自定义背景
+     */
+    private var mBackground = Constant.VALUE_NULL
 
     companion object {
         /**
@@ -188,14 +200,24 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         //设置边框颜色和边框宽度
         mButtonBackground.setStroke(mBorderWidth, mBorderColor)
         //设置背景
-        background = mButtonBackground
+        background = if (mBackground != Constant.VALUE_NULL) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                context.getDrawable(mBackground)
+            } else {
+                resources.getDrawable(mBackground)
+            }
+        } else mButtonBackground
 
         //设置文字
-        mTextIconContainer.text = text
+        mTextIconContainer.text = mText
         //设置文字大小
         mTextIconContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize)
         //设置文字颜色
         mTextIconContainer.setTextColor(mTextColor)
+        //设置提示文字
+        mTextIconContainer.hint = mHintText
+        //设置提示文字颜色
+        mTextIconContainer.setHintTextColor(mHintTextColor)
         //图片距离文字距离
         mTextIconContainer.compoundDrawablePadding = mDrawablePadding
         //是否单行
@@ -250,10 +272,10 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /**
      * 设置不可点击颜色，此时按钮点击无反应
      */
-    @Deprecated("")
+    @Deprecated("请用setButtonClickable()代替")
     fun setUnableColor(@ColorInt color: Int) {
         mColorNormal = color
-        setButtonBackgroundColor(color)
+        invalidateBgColor(color)
         setButtonClickable(false)
     }
 
@@ -273,7 +295,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      */
     fun setButtonClickable(@ColorInt color: Int, buttonClickable: Boolean) {
         mColorNormal = color
-        setButtonBackgroundColor(color)
+        invalidateBgColor(color)
         setButtonClickable(buttonClickable)
     }
 
@@ -307,7 +329,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      */
     fun setColorNormal(@ColorInt colorNormal: Int) {
         mColorNormal = colorNormal
-        setButtonBackgroundColor(colorNormal)
+        invalidateBgColor(colorNormal)
     }
 
     /**
@@ -416,7 +438,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
             mButtonBackground.colors = intArrayOf(startColor, endColor)
         } else {
             //设置填充颜色
-            setButtonBackgroundColor(mColorNormal)
+            invalidateBgColor(mColorNormal)
         }
         invalidateBg()
     }
@@ -449,6 +471,12 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         background = shadowBackground
     }
 
+    /**
+     * 设置自定义背景
+     */
+    fun setCustomBackground(backgroundDrawable: Drawable) {
+        background = backgroundDrawable
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -477,7 +505,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                         background = mButtonBackground
                     } else {
                         val compositeColor = ColorUtils.compositeColors(mCompositeForegroundColor, mColorNormal)
-                        setButtonBackgroundColor(if (mColorPressed == Constant.VALUE_NULL) compositeColor else mColorPressed)
+                        invalidateBgColor(if (mColorPressed == Constant.VALUE_NULL) compositeColor else mColorPressed)
                     }
                 }
             }
@@ -497,7 +525,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                         mButtonBackground.colors = intArrayOf(mColorStart, mColorEnd)
                         background = mButtonBackground
                     } else {
-                        setButtonBackgroundColor(mColorNormal)
+                        invalidateBgColor(mColorNormal)
                     }
                 }
             }
@@ -506,23 +534,23 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     /**
+     * 重绘背景
+     */
+    private fun invalidateBg() {
+        mButtonBackground.cornerRadii = mCornerRadii
+        background = mButtonBackground
+    }
+
+    /**
      * 设置正常状态下颜色
      */
-    private fun setButtonBackgroundColor(@ColorInt color: Int) {
+    private fun invalidateBgColor(@ColorInt color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mButtonBackground.color = ColorStateList.valueOf(color)
         } else {
             mButtonBackground.setColor(color)
         }
         invalidateBg()
-    }
-
-    /**
-     * 重绘背景
-     */
-    private fun invalidateBg() {
-        mButtonBackground.cornerRadii = mCornerRadii
-        background = mButtonBackground
     }
 
     /**
@@ -551,11 +579,19 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
             }
             //文字内容
             if (attr == R.styleable.SuperButton_text) {
-                text = typedArray.getText(attr)
+                mText = typedArray.getText(attr)
             }
             //文字颜色
             if (attr == R.styleable.SuperButton_textColor) {
                 mTextColor = typedArray.getColor(attr, Color.GRAY)
+            }
+            //提示文字内容
+            if (attr == R.styleable.SuperButton_hintText) {
+                mHintText = typedArray.getText(attr)
+            }
+            //提示文字颜色
+            if (attr == R.styleable.SuperButton_hintTextColor) {
+                mHintTextColor = typedArray.getColor(attr, Color.TRANSPARENT)
             }
             //文字大小
             if (attr == R.styleable.SuperButton_textSize) {
@@ -668,6 +704,10 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
             //阴影大小
             if (attr == R.styleable.SuperButton_shadow_size) {
                 mShadowSize = typedArray.getDimensionPixelSize(attr, Constant.VALUE_NULL)
+            }
+            //自定义背景
+            if (attr == R.styleable.SuperButton_background) {
+                mShadowSize = typedArray.getResourceId(attr, Constant.VALUE_NULL)
             }
         }
         typedArray.recycle()
