@@ -119,6 +119,14 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      */
     private var mBorderWidth = Constant.VALUE_NULL
     /**
+     * 边框虚线宽度
+     */
+    private var mBorderDashWidth = Constant.VALUE_NULL
+    /**
+     * 边框虚线间隙值
+     */
+    private var mBorderDashGap = Constant.VALUE_NULL
+    /**
      * 文字和图标容器
      */
     private var mTextIconContainer: AppCompatTextView = AppCompatTextView(context)
@@ -154,7 +162,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (mColorDefaultPressed != Constant.VALUE_NULL) {
             return@lazy mColorDefaultPressed
         }
-        return@lazy if (mCloseDefaultPressed) 0x00000000 else 0x0D000000
+        return@lazy if (mCloseDefaultPressed) 0x00000000 else 0x20000000
     }
     /**
      * 自定义背景
@@ -198,7 +206,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
         mButtonBackground.cornerRadii = mCornerRadii
         //设置边框颜色和边框宽度
-        mButtonBackground.setStroke(mBorderWidth, mBorderColor)
+        mButtonBackground.setStroke(mBorderWidth, mBorderColor, mBorderDashWidth.toFloat(), mBorderDashGap.toFloat())
         //设置背景
         background = if (mBackground != null) mBackground else mButtonBackground
 
@@ -696,6 +704,14 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
             //边框宽度
             if (attr == R.styleable.SuperButton_border_width) {
                 mBorderWidth = typedArray.getDimensionPixelSize(attr, 0)
+            }
+            //边框虚线宽度
+            if (attr == R.styleable.SuperButton_border_dash_width) {
+                mBorderDashWidth = typedArray.getDimensionPixelSize(attr, 0)
+            }
+            //边框虚线间隙值
+            if (attr == R.styleable.SuperButton_border_dash_gap) {
+                mBorderDashGap = typedArray.getDimensionPixelSize(attr, 0)
             }
             //边框颜色
             if (attr == R.styleable.SuperButton_border_color) {
