@@ -19,10 +19,15 @@ import android.content.res.ColorStateList
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Build
+import kotlin.math.ceil
 import kotlin.math.cos
 
 /**
  * A rounded rectangle drawable which also includes a shadow around.
+ * @param backgroundColor 背景颜色
+ * @param radius          圆角半径
+ * @param shadowSize      阴影尺寸
+ * @param maxShadowSize   最大阴影尺寸
  */
 class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Float,
                                   private val mShadowStartColor: Int, private val mShadowEndColor: Int,
@@ -36,7 +41,7 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
     private val mEdgeShadowPaint: Paint
     private val mCardBounds: RectF
     private var mCornerRadius: Float = 0f
-    private var mCornerShadowPath: Path? = null
+    private var mCornerShadowPath = Path()
     /**
      * actual value set by developer
      */
@@ -57,30 +62,15 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
      */
     private var mPrintedShadowClipWarning = true
 
-    private fun setBackground(color: ColorStateList?) {
-        mBackground = color ?: ColorStateList.valueOf(Color.TRANSPARENT)
-        mPaint.color = mBackground!!.getColorForState(state, mBackground!!.defaultColor)
-    }
-
-    /**
-     * Casts the value to an even integer.
-     */
-    private fun toEven(value: Float): Int {
-        val i = (value + .5f).toInt()
-        return if (i % 2 == 1) {
-            i - 1
-        } else i
-    }
-
-    fun setAddPaddingForCorners(addPaddingForCorners: Boolean) {
-        mAddPaddingForCorners = addPaddingForCorners
-        invalidateSelf()
-    }
-
-    override fun setAlpha(alpha: Int) {
-        mPaint.alpha = alpha
-        mCornerShadowPaint.alpha = alpha
-        mEdgeShadowPaint.alpha = alpha
+    init {
+        setBackground(backgroundColor)
+        mCornerShadowPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
+        mCornerShadowPaint.style = Paint.Style.FILL
+        mCornerRadius = radius + .5f
+        mCardBounds = RectF()
+        mEdgeShadowPaint = Paint(mCornerShadowPaint)
+        mEdgeShadowPaint.isAntiAlias = false
+        setShadowSize(shadowSize, shadowSize)
     }
 
     override fun onBoundsChange(bounds: Rect) {
@@ -112,11 +102,11 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
     }
 
     override fun getPadding(padding: Rect): Boolean {
-        val vOffset = Math.ceil(calculateVerticalPadding(mRawMaxShadowSize, mCornerRadius,
+        val vOffset = ceil(calculateVerticalPadding(mRawMaxShadowSize, mCornerRadius,
                 mAddPaddingForCorners).toDouble()).toInt()
-        val hOffset = Math.ceil(calculateHorizontalPadding(mRawMaxShadowSize, mCornerRadius,
+        val hOffset = ceil(calculateHorizontalPadding(mRawMaxShadowSize, mCornerRadius,
                 mAddPaddingForCorners).toDouble()).toInt()
-        padding[hOffset, vOffset, hOffset] = vOffset
+        padding.set(hOffset, vOffset, hOffset, vOffset)
         return true
     }
 
@@ -156,7 +146,8 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
 
     private fun drawShadow(canvas: Canvas) {
         val edgeShadowTop = -mCornerRadius - mShadowSize
-        val inset = mCornerRadius + mInsetShadow + mRawShadowSize / 2
+        val inset = toEven(mCornerRadius + mInsetShadow + mRawShadowSize / 2)
+
         val drawHorizontalEdges = mCardBounds.width() - 2 * inset > 0
         val drawVerticalEdges = mCardBounds.height() - 2 * inset > 0
         // LT
@@ -206,27 +197,26 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
         val innerBounds = RectF(-mCornerRadius, -mCornerRadius, mCornerRadius, mCornerRadius)
         val outerBounds = RectF(innerBounds)
         outerBounds.inset(-mShadowSize, -mShadowSize)
-        if (mCornerShadowPath == null) {
-            mCornerShadowPath = Path()
-        } else {
-            mCornerShadowPath!!.reset()
-        }
-        mCornerShadowPath!!.fillType = Path.FillType.EVEN_ODD
-        mCornerShadowPath!!.moveTo(-mCornerRadius, 0f)
-        mCornerShadowPath!!.rLineTo(-mShadowSize, 0f)
+        mCornerShadowPath.reset()
+        mCornerShadowPath.fillType = Path.FillType.EVEN_ODD
+        mCornerShadowPath.moveTo(-mCornerRadius, 0f)
+        mCornerShadowPath.rLineTo(-mShadowSize, 0f)
         // outer arc
-        mCornerShadowPath!!.arcTo(outerBounds, 180f, 90f, false)
+        mCornerShadowPath.arcTo(outerBounds, 180f, 90f, false)
         // inner arc
-        mCornerShadowPath!!.arcTo(innerBounds, 270f, -90f, false)
-        mCornerShadowPath!!.close()
+        mCornerShadowPath.arcTo(innerBounds, 270f, -90f, false)
+        mCornerShadowPath.close()
         val startRatio = mCornerRadius / (mCornerRadius + mShadowSize)
-        mCornerShadowPaint.shader = RadialGradient(0f, 0f, mCornerRadius + mShadowSize, intArrayOf(mShadowStartColor, mShadowStartColor, mShadowEndColor), floatArrayOf(0f, startRatio, 1f),
+        mCornerShadowPaint.shader = RadialGradient(0f, 0f, mCornerRadius + mShadowSize,
+                intArrayOf(mShadowStartColor, mShadowStartColor, mShadowEndColor),
+                floatArrayOf(0f, startRatio, 1f),
                 Shader.TileMode.CLAMP)
         // we offset the content shadowSize/2 pixels up to make it more realistic.
         // this is why edge shadow shader has some extra space
         // When drawing bottom edge shadow, we use that extra space.
-        mEdgeShadowPaint.shader = LinearGradient(0f, -mCornerRadius + mShadowSize, 0f,
-                -mCornerRadius - mShadowSize, intArrayOf(mShadowStartColor, mShadowStartColor, mShadowEndColor), floatArrayOf(0f, .5f, 1f), Shader.TileMode.CLAMP)
+        mEdgeShadowPaint.shader = LinearGradient(0f, -mCornerRadius + mShadowSize, 0f, -mCornerRadius - mShadowSize,
+                intArrayOf(mShadowStartColor, mShadowStartColor, mShadowEndColor), floatArrayOf(0f, .5f, 1f),
+                Shader.TileMode.CLAMP)
         mEdgeShadowPaint.isAntiAlias = false
     }
 
@@ -235,7 +225,10 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
     // center aligning Views inside the CardView would be problematic.
     private fun buildComponents(bounds: Rect) {
         val verticalOffset = mRawMaxShadowSize * SHADOW_MULTIPLIER
-        mCardBounds[bounds.left + mRawMaxShadowSize, bounds.top + verticalOffset, bounds.right - mRawMaxShadowSize] = bounds.bottom - verticalOffset
+        mCardBounds.set(bounds.left + mRawMaxShadowSize,
+                bounds.top + verticalOffset,
+                bounds.right - mRawMaxShadowSize,
+                bounds.bottom - verticalOffset)
         buildShadowCorners()
     }
 
@@ -369,22 +362,31 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
         }
     }
 
-    /**
-     * 阴影构造方法
-     *
-     * @param backgroundColor 背景颜色
-     * @param radius          圆角半径
-     * @param shadowSize      阴影尺寸
-     * @param maxShadowSize   最大阴影尺寸
-     */
-    init {
-        setBackground(backgroundColor)
-        mCornerShadowPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
-        mCornerShadowPaint.style = Paint.Style.FILL
-        mCornerRadius = radius + .5f
-        mCardBounds = RectF()
-        mEdgeShadowPaint = Paint(mCornerShadowPaint)
-        mEdgeShadowPaint.isAntiAlias = false
-        setShadowSize(shadowSize, maxShadowSize)
+    private fun setBackground(color: ColorStateList?) {
+        mBackground = color ?: ColorStateList.valueOf(Color.TRANSPARENT)
+        mPaint.color = mBackground!!.getColorForState(state, mBackground!!.defaultColor)
     }
+
+    /**
+     * Casts the value to an even integer.
+     */
+    private fun toEven(value: Float): Int {
+        val i = (value + .5f).toInt()
+        return if (i % 2 == 1) {
+            i - 1
+        } else i
+    }
+
+    fun setAddPaddingForCorners(addPaddingForCorners: Boolean) {
+        mAddPaddingForCorners = addPaddingForCorners
+        invalidateSelf()
+    }
+
+    override fun setAlpha(alpha: Int) {
+        mPaint.alpha = alpha
+        mCornerShadowPaint.alpha = alpha
+        mEdgeShadowPaint.alpha = alpha
+    }
+
+
 }
