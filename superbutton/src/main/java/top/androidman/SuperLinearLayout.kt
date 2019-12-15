@@ -10,10 +10,10 @@ import top.androidman.internal.Plasterer
 
 /**
  * @author         yanjie
- * @date           2019-12-15 16:58
+ * @date           2019-12-16 00:45
  * @version        1.0
  */
-class SuperConstraintLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class SuperLinearLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
         ConstraintLayout(context, attrs, defStyleAttr) {
     /**
      * 粉刷图纸
@@ -31,5 +31,4 @@ class SuperConstraintLayout @JvmOverloads constructor(context: Context, attrs: A
     init {
         plasterer.startPaint()
     }
-
 }

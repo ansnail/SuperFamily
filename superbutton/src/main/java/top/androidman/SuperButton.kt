@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.ColorUtils
+import top.androidman.internal.*
 
 /**
  * @author yanjie
@@ -678,7 +679,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 mColorEnd = typedArray.getColor(attr, Color.TRANSPARENT)
             }
             //颜色方向
-            if (attr == R.styleable.SuperButton_color_direction) {
+            if (attr == R.styleable.SuperButton_color_orientation) {
                 mColorDirection = typedArray.getInt(attr, LEFT_RIGHT)
             }
             //所有角圆角半径

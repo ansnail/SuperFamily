@@ -10,6 +10,18 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <top.androidman.SuperConstraintLayout
+            android:id="@+id/sl_normal"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="15dp"
+            app:corner="20dp"
+            app:corner_left_top="0dp"
+            app:normalColor="@color/color_red">
+
+
+        </top.androidman.SuperConstraintLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +37,6 @@
             app:color_normal="@color/color_accent"
             app:color_shadow_end="#00FFFFFF"
             app:color_shadow_start="@color/color_red"
-            app:corner="10dp"
             app:shadow_size="10dp"
             app:text="Shadow"
             app:textColor="@color/color_white"
@@ -149,7 +160,7 @@
             app:drawable_center="@mipmap/icon_like"
             app:drawable_center_height="50dp"
             app:drawable_center_width="50dp"
-            app:shape="CIRCLE" />
+            app:shape="Circle" />
 
         <top.androidman.SuperButton
             android:layout_width="match_parent"
@@ -187,8 +198,8 @@
             android:layout_margin="20dp"
             app:border_color="#00ff00"
             app:border_width="2dp"
-            app:color_direction="RIGHT_LEFT"
             app:color_end="@color/color_end"
+            app:color_orientation="RIGHT_LEFT"
             app:color_start="@color/color_start"
             app:corner="20dp"
             app:text="从右到左渐变"
@@ -199,8 +210,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
-            app:color_direction="TOP_BOTTOM"
             app:color_end="@color/color_end"
+            app:color_orientation="TOP_BOTTOM"
             app:color_start="@color/color_start"
             app:corner="30dp"
             app:text="从上到下渐变"
@@ -211,8 +222,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
-            app:color_direction="BOTTOM_TOP"
             app:color_end="@color/color_end"
+            app:color_orientation="BOTTOM_TOP"
             app:color_start="@color/color_start"
             app:corner="40dp"
             app:text="从下到上渐变"

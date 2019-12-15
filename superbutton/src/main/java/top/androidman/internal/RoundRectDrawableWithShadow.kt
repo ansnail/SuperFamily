@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package top.androidman
+package top.androidman.internal
 
 import android.content.res.ColorStateList
 import android.graphics.*

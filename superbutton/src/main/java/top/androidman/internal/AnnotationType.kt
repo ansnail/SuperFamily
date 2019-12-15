@@ -1,13 +1,14 @@
-package top.androidman
+package top.androidman.internal
 
 import androidx.annotation.IntDef
 
 
 /**
  * @author         yanjie
- * @date           2019-12-05 23:35
+ * @date           2019-12-16 00:03
  * @version        1.0
  */
+/////////////////////////颜色方向相关////////////////////
 /**
  * 从上到下
  */
@@ -44,3 +45,19 @@ const val TL_BR = 0x8
 @IntDef(TOP_BOTTOM, TR_BL, RIGHT_LEFT, BR_TL, BOTTOM_TOP, BL_TR, LEFT_RIGHT, TL_BR)
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
 annotation class ColorOrientation
+///////////////////////////////////////////////////////
+
+/////////////////////////形状相关////////////////////
+/**
+ * 圆形
+ */
+const val CIRCLE = 0x1
+/**
+ * 矩形
+ */
+const val RECT = 0x2
+
+@IntDef(CIRCLE, RECT)
+@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+annotation class Shape
+///////////////////////////////////////////////////////

@@ -1,6 +1,10 @@
 package top.androidman.internal
 
-import top.androidman.Constant
+import android.graphics.drawable.GradientDrawable
+import top.androidman.internal.Constant.VALUE_DEFAULT_FLOAT
+import top.androidman.internal.Constant.VALUE_DEFAULT_INT
+import top.androidman.internal.Constant.VALUE_NULL
+import top.androidman.internal.Constant.VALUE_NULL_FLOAT
 
 
 /**
@@ -13,22 +17,74 @@ class DefaultStore {
     /**
      * 正常颜色
      */
-    var normalColor = Constant.VALUE_NULL
+    var normalColor = VALUE_NULL
+
     /**
-     * 所有角圆角半径
+     * 圆角半径
      */
-    var corner = Constant.VALUE_DEFAULT_FLOAT
+    var corner = VALUE_DEFAULT_FLOAT
+    /**
+     * 左上
+     */
+    var leftTopCorner = VALUE_NULL_FLOAT
+    /**
+     * 左下
+     */
+    var leftBottomCorner = VALUE_NULL_FLOAT
+    /**
+     * 右上
+     */
+    var rightTopCorner = VALUE_NULL_FLOAT
+    /**
+     * 右下
+     */
+    var rightBottomCorner = VALUE_NULL_FLOAT
+
     /**
      * 阴影起始颜色
      */
-    var shadowStartColor = Constant.VALUE_NULL
+    var shadowStartColor = VALUE_NULL
     /**
      * 阴影结束颜色
      */
-    var shadowEndColor = Constant.VALUE_NULL
+    var shadowEndColor = VALUE_NULL
     /**
      * 阴影大小
      */
-    var shadowSize = Constant.VALUE_DEFAULT_INT
+    var shadowSize = VALUE_DEFAULT_INT
 
+    /**
+     * 边框宽度
+     */
+    var borderWidth = VALUE_DEFAULT_INT
+    /**
+     * 边框颜色
+     */
+    var borderColor = VALUE_NULL
+    /**
+     * 边框虚线间隙值
+     */
+    var borderDashGap = VALUE_DEFAULT_INT
+    /**
+     * 边框虚线宽度
+     */
+    var borderDashWidth = VALUE_DEFAULT_INT
+
+    /**
+     * 形状
+     */
+    var shap = RECT
+
+    /**
+     * 渐变起始颜色
+     */
+    var startColor = VALUE_NULL
+    /**
+     * 渐变结束颜色
+     */
+    var endColor = VALUE_NULL
+    /**
+     * 颜色方向
+     */
+    var colorOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.LEFT_RIGHT
 }
