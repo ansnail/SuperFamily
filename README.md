@@ -24,31 +24,34 @@
 9. 可以支持设置按钮是否可以点击
 10. 可以设置带图标的按钮，支持自定义按钮大小，和自动缩放，图标支持设置在文字上下左右四个方向，支持自定义文字距离图标的距离
 
+### 注意
+
+从1.2版本开始引入了默认点击效果，如果不想使用可以用“close_default_pressed”属性关闭掉，如果对默认点击效果的颜色不满意，可以通过“color_default_pressed”属性，设置需要的点击颜色效果
+
 ### 引入
 
-[ ![Download](https://api.bintray.com/packages/androidman/maven/superbutton/images/download.svg?version=1.1.1) ](https://bintray.com/androidman/maven/superbutton/1.1.1/link)
+[ ![Download](https://api.bintray.com/packages/androidman/maven/superbutton/images/download.svg?version=1.2.0) ](https://bintray.com/androidman/maven/superbutton/1.2.0/link)
 
 ```
-implementation 'top.androidman:superbutton:1.1.1'
+implementation 'top.androidman:superbutton:1.2.0'
 ```
-
 [Github传送门](https://github.com/ansnail/SuperButton)
 
 ### 实现效果（目前最低版本支持到16）
 
 基本使用|单独设置每个圆角|Selector|圆形按钮
 :---:|:---:|:---:|:---:
-<img src="./image/20190711155020.png" width="200" />|<img src="./image/20190711171924.png" width="200"/>|<img src="./image/20190711172054.gif" width="200" />|<img src="./image/20190711172121.png" width="200" />
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711155020.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711171924.png" width="200"/>|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172054.gif" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172121.png" width="200" />
 渐变背景的按钮|有边框按钮|按钮不可点击|带图标按钮
-<img src="./image/20190711172358.png" width="200" />|<img src="./image/20190711172416.png" width="200"/>|<img src="./image/20190711172439.png" width="200" />|<img src="./image/20190711172519.png" width="200" />
-带阴影的按钮|||
-<img src="./image/20190724003633.png" width="200" />|||
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172358.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172416.png" width="200"/>|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172439.png" width="200" />|<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172519.png" width="200" />
+带阴影的按钮|边框带虚线的按钮||
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190724003633.png" width="200" />|||
 
 ### 代码解释
 
 #### 0x1 基本使用
 ##### 效果
-<img src="./image/20190711155020.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711155020.png"/>
 
 ##### 代码
 ```
@@ -74,7 +77,7 @@ implementation 'top.androidman:superbutton:1.1.1'
     
 ### 0x2 单独设置每个圆角
 ##### 效果
-<img src="./image/20190711171924.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711171924.png"/>
 
 ##### 代码
 ```
@@ -106,7 +109,7 @@ implementation 'top.androidman:superbutton:1.1.1'
     
 ### 0x3 Selector
 ##### 效果
-<img src="./image/20190711172054.gif"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172054.gif"/>
 
 ##### 代码
 ```
@@ -129,7 +132,7 @@ implementation 'top.androidman:superbutton:1.1.1'
     
 ### 0x4 圆形按钮
 ##### 效果
-<img src="./image/20190711172121.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172121.png"/>
 
 ##### 代码
 ```
@@ -157,7 +160,7 @@ implementation 'top.androidman:superbutton:1.1.1'
 
 ### 0x5 渐变背景的按钮
 ##### 效果
-<img src="./image/20190711172358.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172358.png"/>
 
 ##### 代码
 ```
@@ -193,7 +196,7 @@ implementation 'top.androidman:superbutton:1.1.1'
 
 ### 0x6 有边框按钮
 ##### 效果
-<img src="./image/20190711172416.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172416.png"/>
 
 ##### 代码
 ```
@@ -214,10 +217,14 @@ implementation 'top.androidman:superbutton:1.1.1'
     app:border_width="2dp"
 - 边框颜色<br>
     app:border_color="@color/color_red"
+- 边框虚线宽度<br>
+    app:border_dash_width="5dp"
+- 边框虚线间隙值<br>
+    app:border_dash_gap="5dp"
 
 ### 0x7 按钮不可点击
 ##### 效果
-<img src="./image/20190711172439.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172439.png"/>
 
 ##### 代码
 ```
@@ -245,7 +252,7 @@ implementation 'top.androidman:superbutton:1.1.1'
 
 ### 0x8 带图标按钮
 ##### 效果
-<img src="./image/20190711172519.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190711172519.png"/>
 
 ##### 代码
 ```
@@ -278,7 +285,7 @@ implementation 'top.androidman:superbutton:1.1.1'
 
 ### 0x9 带阴影的按钮
 ##### 效果
-<img src="./image/20190724003633.png"/>
+<img src="https://ansnail.oss-cn-beijing.aliyuncs.com/superbutton/20190724003633.png"/>
 
 ##### 代码
 ```
