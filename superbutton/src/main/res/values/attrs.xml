@@ -158,7 +158,7 @@
         <!--结束颜色-->
         <attr name="endColor" />
         <!--颜色方向-->
-        <attr name="color_direction" format="enum">
+        <attr name="constraintLayout_color_direction" format="enum">
             <!--从上到下-->
             <enum name="TOP_BOTTOM" value="0x1" />
             <!--从右上到左下-->
