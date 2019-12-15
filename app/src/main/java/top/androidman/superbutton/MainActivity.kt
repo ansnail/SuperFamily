@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         setContentView(R.layout.activity_main)
 
-        val button = findViewById<SuperButton>(R.id.sb_test)
+//        val button = findViewById<SuperButton>(R.id.sb_test)
 
     }
 

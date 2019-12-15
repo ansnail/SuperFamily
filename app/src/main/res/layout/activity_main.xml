@@ -10,6 +10,27 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <top.androidman.SuperConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="15dp"
+            app:corner="10dp"
+            app:normalColor="@color/color_red"
+            app:shadow_end_color="#00FFFFFF"
+            app:shadow_size="10dp"
+            app:shadow_start_color="@color/color_14c7de">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/color_white" />
+
+
+        </top.androidman.SuperConstraintLayout>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,8 +44,8 @@
             android:layout_height="100dp"
             android:layout_margin="20dp"
             app:color_normal="@color/color_accent"
-            app:color_shadow_end="@color/color_grey_divider_line"
-            app:color_shadow_start="@color/color_text_grey"
+            app:color_shadow_end="#00FFFFFF"
+            app:color_shadow_start="@color/color_red"
             app:corner="10dp"
             app:shadow_size="10dp"
             app:text="Shadow"
@@ -357,6 +378,7 @@
             app:text="图标在下边"
             app:textColor="@color/color_white"
             app:textSize="22sp" />
+
 
     </LinearLayout>
 </ScrollView>
