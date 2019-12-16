@@ -10,17 +10,110 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Super布局"
+            android:textColor="@color/color_text_black"
+            android:textSize="22dp" />
+
         <top.androidman.SuperConstraintLayout
             android:id="@+id/sl_normal"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_margin="15dp"
-            app:corner="20dp"
-            app:corner_left_top="0dp"
-            app:normalColor="@color/color_red">
+            app:background_endColor="@color/color_end"
+            app:background_normalColor="@color/color_red"
+            app:background_startColor="@color/color_start"
+            app:border_color="@color/color_accent"
+            app:border_dashGap="5dp"
+            app:border_dashWidth="10dp"
+            app:border_width="2dp"
+            app:corner="20dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ConstraintLayout"
+                android:textColor="@color/color_white"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </top.androidman.SuperConstraintLayout>
+
+        <top.androidman.SuperLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            app:background_endColor="@color/color_end"
+            app:background_normalColor="@color/color_red"
+            app:background_startColor="@color/color_start"
+            app:border_color="@color/color_accent"
+            app:border_dashGap="5dp"
+            app:border_dashWidth="10dp"
+            app:border_width="2dp"
+            app:corner="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LinearLayout"
+                android:textColor="@color/color_white"
+                android:textSize="18dp" />
+
+        </top.androidman.SuperLinearLayout>
+
+        <top.androidman.SuperRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="15dp"
+            app:background_endColor="@color/color_end"
+            app:background_normalColor="@color/color_red"
+            app:background_startColor="@color/color_start"
+            app:border_color="@color/color_accent"
+            app:border_dashGap="5dp"
+            app:border_dashWidth="10dp"
+            app:border_width="2dp"
+            app:corner="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="RelativeLayout"
+                android:textColor="@color/color_white"
+                android:textSize="18dp" />
+        </top.androidman.SuperRelativeLayout>
+
+        <top.androidman.SuperFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="15dp"
+            app:background_endColor="@color/color_end"
+            app:background_normalColor="@color/color_red"
+            app:background_startColor="@color/color_start"
+            app:border_color="@color/color_accent"
+            app:border_dashGap="5dp"
+            app:border_dashWidth="10dp"
+            app:border_width="2dp"
+            app:corner="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="FrameLayout"
+                android:textColor="@color/color_white"
+                android:textSize="18dp" />
+
+        </top.androidman.SuperFrameLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -160,7 +253,7 @@
             app:drawable_center="@mipmap/icon_like"
             app:drawable_center_height="50dp"
             app:drawable_center_width="50dp"
-            app:shape="Circle" />
+            app:shape="circle" />
 
         <top.androidman.SuperButton
             android:layout_width="match_parent"
@@ -196,10 +289,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
+            app:background_colorOrientation="RIGHT_LEFT"
             app:border_color="#00ff00"
             app:border_width="2dp"
             app:color_end="@color/color_end"
-            app:color_orientation="RIGHT_LEFT"
             app:color_start="@color/color_start"
             app:corner="20dp"
             app:text="从右到左渐变"
@@ -210,8 +303,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
+            app:background_colorOrientation="TOP_BOTTOM"
             app:color_end="@color/color_end"
-            app:color_orientation="TOP_BOTTOM"
             app:color_start="@color/color_start"
             app:corner="30dp"
             app:text="从上到下渐变"
@@ -222,8 +315,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
+            app:background_colorOrientation="BOTTOM_TOP"
             app:color_end="@color/color_end"
-            app:color_orientation="BOTTOM_TOP"
             app:color_start="@color/color_start"
             app:corner="40dp"
             app:text="从下到上渐变"

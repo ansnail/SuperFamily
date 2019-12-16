@@ -17,7 +17,7 @@ class DefaultStore {
     /**
      * 正常颜色
      */
-    var normalColor = VALUE_NULL
+    var backgroundNormalColor = VALUE_NULL
 
     /**
      * 圆角半径
@@ -64,11 +64,11 @@ class DefaultStore {
     /**
      * 边框虚线间隙值
      */
-    var borderDashGap = VALUE_DEFAULT_INT
+    var borderDashGap = VALUE_DEFAULT_FLOAT
     /**
      * 边框虚线宽度
      */
-    var borderDashWidth = VALUE_DEFAULT_INT
+    var borderDashWidth = VALUE_DEFAULT_FLOAT
 
     /**
      * 形状
@@ -78,13 +78,13 @@ class DefaultStore {
     /**
      * 渐变起始颜色
      */
-    var startColor = VALUE_NULL
+    var backgroundStartColor = VALUE_NULL
     /**
      * 渐变结束颜色
      */
-    var endColor = VALUE_NULL
+    var backgroundEndColor = VALUE_NULL
     /**
      * 颜色方向
      */
-    var colorOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.LEFT_RIGHT
+    var backgroundColorOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.LEFT_RIGHT
 }

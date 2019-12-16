@@ -679,7 +679,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 mColorEnd = typedArray.getColor(attr, Color.TRANSPARENT)
             }
             //颜色方向
-            if (attr == R.styleable.SuperButton_color_orientation) {
+            if (attr == R.styleable.SuperButton_background_colorOrientation) {
                 mColorDirection = typedArray.getInt(attr, LEFT_RIGHT)
             }
             //所有角圆角半径

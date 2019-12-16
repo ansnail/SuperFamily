@@ -33,7 +33,7 @@ class Plasterer(view: View, valueStore: DefaultStore) {
      * 设置正常状态下颜色
      */
     fun normalColor(@ColorInt normalColor: Int): Plasterer {
-        globalStore.normalColor = normalColor
+        globalStore.backgroundNormalColor = normalColor
         return this
     }
 
@@ -41,9 +41,9 @@ class Plasterer(view: View, valueStore: DefaultStore) {
      * 设置渐变色
      */
     fun setColors(@ColorOrientation orientation: Int, startColor: Int, endColor: Int) {
-        globalStore.colorOrientation = getColorOrientation(orientation)
-        globalStore.startColor = startColor
-        globalStore.endColor = endColor
+        globalStore.backgroundColorOrientation = getColorOrientation(orientation)
+        globalStore.backgroundStartColor = startColor
+        globalStore.backgroundEndColor = endColor
     }
 
     /**
@@ -93,12 +93,14 @@ class Plasterer(view: View, valueStore: DefaultStore) {
 
         val backGroundDrawable = if (hasShadow) {
             RoundRectDrawableWithShadow(
-                    ColorStateList.valueOf(globalStore.normalColor), globalStore.corner,
+                    ColorStateList.valueOf(globalStore.backgroundNormalColor), globalStore.corner,
                     globalStore.shadowStartColor, globalStore.shadowEndColor,
                     globalStore.shadowSize.toFloat(), globalStore.shadowSize.toFloat())
         } else {
             generateGradientDrawable()
         }
+        //关闭硬件加速
+        paintObject.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         paintObject.background = backGroundDrawable
     }
 
@@ -109,15 +111,15 @@ class Plasterer(view: View, valueStore: DefaultStore) {
         val beautifulCanvas = GradientDrawable()
         //1.设置正常颜色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            beautifulCanvas.color = ColorStateList.valueOf(globalStore.normalColor)
+            beautifulCanvas.color = ColorStateList.valueOf(globalStore.backgroundNormalColor)
         } else {
-            beautifulCanvas.setColor(globalStore.normalColor)
+            beautifulCanvas.setColor(globalStore.backgroundNormalColor)
         }
         //2.设置渐变色，当设置渐变色时需要同时设置起始色和结束色，否则设置不生效
         //渐变色会覆盖掉正常颜色
-        if (globalStore.startColor != VALUE_NULL && globalStore.endColor != VALUE_NULL) {
-            beautifulCanvas.orientation = globalStore.colorOrientation
-            beautifulCanvas.colors = intArrayOf(globalStore.startColor, globalStore.endColor)
+        if (globalStore.backgroundStartColor != VALUE_NULL && globalStore.backgroundEndColor != VALUE_NULL) {
+            beautifulCanvas.orientation = globalStore.backgroundColorOrientation
+            beautifulCanvas.colors = intArrayOf(globalStore.backgroundStartColor, globalStore.backgroundEndColor)
         }
         //3.设置圆角角度 圆角数组 ordered top-left, top-right, bottom-right, bottom-left
         //分别设置每个圆角的角度时会覆盖corner属性，当设置阴影时，此设置不生效
@@ -135,6 +137,10 @@ class Plasterer(view: View, valueStore: DefaultStore) {
         cornerRadii[6] = if (globalStore.leftBottomCorner != VALUE_NULL_FLOAT) globalStore.leftBottomCorner else globalStore.corner
         cornerRadii[7] = if (globalStore.leftBottomCorner != VALUE_NULL_FLOAT) globalStore.leftBottomCorner else globalStore.corner
         beautifulCanvas.cornerRadii = cornerRadii
+        //4.设置边框颜色和边框宽度
+        beautifulCanvas.setStroke(globalStore.borderWidth, globalStore.borderColor, globalStore.borderDashWidth, globalStore.borderDashGap)
+        //5.设置形状
+        beautifulCanvas.shape = if (globalStore.shap == CIRCLE) GradientDrawable.OVAL else GradientDrawable.RECTANGLE
 
         return beautifulCanvas
     }

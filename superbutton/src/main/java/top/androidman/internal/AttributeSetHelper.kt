@@ -32,42 +32,41 @@ object AttributeSetHelper {
         for (i in 0 until length) {
             val attr = typedArray.getIndex(i)
             //默认背景颜色
-            if (attr == R.styleable.SuperView_normalColor) {
-                defaultStore.normalColor = typedArray.getColor(attr, VALUE_NULL)
+            if (attr == R.styleable.SuperView_background_normalColor) {
+                defaultStore.backgroundNormalColor = typedArray.getColor(attr, VALUE_NULL)
             }
-
             //所有角圆角半径
             if (attr == R.styleable.SuperView_corner) {
                 defaultStore.corner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //左上角圆角半径
-            if (attr == R.styleable.SuperView_corner_left_top) {
+            if (attr == R.styleable.SuperView_corner_leftTop) {
                 defaultStore.leftTopCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //右上角圆角半径
-            if (attr == R.styleable.SuperView_corner_right_top) {
+            if (attr == R.styleable.SuperView_corner_rightTop) {
                 defaultStore.rightTopCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //左下角圆角半径
-            if (attr == R.styleable.SuperView_corner_left_bottom) {
+            if (attr == R.styleable.SuperView_corner_leftBottom) {
                 defaultStore.leftBottomCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //右下角圆角半径
-            if (attr == R.styleable.SuperView_corner_right_bottom) {
+            if (attr == R.styleable.SuperView_corner_rightBottom) {
                 defaultStore.rightBottomCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
 
             //阴影开始颜色
-            if (attr == R.styleable.SuperView_shadow_start_color) {
-                defaultStore.shadowStartColor = typedArray.getColor(attr, Constant.VALUE_NULL)
+            if (attr == R.styleable.SuperView_shadow_startColor) {
+                defaultStore.shadowStartColor = typedArray.getColor(attr, VALUE_NULL)
             }
             //阴影结束颜色
-            if (attr == R.styleable.SuperView_shadow_end_color) {
-                defaultStore.shadowEndColor = typedArray.getColor(attr, Constant.VALUE_NULL)
+            if (attr == R.styleable.SuperView_shadow_endColor) {
+                defaultStore.shadowEndColor = typedArray.getColor(attr, VALUE_NULL)
             }
             //阴影大小
             if (attr == R.styleable.SuperView_shadow_size) {
-                defaultStore.shadowSize = typedArray.getDimensionPixelSize(attr, Constant.VALUE_NULL)
+                defaultStore.shadowSize = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
             }
 
             //边框宽度
@@ -75,12 +74,12 @@ object AttributeSetHelper {
                 defaultStore.borderWidth = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT)
             }
             //边框虚线宽度
-            if (attr == R.styleable.SuperView_border_dash_width) {
-                defaultStore.borderDashWidth = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT)
+            if (attr == R.styleable.SuperView_border_dashWidth) {
+                defaultStore.borderDashWidth = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //边框虚线间隙值
-            if (attr == R.styleable.SuperView_border_dash_gap) {
-                defaultStore.borderDashGap = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT)
+            if (attr == R.styleable.SuperView_border_dashGap) {
+                defaultStore.borderDashGap = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //边框颜色
             if (attr == R.styleable.SuperView_border_color) {
@@ -93,16 +92,16 @@ object AttributeSetHelper {
             }
 
             //开始颜色
-            if (attr == R.styleable.SuperView_startColor) {
-                defaultStore.startColor = typedArray.getColor(attr, Color.TRANSPARENT)
+            if (attr == R.styleable.SuperView_background_startColor) {
+                defaultStore.backgroundStartColor = typedArray.getColor(attr, Color.TRANSPARENT)
             }
             //结束颜色
-            if (attr == R.styleable.SuperView_endColor) {
-                defaultStore.endColor = typedArray.getColor(attr, Color.TRANSPARENT)
+            if (attr == R.styleable.SuperView_background_endColor) {
+                defaultStore.backgroundEndColor = typedArray.getColor(attr, Color.TRANSPARENT)
             }
             //颜色方向
-            if (attr == R.styleable.SuperView_color_orientation) {
-                defaultStore.colorOrientation = getColorOrientation(typedArray.getInt(attr, LEFT_RIGHT))
+            if (attr == R.styleable.SuperView_background_colorOrientation) {
+                defaultStore.backgroundColorOrientation = getColorOrientation(typedArray.getInt(attr, LEFT_RIGHT))
             }
         }
         typedArray.recycle()
