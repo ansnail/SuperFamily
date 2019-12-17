@@ -111,6 +111,38 @@
         <attr name="background_endColor" />
         <!--颜色方向-->
         <attr name="background_colorOrientation" />
+
+        <!--默认配置-->
+        <attr name="text" format="reference|string" />
+        <!--按钮文字颜色-->
+        <attr name="textColor" format="reference|color" />
+        <!--提示文字-->
+        <attr name="hintText" format="reference|string" />
+        <!--提示文字颜色-->
+        <attr name="hintTextColor" format="reference|color" />
+        <!--按钮文字大小-->
+        <attr name="textSize" format="dimension" />
+        <!--文字是否单行，默认单行-->
+        <attr name="singleLine" format="boolean" />
+
+        <!--图片在文字左边-->
+        <attr name="drawableLeft" format="reference|color" />
+        <!--图片在文字右边-->
+        <attr name="drawableRight" format="reference|color" />
+        <!--图片在文字上边-->
+        <attr name="drawableTop" format="reference|color" />
+        <!--图片在文字下边-->
+        <attr name="drawableBottom" format="reference|color" />
+        <!--图片距文字的距离-->
+        <attr name="drawablePadding" format="dimension" />
+
+        <!--只有图片的情况,此时会忽略文字，即便设置-->
+        <attr name="onlyImage" format="reference|color" />
+        <!--图片在中间时宽-->
+        <attr name="onlyImageWidth" format="dimension" />
+        <!--图片在中间时高-->
+        <attr name="onlyImageHeight" format="dimension" />
+
     </declare-styleable>
 
 
