@@ -1,45 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<top.androidman.SuperConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    app:background_colorOrientation="TL_BR"
-    app:background_endColor="@color/color_end"
-    app:background_startColor="@color/color_start">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/text"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="微信微信微信微信微信"
-        android:textColor="@color/color_white"
-        android:textSize="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
+    <top.androidman.SuperButton
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80333333"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="80dp"
+        android:layout_margin="15dp"
+        app:background_normalColor="@color/color_accent"
+        app:corner="10dp"
+        app:text="@string/app_name" />
 
-
-</top.androidman.SuperConstraintLayout>
+</LinearLayout>

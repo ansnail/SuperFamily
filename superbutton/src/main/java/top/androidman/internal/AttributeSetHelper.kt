@@ -18,11 +18,10 @@ object AttributeSetHelper {
     /**
      * 解析属性
      */
-    fun loadFromAttributeSet(context: Context, attrs: AttributeSet?): DefaultStore {
+    fun loadFromAttributeSet(context: Context, attrs: AttributeSet?, defaultStore: DefaultStore = DefaultStore()): DefaultStore {
         /**
          * 默认数据
          */
-        val defaultStore = DefaultStore()
         if (attrs == null) {
             return defaultStore
         }

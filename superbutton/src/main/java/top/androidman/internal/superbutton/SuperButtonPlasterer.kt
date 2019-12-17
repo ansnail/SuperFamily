@@ -6,8 +6,6 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
-import top.androidman.SuperLinearLayout
-import top.androidman.internal.DefaultStore
 import top.androidman.internal.Plasterer
 
 
@@ -30,6 +28,7 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
 
 
     override fun startPaint() {
+        super.startPaint()
         //1.全部内容居中
         paintObject.gravity = Gravity.CENTER
         //2.创建文字组件

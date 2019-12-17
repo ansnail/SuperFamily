@@ -13,7 +13,7 @@ import top.androidman.internal.Constant.VALUE_NULL_FLOAT
  * @version        1.0
  */
 
-class DefaultStore {
+open class DefaultStore {
     /**
      * 正常颜色
      */

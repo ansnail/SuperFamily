@@ -19,7 +19,7 @@ import top.androidman.internal.Constant.VALUE_NULL_FLOAT
  * 2.告诉粉刷匠要求
  * 3.让粉刷匠开始工作
  */
-class Plasterer(view: View, valueStore: DefaultStore) {
+open class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * 粉刷图纸
      */
@@ -85,7 +85,7 @@ class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * 开始粉刷
      */
-    fun startPaint() {
+    open fun startPaint() {
         //是否有阴影效果
         val hasShadow = globalStore.shadowSize != VALUE_NULL &&
                 globalStore.shadowStartColor != VALUE_NULL &&

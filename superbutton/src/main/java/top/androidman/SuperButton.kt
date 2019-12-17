@@ -2,11 +2,11 @@ package top.androidman
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.Gravity
-import androidx.appcompat.widget.AppCompatTextView
+import android.widget.LinearLayout
 import top.androidman.internal.AttributeSetHelper
-import top.androidman.internal.DefaultStore
-import top.androidman.internal.Plasterer
+import top.androidman.internal.superbutton.SuperButtonAttributeSetHelper
+import top.androidman.internal.superbutton.SuperButtonDefaultStore
+import top.androidman.internal.superbutton.SuperButtonPlasterer
 
 
 /**
@@ -16,19 +16,22 @@ import top.androidman.internal.Plasterer
  * @description
  */
 class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        AppCompatTextView(context, attrs, defStyleAttr) {
+        LinearLayout(context, attrs, defStyleAttr) {
 
     /**
      * 粉刷图纸
      */
-    private val valueStore: DefaultStore by lazy {
-        return@lazy AttributeSetHelper.loadFromAttributeSet(context, attrs)
+    private val valueStore: SuperButtonDefaultStore by lazy {
+        val store = SuperButtonDefaultStore()
+        AttributeSetHelper.loadFromAttributeSet(context, attrs, store)
+        SuperButtonAttributeSetHelper.loadFromAttributeSet(context, attrs, store)
+        return@lazy store
     }
     /**
      * 粉刷匠
      */
-    val plasterer: Plasterer by lazy {
-        return@lazy Plasterer(this, valueStore)
+    val plasterer: SuperButtonPlasterer by lazy {
+        return@lazy SuperButtonPlasterer(this, valueStore)
     }
 
     init {
