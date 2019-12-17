@@ -69,93 +69,50 @@
     </declare-styleable>
 
     <declare-styleable name="SuperButton">
-        <!--默认配置-->
-        <attr name="text" format="reference|string" />
-        <!--按钮文字颜色-->
-        <attr name="textColor" format="reference|color" />
-        <!--提示文字-->
-        <attr name="hintText" format="reference|string" />
-        <!--提示文字颜色-->
-        <attr name="hintTextColor" format="reference|color" />
-        <!--按钮文字大小-->
-        <attr name="textSize" format="dimension" />
-        <!--文字是否单行，默认单行-->
-        <attr name="singleLine" format="boolean" />
-
         <!--默认背景颜色-->
-        <attr name="color_normal" format="reference|color" />
+        <attr name="background_normalColor" />
         <!--按压时的背景颜色-->
-        <attr name="color_pressed" format="reference|color" />
+        <attr name="background_pressedColor" />
 
-        <!--图片在文字左边-->
-        <attr name="drawable_left" format="reference|color" />
-        <!--图片在文字右边-->
-        <attr name="drawable_right" format="reference|color" />
-        <!--图片在文字上边-->
-        <attr name="drawable_top" format="reference|color" />
-        <!--图片在文字下边-->
-        <attr name="drawable_bottom" format="reference|color" />
-        <!--图片距文字的距离-->
-        <attr name="drawable_padding" format="dimension" />
-        <!--图标根据文字大小自动缩放图标-->
-        <attr name="drawable_auto" format="boolean" />
+        <!--按钮圆角，如果单独设置会覆盖此设置-->
+        <attr name="corner" />
+        <!--左上角圆角半径-->
+        <attr name="corner_leftTop" />
+        <!--左下角圆角半径-->
+        <attr name="corner_leftBottom" />
+        <!--右上角圆角半径-->
+        <attr name="corner_rightTop" />
+        <!--右下角圆角半径-->
+        <attr name="corner_rightBottom" />
 
-        <!--只有图片的情况,此时会忽略文字，即便设置-->
-        <attr name="drawable_center" format="reference|color" />
-        <!--图片在中间时宽-->
-        <attr name="drawable_center_width" format="dimension" />
-        <!--图片在中间时高-->
-        <attr name="drawable_center_height" format="dimension" />
+        <!--阴影开始颜色-->
+        <attr name="shadow_startColor" />
+        <!--阴影结束颜色-->
+        <attr name="shadow_endColor" />
+        <!--阴影大小-->
+        <attr name="shadow_size" />
+
+        <!--边框宽度-->
+        <attr name="border_width" />
+        <!--边框虚线宽度-->
+        <attr name="border_dashWidth" />
+        <!--边框虚线间隙值-->
+        <attr name="border_dashGap" />
+        <!--边框颜色-->
+        <attr name="border_color" />
 
         <!--形状-->
         <attr name="shape" />
 
         <!--按钮背景是渐变色时设置-->
         <!--开始颜色-->
-        <attr name="color_start" format="color" />
+        <attr name="background_startColor" />
         <!--结束颜色-->
-        <attr name="color_end" format="color" />
+        <attr name="background_endColor" />
         <!--颜色方向-->
         <attr name="background_colorOrientation" />
-
-        <!--按钮圆角，如果单独设置会覆盖此设置-->
-        <attr name="corner" />
-        <!--左上角圆角半径-->
-        <attr name="corner_left_top" />
-        <!--左下角圆角半径-->
-        <attr name="corner_left_bottom" />
-        <!--右上角圆角半径-->
-        <attr name="corner_right_top" />
-        <!--右下角圆角半径-->
-        <attr name="corner_right_bottom" />
-
-        <!--边框宽度-->
-        <attr name="border_width" />
-        <!--边框虚线宽度-->
-        <attr name="border_dash_width" />
-        <!--边框虚线间隙值-->
-        <attr name="border_dash_gap" />
-        <!--边框颜色-->
-        <attr name="border_color" />
-        <!--按钮是否可以点击-->
-        <attr name="button_clickable" format="boolean" />
-
-        <!--阴影开始颜色-->
-        <attr name="color_shadow_start" format="color" />
-        <!--阴影结束颜色-->
-        <attr name="color_shadow_end" format="color" />
-        <!--阴影大小-->
-        <attr name="shadow_size" />
-
-        <!--是否关闭默认的点击效果-->
-        <attr name="close_default_pressed" format="boolean" />
-        <!--设置默认的点击效果颜色-->
-        <attr name="color_default_pressed" format="color" />
-
-        <!--自定义背景-->
-        <attr name="custom_background" format="reference|color" />
-
     </declare-styleable>
+
 
     <declare-styleable name="SuperConstraintLayout">
         <!--默认背景颜色-->
@@ -200,6 +157,143 @@
         <attr name="background_endColor" />
         <!--颜色方向-->
         <attr name="background_colorOrientation" />
-
     </declare-styleable>
+
+    <declare-styleable name="SuperFrameLayout">
+        <!--默认背景颜色-->
+        <attr name="background_normalColor" />
+        <!--按压时的背景颜色-->
+        <attr name="background_pressedColor" />
+
+        <!--按钮圆角，如果单独设置会覆盖此设置-->
+        <attr name="corner" />
+        <!--左上角圆角半径-->
+        <attr name="corner_leftTop" />
+        <!--左下角圆角半径-->
+        <attr name="corner_leftBottom" />
+        <!--右上角圆角半径-->
+        <attr name="corner_rightTop" />
+        <!--右下角圆角半径-->
+        <attr name="corner_rightBottom" />
+
+        <!--阴影开始颜色-->
+        <attr name="shadow_startColor" />
+        <!--阴影结束颜色-->
+        <attr name="shadow_endColor" />
+        <!--阴影大小-->
+        <attr name="shadow_size" />
+
+        <!--边框宽度-->
+        <attr name="border_width" />
+        <!--边框虚线宽度-->
+        <attr name="border_dashWidth" />
+        <!--边框虚线间隙值-->
+        <attr name="border_dashGap" />
+        <!--边框颜色-->
+        <attr name="border_color" />
+
+        <!--形状-->
+        <attr name="shape" />
+
+        <!--按钮背景是渐变色时设置-->
+        <!--开始颜色-->
+        <attr name="background_startColor" />
+        <!--结束颜色-->
+        <attr name="background_endColor" />
+        <!--颜色方向-->
+        <attr name="background_colorOrientation" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SuperLinearLayout">
+        <!--默认背景颜色-->
+        <attr name="background_normalColor" />
+        <!--按压时的背景颜色-->
+        <attr name="background_pressedColor" />
+
+        <!--按钮圆角，如果单独设置会覆盖此设置-->
+        <attr name="corner" />
+        <!--左上角圆角半径-->
+        <attr name="corner_leftTop" />
+        <!--左下角圆角半径-->
+        <attr name="corner_leftBottom" />
+        <!--右上角圆角半径-->
+        <attr name="corner_rightTop" />
+        <!--右下角圆角半径-->
+        <attr name="corner_rightBottom" />
+
+        <!--阴影开始颜色-->
+        <attr name="shadow_startColor" />
+        <!--阴影结束颜色-->
+        <attr name="shadow_endColor" />
+        <!--阴影大小-->
+        <attr name="shadow_size" />
+
+        <!--边框宽度-->
+        <attr name="border_width" />
+        <!--边框虚线宽度-->
+        <attr name="border_dashWidth" />
+        <!--边框虚线间隙值-->
+        <attr name="border_dashGap" />
+        <!--边框颜色-->
+        <attr name="border_color" />
+
+        <!--形状-->
+        <attr name="shape" />
+
+        <!--按钮背景是渐变色时设置-->
+        <!--开始颜色-->
+        <attr name="background_startColor" />
+        <!--结束颜色-->
+        <attr name="background_endColor" />
+        <!--颜色方向-->
+        <attr name="background_colorOrientation" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SuperRelativeLayout">
+        <!--默认背景颜色-->
+        <attr name="background_normalColor" />
+        <!--按压时的背景颜色-->
+        <attr name="background_pressedColor" />
+
+        <!--按钮圆角，如果单独设置会覆盖此设置-->
+        <attr name="corner" />
+        <!--左上角圆角半径-->
+        <attr name="corner_leftTop" />
+        <!--左下角圆角半径-->
+        <attr name="corner_leftBottom" />
+        <!--右上角圆角半径-->
+        <attr name="corner_rightTop" />
+        <!--右下角圆角半径-->
+        <attr name="corner_rightBottom" />
+
+        <!--阴影开始颜色-->
+        <attr name="shadow_startColor" />
+        <!--阴影结束颜色-->
+        <attr name="shadow_endColor" />
+        <!--阴影大小-->
+        <attr name="shadow_size" />
+
+        <!--边框宽度-->
+        <attr name="border_width" />
+        <!--边框虚线宽度-->
+        <attr name="border_dashWidth" />
+        <!--边框虚线间隙值-->
+        <attr name="border_dashGap" />
+        <!--边框颜色-->
+        <attr name="border_color" />
+
+        <!--形状-->
+        <attr name="shape" />
+
+        <!--按钮背景是渐变色时设置-->
+        <!--开始颜色-->
+        <attr name="background_startColor" />
+        <!--结束颜色-->
+        <attr name="background_endColor" />
+        <!--颜色方向-->
+        <attr name="background_colorOrientation" />
+    </declare-styleable>
+
 </resources>

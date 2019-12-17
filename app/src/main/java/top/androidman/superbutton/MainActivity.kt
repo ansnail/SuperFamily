@@ -13,13 +13,13 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         setContentView(R.layout.activity_main)
 
-        val button = findViewById<SuperConstraintLayout>(R.id.sl_normal)
-
-        button.setOnClickListener {
-            button.plasterer
-                    .normalColor(Color.GRAY)
-                    .startPaint()
-        }
+//        val button = findViewById<SuperConstraintLayout>(R.id.sl_normal)
+//
+//        button.setOnClickListener {
+//            button.plasterer
+//                    .normalColor(Color.GRAY)
+//                    .startPaint()
+//        }
 
     }
 
