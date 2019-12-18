@@ -102,6 +102,8 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         //关闭硬件加速
         paintObject.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         paintObject.background = backGroundDrawable
+
+
     }
 
     /**

@@ -13,6 +13,11 @@
         android:layout_margin="15dp"
         app:background_normalColor="@color/color_accent"
         app:corner="10dp"
-        app:text="@string/app_name" />
+        app:hintText="@string/poetry_1"
+        app:hintTextColor="@color/color_red"
+        app:iconOrientation="top"
+        app:text="@string/poetry_2"
+        app:textColor="@color/color_end"
+        app:textSize="22dp" />
 
 </LinearLayout>

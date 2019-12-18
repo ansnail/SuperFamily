@@ -49,21 +49,21 @@
         <!--颜色方向-->
         <attr name="background_colorOrientation" format="enum">
             <!--从上到下-->
-            <enum name="TOP_BOTTOM" value="0x1" />
+            <enum name="top_bottom" value="0x1" />
             <!--从右上到左下-->
-            <enum name="TR_BL" value="0x2" />
+            <enum name="tr_bl" value="0x2" />
             <!--从右到左-->
-            <enum name="RIGHT_LEFT" value="0x3" />
+            <enum name="right_left" value="0x3" />
             <!--从右下到左上-->
-            <enum name="BR_TL" value="0x4" />
+            <enum name="br_tl" value="0x4" />
             <!--从下到上-->
-            <enum name="BOTTOM_TOP" value="0x5" />
+            <enum name="bottom_top" value="0x5" />
             <!--从左下到右上-->
-            <enum name="BL_TR" value="0x6" />
+            <enum name="bl_tr" value="0x6" />
             <!--从左到右-->
-            <enum name="LEFT_RIGHT" value="0x7" />
+            <enum name="left_right" value="0x7" />
             <!--从左上到右下-->
-            <enum name="TL_BR" value="0x8" />
+            <enum name="tl_br" value="0x8" />
         </attr>
 
     </declare-styleable>
@@ -125,16 +125,25 @@
         <!--文字是否单行，默认单行-->
         <attr name="singleLine" format="boolean" />
 
-        <!--图片在文字左边-->
-        <attr name="drawableLeft" format="reference|color" />
-        <!--图片在文字右边-->
-        <attr name="drawableRight" format="reference|color" />
-        <!--图片在文字上边-->
-        <attr name="drawableTop" format="reference|color" />
-        <!--图片在文字下边-->
-        <attr name="drawableBottom" format="reference|color" />
-        <!--图片距文字的距离-->
-        <attr name="drawablePadding" format="dimension" />
+        <!--图标资源-->
+        <attr name="icon" format="reference" />
+        <!--图标距文字的距离-->
+        <attr name="iconPadding" format="dimension" />
+        <!--图标宽-->
+        <attr name="iconWidth" format="dimension" />
+        <!--图标高-->
+        <attr name="iconHeight" format="dimension" />
+        <attr name="iconOrientation" format="enum">
+            <!--图标在文字上面-->
+            <enum name="top" value="0x1" />
+            <!--图标在文字下面-->
+            <enum name="bottom" value="0x2" />
+            <!--图标在文字右面-->
+            <enum name="right" value="0x3" />
+            <!--图标在文字左面-->
+            <enum name="left" value="0x4" />
+        </attr>
+
 
     </declare-styleable>
 
