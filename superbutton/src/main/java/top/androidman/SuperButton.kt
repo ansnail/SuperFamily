@@ -530,7 +530,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 }
             }
             //抬起
-            MotionEvent.ACTION_UP -> {
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 //假如有阴影
                 if (mShadowSize != Constant.VALUE_NULL &&
                         mShadowStartColor != Constant.VALUE_NULL &&
