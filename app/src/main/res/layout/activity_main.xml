@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <top.androidman.SuperButton
+        android:id="@+id/sl_normal"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="15dp"

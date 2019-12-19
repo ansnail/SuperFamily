@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import top.androidman.SuperButton
 import top.androidman.SuperConstraintLayout
 
 class MainActivity : AppCompatActivity() {
@@ -13,13 +14,13 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.hide()
         setContentView(R.layout.activity_main)
 
-//        val button = findViewById<SuperConstraintLayout>(R.id.sl_normal)
-//
-//        button.setOnClickListener {
-//            button.plasterer
-//                    .normalColor(Color.GRAY)
-//                    .startPaint()
-//        }
+        val button = findViewById<SuperButton>(R.id.sl_normal)
+
+        button.setOnClickListener {
+            button.plasterer
+                    .normalColor(Color.GRAY)
+                    .startPaint()
+        }
 
     }
 

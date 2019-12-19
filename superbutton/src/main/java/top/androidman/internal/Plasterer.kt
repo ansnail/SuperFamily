@@ -3,7 +3,9 @@ package top.androidman.internal
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
+import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import top.androidman.internal.Constant.VALUE_NULL
 import top.androidman.internal.Constant.VALUE_NULL_FLOAT
@@ -103,7 +105,17 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         paintObject.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         paintObject.background = backGroundDrawable
 
-
+        paintObject.setOnTouchListener { _, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    Toast.makeText(paintObject.context, "down", Toast.LENGTH_SHORT).show()
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    Toast.makeText(paintObject.context, "up", Toast.LENGTH_SHORT).show()
+                }
+            }
+            return@setOnTouchListener false
+        }
     }
 
     /**

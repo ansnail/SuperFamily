@@ -3,6 +3,10 @@
     <declare-styleable name="SuperView">
         <!--默认背景颜色-->
         <attr name="background_normalColor" format="reference|color" />
+
+
+        <!--是否开启点击效果,默认关闭-->
+        <attr name="open_pressed_effect" format="boolean" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" format="reference|color" />
 
