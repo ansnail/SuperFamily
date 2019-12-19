@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="15dp"
-        app:background_endColor="@color/color_white"
+        app:background_endColor="@color/color_end"
         app:background_normalColor="@color/color_accent"
         app:background_startColor="@color/color_start"
         app:clickable="true"

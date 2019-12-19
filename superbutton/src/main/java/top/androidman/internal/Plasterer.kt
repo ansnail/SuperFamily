@@ -33,28 +33,40 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
      */
     private var paintObject: View = view
     /**
-     * 混合后不能点击时的颜色
-     */
-    private val unableClickCompositeColor by lazy {
-        return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
-    }
-    /**
-     * 混合后的按压时的颜色
+     * 可以点击时混合后的按压时的颜色
      */
     private val compositeNormalBackgroundColorWhenPressed by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
     }
     /**
-     * 混合后的按压时的背景开始颜色
+     * 可以点击时混合后的按压时的背景开始颜色
      */
     private val compositeBackgroundStartColorWhenPressed by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundStartColor)
     }
     /**
-     * 混合后的按压时的背景结束颜色
+     * 可以点击时混合后的按压时的背景结束颜色
      */
     private val compositeBackgroundEndColorWhenPressed by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundEndColor)
+    }
+    /**
+     * 不可以点击时混合后的按压时的颜色
+     */
+    private val compositeNormalBackgroundColorWhenUnableClick by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
+    }
+    /**
+     * 不可以点击时混合后的按压时的背景开始颜色
+     */
+    private val compositeBackgroundStartColorWhenUnableClick by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundStartColor)
+    }
+    /**
+     * 不可以点击时混合后的按压时的背景结束颜色
+     */
+    private val compositeBackgroundEndColorWhenUnableClick by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundEndColor)
     }
 
     /**
@@ -194,7 +206,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                         if (globalStore.clickable)
                             globalStore.backgroundStartColor
                         else
-                            ColorUtils.compositeColors(unableClickCompositeColor, globalStore.backgroundStartColor)
+                            compositeBackgroundStartColorWhenUnableClick
                     }
             val backgroundEndColor =
                     if (isPressed) {
@@ -211,7 +223,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                         if (globalStore.clickable)
                             globalStore.backgroundEndColor
                         else
-                            ColorUtils.compositeColors(unableClickCompositeColor, globalStore.backgroundEndColor)
+                            compositeBackgroundEndColorWhenUnableClick
                     }
             beautifulCanvas.orientation = globalStore.backgroundColorOrientation
             beautifulCanvas.colors = intArrayOf(backgroundStartColor, backgroundEndColor)
@@ -232,7 +244,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                         if (globalStore.clickable)
                             globalStore.backgroundNormalColor
                         else
-                            ColorUtils.compositeColors(unableClickCompositeColor, globalStore.backgroundNormalColor)
+                            compositeNormalBackgroundColorWhenUnableClick
                     }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 beautifulCanvas.color = ColorStateList.valueOf(backgroundNormalColor)
