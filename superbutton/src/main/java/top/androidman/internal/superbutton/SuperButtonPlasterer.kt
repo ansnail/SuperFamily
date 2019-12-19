@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import top.androidman.internal.*
+import top.androidman.internal.Constant.VALUE_NULL
 
 
 /**
@@ -47,7 +48,7 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         val iconContent = AppCompatImageView(paintObject.context)
         iconContent.setBackgroundDrawable(globalStore.icon)
         val iconLayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        if (globalStore.iconWidth != Constant.VALUE_NULL && globalStore.iconHeight != Constant.VALUE_NULL) {
+        if (globalStore.iconWidth != VALUE_NULL && globalStore.iconHeight != VALUE_NULL) {
             iconLayoutParams.width = globalStore.iconWidth
             iconLayoutParams.height = globalStore.iconHeight
         }

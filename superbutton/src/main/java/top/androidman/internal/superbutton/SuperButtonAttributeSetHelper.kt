@@ -1,7 +1,6 @@
 package top.androidman.internal.superbutton
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import top.androidman.R
 import top.androidman.internal.Constant.DEFAULT_HINT_TEXT_COLOR

@@ -5,8 +5,10 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.ColorInt
+import androidx.core.graphics.ColorUtils
+import top.androidman.internal.Constant.DEFAULT_PRESSED_FOREGROUND_COLOR
+import top.androidman.internal.Constant.DEFAULT_UNABLE_FOREGROUND_COLOR
 import top.androidman.internal.Constant.VALUE_NULL
 import top.androidman.internal.Constant.VALUE_NULL_FLOAT
 
@@ -30,6 +32,30 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
      * 粉刷对象
      */
     private var paintObject: View = view
+    /**
+     * 混合后不能点击时的颜色
+     */
+    private val unableClickCompositeColor by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
+    }
+    /**
+     * 混合后的按压时的颜色
+     */
+    private val compositeNormalBackgroundColorWhenPressed by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
+    }
+    /**
+     * 混合后的按压时的背景开始颜色
+     */
+    private val compositeBackgroundStartColorWhenPressed by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundStartColor)
+    }
+    /**
+     * 混合后的按压时的背景结束颜色
+     */
+    private val compositeBackgroundEndColorWhenPressed by lazy {
+        return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundEndColor)
+    }
 
     /**
      * 设置正常状态下颜色
@@ -83,11 +109,17 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         globalStore.leftBottomCorner = dp2px(leftBottomCorner)
     }
 
+    /**
+     * 按钮是否按下
+     */
+    private var isPressed = false
 
     /**
      * 开始粉刷
      */
     open fun startPaint() {
+        //是否有自定义按压效果
+        val hasCustomPressedEffect = globalStore.backgroundPressedColor != VALUE_NULL
         //是否有阴影效果
         val hasShadow = globalStore.shadowSize != VALUE_NULL &&
                 globalStore.shadowStartColor != VALUE_NULL &&
@@ -95,23 +127,44 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
 
         val backGroundDrawable = if (hasShadow) {
             RoundRectDrawableWithShadow(
-                    ColorStateList.valueOf(globalStore.backgroundNormalColor), globalStore.corner,
+                    ColorStateList.valueOf(
+                            if (isPressed) {
+                                if (hasCustomPressedEffect) {
+                                    globalStore.backgroundPressedColor
+                                } else {
+                                    if (globalStore.openPressedEffect) {
+                                        compositeNormalBackgroundColorWhenPressed
+                                    } else {
+                                        globalStore.backgroundNormalColor
+                                    }
+                                }
+                            } else {
+                                globalStore.backgroundNormalColor
+                            }),
+                    globalStore.corner,
                     globalStore.shadowStartColor, globalStore.shadowEndColor,
                     globalStore.shadowSize.toFloat(), globalStore.shadowSize.toFloat())
         } else {
-            generateGradientDrawable()
+            generateGradientDrawable(hasCustomPressedEffect)
         }
         //关闭硬件加速
         paintObject.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         paintObject.background = backGroundDrawable
 
         paintObject.setOnTouchListener { _, event ->
+            if (!globalStore.clickable) {
+                return@setOnTouchListener true
+            }
             when (event.actionMasked) {
+                //按下
                 MotionEvent.ACTION_DOWN -> {
-                    Toast.makeText(paintObject.context, "down", Toast.LENGTH_SHORT).show()
+                    isPressed = true
+                    startPaint()
                 }
+                //抬起或取消
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    Toast.makeText(paintObject.context, "up", Toast.LENGTH_SHORT).show()
+                    isPressed = false
+                    startPaint()
                 }
             }
             return@setOnTouchListener false
@@ -121,21 +174,73 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * 生成背景
      */
-    private fun generateGradientDrawable(): GradientDrawable {
+    private fun generateGradientDrawable(hasCustomPressedEffect: Boolean): GradientDrawable {
         val beautifulCanvas = GradientDrawable()
-        //1.设置正常颜色
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            beautifulCanvas.color = ColorStateList.valueOf(globalStore.backgroundNormalColor)
-        } else {
-            beautifulCanvas.setColor(globalStore.backgroundNormalColor)
-        }
-        //2.设置渐变色，当设置渐变色时需要同时设置起始色和结束色，否则设置不生效
+        //设置渐变色，当设置渐变色时需要同时设置起始色和结束色，否则设置不生效
         //渐变色会覆盖掉正常颜色
         if (globalStore.backgroundStartColor != VALUE_NULL && globalStore.backgroundEndColor != VALUE_NULL) {
+            val backgroundStartColor =
+                    if (isPressed) {
+                        if (hasCustomPressedEffect) {
+                            globalStore.backgroundPressedColor
+                        } else {
+                            if (globalStore.openPressedEffect) {
+                                compositeBackgroundStartColorWhenPressed
+                            } else {
+                                globalStore.backgroundStartColor
+                            }
+                        }
+                    } else {
+                        if (globalStore.clickable)
+                            globalStore.backgroundStartColor
+                        else
+                            ColorUtils.compositeColors(unableClickCompositeColor, globalStore.backgroundStartColor)
+                    }
+            val backgroundEndColor =
+                    if (isPressed) {
+                        if (hasCustomPressedEffect) {
+                            globalStore.backgroundPressedColor
+                        } else {
+                            if (globalStore.openPressedEffect) {
+                                compositeBackgroundEndColorWhenPressed
+                            } else {
+                                globalStore.backgroundEndColor
+                            }
+                        }
+                    } else {
+                        if (globalStore.clickable)
+                            globalStore.backgroundEndColor
+                        else
+                            ColorUtils.compositeColors(unableClickCompositeColor, globalStore.backgroundEndColor)
+                    }
             beautifulCanvas.orientation = globalStore.backgroundColorOrientation
-            beautifulCanvas.colors = intArrayOf(globalStore.backgroundStartColor, globalStore.backgroundEndColor)
+            beautifulCanvas.colors = intArrayOf(backgroundStartColor, backgroundEndColor)
+        } else {
+            //设置正常颜色
+            val backgroundNormalColor =
+                    if (isPressed) {
+                        if (hasCustomPressedEffect) {
+                            globalStore.backgroundPressedColor
+                        } else {
+                            if (globalStore.openPressedEffect) {
+                                compositeNormalBackgroundColorWhenPressed
+                            } else {
+                                globalStore.backgroundNormalColor
+                            }
+                        }
+                    } else {
+                        if (globalStore.clickable)
+                            globalStore.backgroundNormalColor
+                        else
+                            ColorUtils.compositeColors(unableClickCompositeColor, globalStore.backgroundNormalColor)
+                    }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                beautifulCanvas.color = ColorStateList.valueOf(backgroundNormalColor)
+            } else {
+                beautifulCanvas.setColor(backgroundNormalColor)
+            }
         }
-        //3.设置圆角角度 圆角数组 ordered top-left, top-right, bottom-right, bottom-left
+        //设置圆角角度 圆角数组 ordered top-left, top-right, bottom-right, bottom-left
         //分别设置每个圆角的角度时会覆盖corner属性，当设置阴影时，此设置不生效
         val cornerRadii = FloatArray(8)
         //top-left
@@ -151,9 +256,11 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         cornerRadii[6] = if (globalStore.leftBottomCorner != VALUE_NULL_FLOAT) globalStore.leftBottomCorner else globalStore.corner
         cornerRadii[7] = if (globalStore.leftBottomCorner != VALUE_NULL_FLOAT) globalStore.leftBottomCorner else globalStore.corner
         beautifulCanvas.cornerRadii = cornerRadii
-        //4.设置边框颜色和边框宽度
-        beautifulCanvas.setStroke(globalStore.borderWidth, globalStore.borderColor, globalStore.borderDashWidth, globalStore.borderDashGap)
-        //5.设置形状
+        //设置边框颜色和边框宽度,边框不变色
+        if (globalStore.borderWidth != VALUE_NULL && globalStore.borderColor != VALUE_NULL) {
+            beautifulCanvas.setStroke(globalStore.borderWidth, globalStore.borderColor, globalStore.borderDashWidth, globalStore.borderDashGap)
+        }
+        //设置形状
         beautifulCanvas.shape = if (globalStore.shap == CIRCLE) GradientDrawable.OVAL else GradientDrawable.RECTANGLE
 
         return beautifulCanvas
@@ -162,7 +269,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * dp转换px
      */
-    fun dp2px(dpValue: Float): Float {
+    private fun dp2px(dpValue: Float): Float {
         val scale = paintObject.context.resources.displayMetrics.density
         return dpValue * scale + 0.5f
     }

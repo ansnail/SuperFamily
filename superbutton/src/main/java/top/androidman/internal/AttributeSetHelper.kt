@@ -1,7 +1,6 @@
 package top.androidman.internal
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import top.androidman.R
 import top.androidman.internal.Constant.VALUE_DEFAULT_INT
@@ -70,7 +69,7 @@ object AttributeSetHelper {
 
             //边框宽度
             if (attr == R.styleable.SuperView_border_width) {
-                defaultStore.borderWidth = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT)
+                defaultStore.borderWidth = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
             }
             //边框虚线宽度
             if (attr == R.styleable.SuperView_border_dashWidth) {
@@ -82,7 +81,7 @@ object AttributeSetHelper {
             }
             //边框颜色
             if (attr == R.styleable.SuperView_border_color) {
-                defaultStore.borderColor = typedArray.getColor(attr, Color.TRANSPARENT)
+                defaultStore.borderColor = typedArray.getColor(attr, VALUE_NULL)
             }
 
             //形状
@@ -90,17 +89,31 @@ object AttributeSetHelper {
                 defaultStore.shap = typedArray.getInt(attr, RECT)
             }
 
-            //开始颜色
+            //背景开始颜色
             if (attr == R.styleable.SuperView_background_startColor) {
-                defaultStore.backgroundStartColor = typedArray.getColor(attr, Color.TRANSPARENT)
+                defaultStore.backgroundStartColor = typedArray.getColor(attr, VALUE_NULL)
             }
-            //结束颜色
+            //背景结束颜色
             if (attr == R.styleable.SuperView_background_endColor) {
-                defaultStore.backgroundEndColor = typedArray.getColor(attr, Color.TRANSPARENT)
+                defaultStore.backgroundEndColor = typedArray.getColor(attr, VALUE_NULL)
             }
-            //颜色方向
+            //背景颜色方向
             if (attr == R.styleable.SuperView_background_colorOrientation) {
                 defaultStore.backgroundColorOrientation = getColorOrientation(typedArray.getInt(attr, LEFT_RIGHT))
+            }
+
+            //是否开启点击效果,默认关闭
+            if (attr == R.styleable.SuperView_open_pressed_effect) {
+                defaultStore.openPressedEffect = typedArray.getBoolean(attr, false)
+            }
+            //按压时的背景颜色
+            if (attr == R.styleable.SuperView_background_pressedColor) {
+                defaultStore.backgroundPressedColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+
+            //按钮是否可以点击
+            if (attr == R.styleable.SuperView_clickable) {
+                defaultStore.clickable = typedArray.getBoolean(attr, true)
             }
         }
         typedArray.recycle()

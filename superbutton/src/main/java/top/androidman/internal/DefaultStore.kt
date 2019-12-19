@@ -51,12 +51,12 @@ open class DefaultStore {
     /**
      * 阴影大小
      */
-    var shadowSize = VALUE_DEFAULT_INT
+    var shadowSize = VALUE_NULL
 
     /**
      * 边框宽度
      */
-    var borderWidth = VALUE_DEFAULT_INT
+    var borderWidth = VALUE_NULL
     /**
      * 边框颜色
      */
@@ -78,13 +78,26 @@ open class DefaultStore {
     /**
      * 渐变起始颜色
      */
-    var backgroundStartColor = VALUE_NULL
+    var backgroundStartColor = VALUE_DEFAULT_INT
     /**
      * 渐变结束颜色
      */
-    var backgroundEndColor = VALUE_NULL
+    var backgroundEndColor = VALUE_DEFAULT_INT
     /**
      * 颜色方向
      */
     var backgroundColorOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.LEFT_RIGHT
+
+    /**
+     * 是否开启点击效果,默认关闭
+     */
+    var openPressedEffect = false
+    /**
+     * 按压时的背景颜色
+     */
+    var backgroundPressedColor = VALUE_NULL
+    /**
+     * 按钮是否可以点击,默认可以
+     */
+    var clickable = true
 }

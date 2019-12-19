@@ -3,12 +3,12 @@
     <declare-styleable name="SuperView">
         <!--默认背景颜色-->
         <attr name="background_normalColor" format="reference|color" />
-
-
         <!--是否开启点击效果,默认关闭-->
         <attr name="open_pressed_effect" format="boolean" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" format="reference|color" />
+        <!--是否可以点击-->
+        <attr name="clickable" format="boolean" />
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" format="dimension" />
@@ -75,8 +75,12 @@
     <declare-styleable name="SuperButton">
         <!--默认背景颜色-->
         <attr name="background_normalColor" />
+        <!--是否开启点击效果,默认关闭-->
+        <attr name="open_pressed_effect" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" />
+        <!--是否可以点击-->
+        <attr name="clickable" />
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
@@ -147,17 +151,18 @@
             <!--图标在文字左面-->
             <enum name="left" value="0x4" />
         </attr>
-
-
     </declare-styleable>
 
 
     <declare-styleable name="SuperConstraintLayout">
         <!--默认背景颜色-->
         <attr name="background_normalColor" />
+        <!--是否开启点击效果,默认关闭-->
+        <attr name="open_pressed_effect" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" />
-
+        <!--是否可以点击-->
+        <attr name="clickable" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
@@ -200,9 +205,12 @@
     <declare-styleable name="SuperFrameLayout">
         <!--默认背景颜色-->
         <attr name="background_normalColor" />
+        <!--是否开启点击效果,默认关闭-->
+        <attr name="open_pressed_effect" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" />
-
+        <!--是否可以点击-->
+        <attr name="clickable" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
@@ -246,9 +254,12 @@
     <declare-styleable name="SuperLinearLayout">
         <!--默认背景颜色-->
         <attr name="background_normalColor" />
+        <!--是否开启点击效果,默认关闭-->
+        <attr name="open_pressed_effect" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" />
-
+        <!--是否可以点击-->
+        <attr name="clickable" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
@@ -292,9 +303,12 @@
     <declare-styleable name="SuperRelativeLayout">
         <!--默认背景颜色-->
         <attr name="background_normalColor" />
+        <!--是否开启点击效果,默认关闭-->
+        <attr name="open_pressed_effect" />
         <!--按压时的背景颜色-->
         <attr name="background_pressedColor" />
-
+        <!--是否可以点击-->
+        <attr name="clickable" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
