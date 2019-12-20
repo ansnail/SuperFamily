@@ -86,7 +86,7 @@ object AttributeSetHelper {
 
             //形状
             if (attr == R.styleable.SuperView_shape) {
-                defaultStore.shap = typedArray.getInt(attr, RECT)
+                defaultStore.shape = typedArray.getInt(attr, RECT)
             }
 
             //背景开始颜色
@@ -114,6 +114,10 @@ object AttributeSetHelper {
             //按钮是否可以点击
             if (attr == R.styleable.SuperView_clickable) {
                 defaultStore.clickable = typedArray.getBoolean(attr, true)
+            }
+            //按钮不可点击时的颜色
+            if (attr == R.styleable.SuperView_unClickableColor) {
+                defaultStore.unClickableColor = typedArray.getColor(attr, VALUE_NULL)
             }
         }
         typedArray.recycle()

@@ -72,53 +72,146 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * 设置正常状态下颜色
      */
-    fun normalColor(@ColorInt normalColor: Int): Plasterer {
+    fun setNormalColor(@ColorInt normalColor: Int): Plasterer {
         globalStore.backgroundNormalColor = normalColor
         return this
     }
 
     /**
-     * 设置渐变色
+     * 是否开启点击效果,默认关闭
      */
-    fun setColors(@ColorOrientation orientation: Int, startColor: Int, endColor: Int) {
-        globalStore.backgroundColorOrientation = getColorOrientation(orientation)
-        globalStore.backgroundStartColor = startColor
-        globalStore.backgroundEndColor = endColor
+    fun setOpenPressedEffect(open: Boolean): Plasterer {
+        globalStore.openPressedEffect = open
+        return this
+    }
+
+    /**
+     * 按压时的背景颜色
+     */
+    fun setPressedColor(@ColorInt pressedColor: Int): Plasterer {
+        globalStore.backgroundPressedColor = pressedColor
+        return this
+    }
+
+    /**
+     * 设置是否可以点击，默认可以
+     */
+    fun setClickable(clickable: Boolean): Plasterer {
+        globalStore.clickable = clickable
+        return this
+    }
+
+    /**
+     * 不能点击时的颜色，只有在clickable属性为false时才生效
+     */
+    fun setUnClickableColor(@ColorInt unClickableColor: Int): Plasterer {
+        globalStore.unClickableColor = unClickableColor
+        return this
     }
 
     /**
      * 设置圆角
      */
-    fun setCorner(corner: Float) {
+    fun setCorners(corner: Float): Plasterer {
         globalStore.corner = dp2px(corner)
+        return this
     }
 
     /**
      * 设置按钮左上角圆角角度，单位为dp
      */
-    fun setLeftTopCorner(leftTopCorner: Float) {
+    fun setLeftTopCorner(leftTopCorner: Float): Plasterer {
         globalStore.leftTopCorner = dp2px(leftTopCorner)
+        return this
     }
 
     /**
      * 设置按钮右上角圆角角度，单位为dp
      */
-    fun setRightTopCorner(rightTopCorner: Float) {
+    fun setRightTopCorner(rightTopCorner: Float): Plasterer {
         globalStore.rightTopCorner = dp2px(rightTopCorner)
+        return this
     }
 
     /**
      * 设置按钮右下角圆角角度，单位为dp
      */
-    fun setRightBottomCorner(rightBottomCorner: Float) {
+    fun setRightBottomCorner(rightBottomCorner: Float): Plasterer {
         globalStore.rightBottomCorner = dp2px(rightBottomCorner)
+        return this
     }
 
     /**
      * 设置按钮左下角圆角角度，单位为dp
      */
-    fun setLeftBottomCorner(leftBottomCorner: Float) {
+    fun setLeftBottomCorner(leftBottomCorner: Float): Plasterer {
         globalStore.leftBottomCorner = dp2px(leftBottomCorner)
+        return this
+    }
+
+    /**
+     * 设置按钮所有圆角角度，单位为dp
+     * @param leftTopCorner Float 左上角圆角角度
+     * @param rightTopCorner Float 右上角圆角角度
+     * @param rightBottomCorner Float 右下角圆角角度
+     * @param leftBottomCorner Float 左下角圆角角度
+     */
+    fun setCorners(leftTopCorner: Float, rightTopCorner: Float, rightBottomCorner: Float, leftBottomCorner: Float): Plasterer {
+        globalStore.leftTopCorner = dp2px(leftTopCorner)
+        globalStore.leftBottomCorner = dp2px(leftBottomCorner)
+        globalStore.rightTopCorner = dp2px(rightTopCorner)
+        globalStore.rightBottomCorner = dp2px(rightBottomCorner)
+        return this
+    }
+
+    /**
+     * 设置边框
+     * @param borderColor Int 边框颜色
+     * @param borderWidth Int 边框宽度
+     * @param borderDashWidth Float 边框虚线宽度
+     * @param borderDashGap Float 边框虚线间隙宽度
+     */
+    fun setBorder(@ColorInt borderColor: Int, borderWidth: Int, borderDashWidth: Float, borderDashGap: Float): Plasterer {
+        globalStore.borderColor = borderColor
+        globalStore.borderWidth = borderWidth
+        globalStore.borderDashWidth = borderDashWidth
+        globalStore.borderDashGap = borderDashGap
+        return this
+    }
+
+    /**
+     * 设置渐变色
+     * @param orientation Int 方向
+     * @param startColor Int 开始颜色
+     * @param endColor Int 结束颜色
+     */
+    fun setColors(@ColorOrientation orientation: Int, @ColorInt startColor: Int, @ColorInt endColor: Int): Plasterer {
+        globalStore.backgroundColorOrientation = getColorOrientation(orientation)
+        globalStore.backgroundStartColor = startColor
+        globalStore.backgroundEndColor = endColor
+        return this
+    }
+
+    /**
+     * 设置阴影
+     * @param shadowSize Int 阴影宽度
+     * @param shadowStartColor Int 阴影开始颜色
+     * @param shadowEndColor Int 阴影结束颜色
+     */
+    fun setShadowColors(shadowSize: Int, @ColorInt shadowStartColor: Int, @ColorInt shadowEndColor: Int): Plasterer {
+        globalStore.shadowSize = shadowSize
+        globalStore.shadowStartColor = shadowStartColor
+        globalStore.shadowEndColor = shadowEndColor
+        return this
+    }
+
+    /**
+     * 设置形状
+     * @param shape Int
+     */
+    fun setShape(@Shape shape: Int): Plasterer {
+        globalStore.shape = shape
+        return this
     }
 
     /**
@@ -203,10 +296,15 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                             }
                         }
                     } else {
-                        if (globalStore.clickable)
+                        if (globalStore.clickable) {
                             globalStore.backgroundStartColor
-                        else
-                            compositeBackgroundStartColorWhenUnableClick
+                        } else {
+                            if (globalStore.unClickableColor != VALUE_NULL) {
+                                globalStore.unClickableColor
+                            } else {
+                                compositeBackgroundStartColorWhenUnableClick
+                            }
+                        }
                     }
             val backgroundEndColor =
                     if (isPressed) {
@@ -222,8 +320,13 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                     } else {
                         if (globalStore.clickable)
                             globalStore.backgroundEndColor
-                        else
-                            compositeBackgroundEndColorWhenUnableClick
+                        else {
+                            if (globalStore.unClickableColor != VALUE_NULL) {
+                                globalStore.unClickableColor
+                            } else {
+                                compositeBackgroundEndColorWhenUnableClick
+                            }
+                        }
                     }
             beautifulCanvas.orientation = globalStore.backgroundColorOrientation
             beautifulCanvas.colors = intArrayOf(backgroundStartColor, backgroundEndColor)
@@ -243,8 +346,13 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                     } else {
                         if (globalStore.clickable)
                             globalStore.backgroundNormalColor
-                        else
-                            compositeNormalBackgroundColorWhenUnableClick
+                        else {
+                            if (globalStore.unClickableColor != VALUE_NULL) {
+                                globalStore.unClickableColor
+                            } else {
+                                compositeNormalBackgroundColorWhenUnableClick
+                            }
+                        }
                     }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 beautifulCanvas.color = ColorStateList.valueOf(backgroundNormalColor)
@@ -273,7 +381,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
             beautifulCanvas.setStroke(globalStore.borderWidth, globalStore.borderColor, globalStore.borderDashWidth, globalStore.borderDashGap)
         }
         //设置形状
-        beautifulCanvas.shape = if (globalStore.shap == CIRCLE) GradientDrawable.OVAL else GradientDrawable.RECTANGLE
+        beautifulCanvas.shape = if (globalStore.shape == CIRCLE) GradientDrawable.OVAL else GradientDrawable.RECTANGLE
 
         return beautifulCanvas
     }

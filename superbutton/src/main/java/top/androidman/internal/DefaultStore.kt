@@ -73,7 +73,7 @@ open class DefaultStore {
     /**
      * 形状
      */
-    var shap = RECT
+    var shape = RECT
 
     /**
      * 渐变起始颜色
@@ -100,4 +100,8 @@ open class DefaultStore {
      * 按钮是否可以点击,默认可以
      */
     var clickable = true
+    /**
+     * 不能点击时的颜色
+     */
+    var unClickableColor = VALUE_NULL
 }
