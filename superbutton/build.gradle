@@ -40,7 +40,7 @@ publish {
     userOrg = 'androidman'//bintray.com用户名
     groupId = 'top.androidman'//jcenter上的路径
     artifactId = 'superbutton'//项目名称
-    publishVersion = '1.2.0'//版本号
+    publishVersion = '1.3.0'//版本号
     desc = '让按钮使用更简单'//描述
     website = 'https://github.com/ansnail/SuperButton'
 }

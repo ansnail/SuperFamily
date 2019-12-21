@@ -284,7 +284,7 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
         }
 
     interface RoundRectHelper {
-        fun drawRoundRect(canvas: Canvas?, bounds: RectF?, cornerRadius: Float, paint: Paint?)
+        fun drawRoundRect(canvas: Canvas?, bounds: RectF?, cornerRadius: Float, paint: Paint)
     }
 
     companion object {
@@ -302,13 +302,13 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
         val sRoundRectHelper: RoundRectHelper by lazy {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 return@lazy object : RoundRectHelper {
-                    override fun drawRoundRect(canvas: Canvas?, bounds: RectF?, cornerRadius: Float, paint: Paint?) {
-                        canvas!!.drawRoundRect(bounds!!, cornerRadius, cornerRadius, paint!!)
+                    override fun drawRoundRect(canvas: Canvas?, bounds: RectF?, cornerRadius: Float, paint: Paint) {
+                        canvas!!.drawRoundRect(bounds!!, cornerRadius, cornerRadius, paint)
                     }
                 }
             } else {
                 return@lazy object : RoundRectHelper {
-                    override fun drawRoundRect(canvas: Canvas?, bounds: RectF?, cornerRadius: Float, paint: Paint?) {
+                    override fun drawRoundRect(canvas: Canvas?, bounds: RectF?, cornerRadius: Float, paint: Paint) {
                         val mCornerRect = RectF()
                         val twoRadius = cornerRadius * 2
                         val innerWidth = bounds!!.width() - twoRadius - 1
