@@ -10,7 +10,7 @@
         <!--是否可以点击-->
         <attr name="clickable" format="boolean" />
         <!--不能点击时的颜色-->
-        <attr name="ununClickableColor" format="reference|color" />
+        <attr name="unClickableColor" format="reference|color" />
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" format="dimension" />
@@ -136,6 +136,8 @@
         <attr name="textSize" format="dimension" />
         <!--文字是否单行，默认单行-->
         <attr name="singleLine" format="boolean" />
+        <!--文字最大长度-->
+        <attr name="maxLength" format="integer" />
 
         <!--图标资源-->
         <attr name="icon" format="reference" />

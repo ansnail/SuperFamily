@@ -60,5 +60,9 @@ class SuperButtonDefaultStore : DefaultStore() {
      * icon高度
      */
     var iconHeight = Constant.VALUE_NULL
+    /**
+     * 字符最大长度
+     */
+    var maxLength = Constant.VALUE_NULL
 
 }

@@ -1,6 +1,8 @@
 package top.androidman.internal.superbutton
 
 import android.graphics.drawable.Drawable
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
@@ -42,30 +44,32 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      * 设置文字
      * @param text CharSequence
      */
-    fun setText(text: CharSequence) {
+    fun setText(text: CharSequence): SuperButtonPlasterer {
         globalStore.text = text
+        return this
     }
 
     /**
      * 设置字体颜色
      */
-    fun setTextColor(@ColorInt textColor: Int): Plasterer {
+    fun setTextColor(@ColorInt textColor: Int): SuperButtonPlasterer {
         globalStore.textColor = textColor
         return this
     }
 
     /**
      * 设置提示文字
-     * @param text CharSequence
+     * @param hintText CharSequence
      */
-    fun setHintText(hintText: CharSequence) {
+    fun setHintText(hintText: CharSequence): SuperButtonPlasterer {
         globalStore.hintText = hintText
+        return this
     }
 
     /**
      * 设置提示字体颜色
      */
-    fun setHintTextColor(@ColorInt hintTextColor: Int): Plasterer {
+    fun setHintTextColor(@ColorInt hintTextColor: Int): SuperButtonPlasterer {
         globalStore.hintTextColor = hintTextColor
         return this
     }
@@ -74,8 +78,9 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      * 设置单行显示
      * @param singleLine Boolean
      */
-    fun setSingleLine(singleLine: Boolean) {
+    fun setSingleLine(singleLine: Boolean): SuperButtonPlasterer {
         globalStore.singleLine = singleLine
+        return this
     }
 
     /**
@@ -83,33 +88,48 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      * @param iconWidth Int
      * @param iconHeight Int
      */
-    fun setIconWidthHeight(iconWidth: Int, iconHeight: Int) {
+    fun setIconWidthHeight(iconWidth: Int, iconHeight: Int): SuperButtonPlasterer {
         globalStore.iconWidth = iconWidth
         globalStore.iconHeight = iconHeight
+        return this
     }
 
     /**
      * 设置图标资源
      * @param icon Drawable
      */
-    fun setIcon(icon: Drawable) {
+    fun setIcon(icon: Drawable): SuperButtonPlasterer {
         globalStore.icon = icon
+        return this
     }
 
     /**
      * 图标和文字间的距离
      * @param iconPadding Int
      */
-    fun setIconPadding(iconPadding: Int) {
+    fun setIconPadding(iconPadding: Int): SuperButtonPlasterer {
         globalStore.iconPadding = iconPadding
+        return this
     }
 
     /**
      * 图标在文字的方向
      * @param orientation Int
      */
-    fun setIconOrientation(@IconOrientation orientation: Int) {
+    fun setIconOrientation(@IconOrientation orientation: Int): SuperButtonPlasterer {
         globalStore.iconAtTextOrientation = orientation
+        return this
+    }
+
+    /**
+     * 设置最大字符长度
+     * @param maxLength Int
+     */
+    fun setMaxLength(maxLength: Int): SuperButtonPlasterer {
+        if (maxLength >= 1) {
+            globalStore.maxLength = maxLength
+        }
+        return this
     }
 
     override fun startPaint() {
@@ -117,8 +137,8 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         super.startPaint()
         //全部内容居中
         paintObject.gravity = Gravity.CENTER
-
         //创建文字组件
+        textView.filters = arrayOf<InputFilter>(LengthFilter(globalStore.maxLength))
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, globalStore.textSize.toFloat())
         textView.setTextColor(globalStore.textColor)
         textView.text = globalStore.text

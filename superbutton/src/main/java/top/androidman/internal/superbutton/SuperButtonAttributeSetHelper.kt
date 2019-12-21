@@ -75,6 +75,10 @@ object SuperButtonAttributeSetHelper {
             if (attr == R.styleable.SuperButton_iconOrientation) {
                 defaultStore.iconAtTextOrientation = typedArray.getInt(attr, LEFT)
             }
+            //字符最大长度
+            if (attr == R.styleable.SuperButton_maxLength) {
+                defaultStore.maxLength = typedArray.getInt(attr, VALUE_NULL)
+            }
         }
         typedArray.recycle()
         return defaultStore
