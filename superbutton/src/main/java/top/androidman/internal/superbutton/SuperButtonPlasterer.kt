@@ -28,6 +28,14 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      * 粉刷对象
      */
     private var paintObject: LinearLayout = linearLayout
+    /**
+     * 图标对象
+     */
+    var iconView: AppCompatImageView = AppCompatImageView(linearLayout.context)
+    /**
+     * 文本对象
+     */
+    var textView: AppCompatTextView = AppCompatTextView(linearLayout.context)
 
 
     /**
@@ -96,7 +104,6 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         globalStore.iconPadding = iconPadding
     }
 
-
     /**
      * 图标在文字的方向
      * @param orientation Int
@@ -112,18 +119,16 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         paintObject.gravity = Gravity.CENTER
 
         //创建文字组件
-        val textContent = AppCompatTextView(paintObject.context)
-        textContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, globalStore.textSize.toFloat())
-        textContent.setTextColor(globalStore.textColor)
-        textContent.text = globalStore.text
-        textContent.hint = globalStore.hintText
-        textContent.setHintTextColor(globalStore.hintTextColor)
-        textContent.setSingleLine(globalStore.singleLine)
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, globalStore.textSize.toFloat())
+        textView.setTextColor(globalStore.textColor)
+        textView.text = globalStore.text
+        textView.hint = globalStore.hintText
+        textView.setHintTextColor(globalStore.hintTextColor)
+        textView.setSingleLine(globalStore.singleLine)
         val textLayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         //创建图标组件
-        val iconContent = AppCompatImageView(paintObject.context)
-        iconContent.setBackgroundDrawable(globalStore.icon)
+        iconView.setBackgroundDrawable(globalStore.icon)
         val iconLayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         if (globalStore.iconWidth != VALUE_NULL && globalStore.iconHeight != VALUE_NULL) {
             iconLayoutParams.width = globalStore.iconWidth
@@ -138,11 +143,11 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
             TOP -> {
                 paintObject.orientation = LinearLayout.VERTICAL
                 if (hasIcon) {
-                    paintObject.addView(iconContent, iconLayoutParams)
+                    paintObject.addView(iconView, iconLayoutParams)
                 }
                 if (hasText) {
                     textLayoutParams.topMargin = globalStore.iconPadding
-                    paintObject.addView(textContent, textLayoutParams)
+                    paintObject.addView(textView, textLayoutParams)
                 }
             }
             //图标在文字下面
@@ -150,10 +155,10 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
                 paintObject.orientation = LinearLayout.VERTICAL
                 if (hasText) {
                     textLayoutParams.bottomMargin = globalStore.iconPadding
-                    paintObject.addView(textContent, textLayoutParams)
+                    paintObject.addView(textView, textLayoutParams)
                 }
                 if (hasIcon) {
-                    paintObject.addView(iconContent, iconLayoutParams)
+                    paintObject.addView(iconView, iconLayoutParams)
                 }
             }
             //图标在文字右面
@@ -161,21 +166,21 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
                 paintObject.orientation = LinearLayout.HORIZONTAL
                 if (hasText) {
                     textLayoutParams.rightMargin = globalStore.iconPadding
-                    paintObject.addView(textContent, textLayoutParams)
+                    paintObject.addView(textView, textLayoutParams)
                 }
                 if (hasIcon) {
-                    paintObject.addView(iconContent, iconLayoutParams)
+                    paintObject.addView(iconView, iconLayoutParams)
                 }
             }
             //图标在文字左面
             LEFT -> {
                 paintObject.orientation = LinearLayout.HORIZONTAL
                 if (hasIcon) {
-                    paintObject.addView(iconContent, iconLayoutParams)
+                    paintObject.addView(iconView, iconLayoutParams)
                 }
                 if (hasText) {
                     textLayoutParams.leftMargin = globalStore.iconPadding
-                    paintObject.addView(textContent, textLayoutParams)
+                    paintObject.addView(textView, textLayoutParams)
                 }
             }
         }
