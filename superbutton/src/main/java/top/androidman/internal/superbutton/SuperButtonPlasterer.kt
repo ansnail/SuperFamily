@@ -1,9 +1,11 @@
 package top.androidman.internal.superbutton
 
+import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import top.androidman.internal.*
@@ -27,6 +29,81 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      */
     private var paintObject: LinearLayout = linearLayout
 
+
+    /**
+     * 设置文字
+     * @param text CharSequence
+     */
+    fun setText(text: CharSequence) {
+        globalStore.text = text
+    }
+
+    /**
+     * 设置字体颜色
+     */
+    fun setTextColor(@ColorInt textColor: Int): Plasterer {
+        globalStore.textColor = textColor
+        return this
+    }
+
+    /**
+     * 设置提示文字
+     * @param text CharSequence
+     */
+    fun setHintText(hintText: CharSequence) {
+        globalStore.hintText = hintText
+    }
+
+    /**
+     * 设置提示字体颜色
+     */
+    fun setHintTextColor(@ColorInt hintTextColor: Int): Plasterer {
+        globalStore.hintTextColor = hintTextColor
+        return this
+    }
+
+    /**
+     * 设置单行显示
+     * @param singleLine Boolean
+     */
+    fun setSingleLine(singleLine: Boolean) {
+        globalStore.singleLine = singleLine
+    }
+
+    /**
+     * 设置图标宽高
+     * @param iconWidth Int
+     * @param iconHeight Int
+     */
+    fun setIconWidthHeight(iconWidth: Int, iconHeight: Int) {
+        globalStore.iconWidth = iconWidth
+        globalStore.iconHeight = iconHeight
+    }
+
+    /**
+     * 设置图标资源
+     * @param icon Drawable
+     */
+    fun setIcon(icon: Drawable) {
+        globalStore.icon = icon
+    }
+
+    /**
+     * 图标和文字间的距离
+     * @param iconPadding Int
+     */
+    fun setIconPadding(iconPadding: Int) {
+        globalStore.iconPadding = iconPadding
+    }
+
+
+    /**
+     * 图标在文字的方向
+     * @param orientation Int
+     */
+    fun setIconOrientation(@IconOrientation orientation: Int) {
+        globalStore.iconAtTextOrientation = orientation
+    }
 
     override fun startPaint() {
         paintObject.removeAllViews()
