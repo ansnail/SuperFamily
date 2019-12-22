@@ -105,7 +105,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
      * 不能点击时的颜色，只有在clickable属性为false时才生效
      */
     fun setUnClickableColor(@ColorInt unClickableColor: Int): Plasterer {
-        globalStore.unClickableColor = unClickableColor
+        globalStore.disableColor = unClickableColor
         return this
     }
 
@@ -257,7 +257,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         paintObject.background = backGroundDrawable
 
         paintObject.setOnTouchListener { _, event ->
-            if (!globalStore.clickable) {
+            if (globalStore.disableColor != VALUE_NULL || (globalStore.disableColor == VALUE_NULL && !globalStore.clickable)) {
                 return@setOnTouchListener true
             }
             when (event.actionMasked) {
@@ -296,11 +296,11 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                             }
                         }
                     } else {
-                        if (globalStore.clickable) {
-                            globalStore.backgroundStartColor
+                        if (globalStore.disableColor != VALUE_NULL) {
+                            globalStore.disableColor
                         } else {
-                            if (globalStore.unClickableColor != VALUE_NULL) {
-                                globalStore.unClickableColor
+                            if (globalStore.clickable) {
+                                globalStore.backgroundStartColor
                             } else {
                                 compositeBackgroundStartColorWhenUnableClick
                             }
@@ -318,11 +318,11 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                             }
                         }
                     } else {
-                        if (globalStore.clickable)
-                            globalStore.backgroundEndColor
-                        else {
-                            if (globalStore.unClickableColor != VALUE_NULL) {
-                                globalStore.unClickableColor
+                        if (globalStore.disableColor != VALUE_NULL) {
+                            globalStore.disableColor
+                        } else {
+                            if (globalStore.clickable) {
+                                globalStore.backgroundEndColor
                             } else {
                                 compositeBackgroundEndColorWhenUnableClick
                             }
@@ -344,11 +344,11 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                             }
                         }
                     } else {
-                        if (globalStore.clickable)
-                            globalStore.backgroundNormalColor
-                        else {
-                            if (globalStore.unClickableColor != VALUE_NULL) {
-                                globalStore.unClickableColor
+                        if (globalStore.disableColor != VALUE_NULL) {
+                            globalStore.disableColor
+                        } else {
+                            if (globalStore.clickable) {
+                                globalStore.backgroundNormalColor
                             } else {
                                 compositeNormalBackgroundColorWhenUnableClick
                             }

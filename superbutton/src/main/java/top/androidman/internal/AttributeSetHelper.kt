@@ -116,8 +116,8 @@ object AttributeSetHelper {
                 defaultStore.clickable = typedArray.getBoolean(attr, true)
             }
             //按钮不可点击时的颜色
-            if (attr == R.styleable.SuperView_unClickableColor) {
-                defaultStore.unClickableColor = typedArray.getColor(attr, VALUE_NULL)
+            if (attr == R.styleable.SuperView_disableColor) {
+                defaultStore.disableColor = typedArray.getColor(attr, VALUE_NULL)
             }
         }
         typedArray.recycle()

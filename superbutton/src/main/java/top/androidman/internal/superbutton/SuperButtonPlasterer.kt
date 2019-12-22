@@ -1,8 +1,8 @@
 package top.androidman.internal.superbutton
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
-import android.text.InputFilter.LengthFilter
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
@@ -138,7 +138,7 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         //全部内容居中
         paintObject.gravity = Gravity.CENTER
         //创建文字组件
-        textView.filters = arrayOf<InputFilter>(LengthFilter(globalStore.maxLength))
+        textView.filters = arrayOf(InputFilter.LengthFilter(globalStore.maxLength))
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, globalStore.textSize.toFloat())
         textView.setTextColor(globalStore.textColor)
         textView.text = globalStore.text

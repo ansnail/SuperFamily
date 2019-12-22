@@ -10,7 +10,7 @@
         <!--是否可以点击-->
         <attr name="clickable" format="boolean" />
         <!--不能点击时的颜色-->
-        <attr name="unClickableColor" format="reference|color" />
+        <attr name="disableColor" format="reference|color" />
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" format="dimension" />
@@ -84,7 +84,7 @@
         <!--是否可以点击-->
         <attr name="clickable" />
         <!--不能点击时的颜色-->
-        <attr name="unClickableColor" />
+        <attr name="disableColor" />
 
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
@@ -170,7 +170,7 @@
         <!--是否可以点击-->
         <attr name="clickable" />
         <!--不能点击时的颜色-->
-        <attr name="unClickableColor" />
+        <attr name="disableColor" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
@@ -220,7 +220,7 @@
         <!--是否可以点击-->
         <attr name="clickable" />
         <!--不能点击时的颜色-->
-        <attr name="unClickableColor" />
+        <attr name="disableColor" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
@@ -271,7 +271,7 @@
         <!--是否可以点击-->
         <attr name="clickable" />
         <!--不能点击时的颜色-->
-        <attr name="unClickableColor" />
+        <attr name="disableColor" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->
@@ -322,7 +322,7 @@
         <!--是否可以点击-->
         <attr name="clickable" />
         <!--不能点击时的颜色-->
-        <attr name="unClickableColor" />
+        <attr name="disableColor" />
         <!--按钮圆角，如果单独设置会覆盖此设置-->
         <attr name="corner" />
         <!--左上角圆角半径-->

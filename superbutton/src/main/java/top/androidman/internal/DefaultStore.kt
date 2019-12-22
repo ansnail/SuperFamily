@@ -103,5 +103,5 @@ open class DefaultStore {
     /**
      * 不能点击时的颜色
      */
-    var unClickableColor = VALUE_NULL
+    var disableColor = VALUE_NULL
 }
