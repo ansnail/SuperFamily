@@ -102,10 +102,10 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     /**
-     * 不能点击时的颜色，只有在clickable属性为false时才生效
+     * 不能点击时的颜色
      */
-    fun setUnClickableColor(@ColorInt unClickableColor: Int): Plasterer {
-        globalStore.disableColor = unClickableColor
+    fun setDisableColor(@ColorInt disableColor: Int): Plasterer {
+        globalStore.disableColor = disableColor
         return this
     }
 

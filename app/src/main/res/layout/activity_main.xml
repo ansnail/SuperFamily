@@ -16,7 +16,6 @@
         app:background_normalColor="@color/color_accent"
         app:background_startColor="@color/color_start"
         app:clickable="false"
-        app:unClickableColor="@color/light_red"
         app:corner="10dp"
         app:hintText="@string/poetry_1"
         app:hintTextColor="@color/color_red"

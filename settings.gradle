@@ -1,1 +1,1 @@
-include ':app', ':superbutton', ':testmodule'
+include ':app', ':superfamily'

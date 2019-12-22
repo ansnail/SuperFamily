@@ -29,7 +29,7 @@ import kotlin.math.cos
  * @param shadowSize      阴影尺寸
  * @param maxShadowSize   最大阴影尺寸
  */
-class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Float,
+class RoundRectDrawableWithShadow(backgroundColor: ColorStateList, radius: Float,
                                   private val mShadowStartColor: Int, private val mShadowEndColor: Int,
                                   shadowSize: Float, maxShadowSize: Float) : Drawable() {
     /**
@@ -125,7 +125,7 @@ class RoundRectDrawableWithShadow(backgroundColor: ColorStateList?, radius: Floa
         return mBackground != null && mBackground!!.isStateful || super.isStateful()
     }
 
-    override fun setColorFilter(cf: ColorFilter) {
+    override fun setColorFilter(cf: ColorFilter?) {
         mPaint.colorFilter = cf
     }
 

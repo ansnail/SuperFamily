@@ -1,6 +1,5 @@
 package top.androidman.internal.superbutton
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.util.TypedValue

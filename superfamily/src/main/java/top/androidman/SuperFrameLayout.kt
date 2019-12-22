@@ -2,8 +2,7 @@ package top.androidman
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.FrameLayout
 import top.androidman.internal.AttributeSetHelper
 import top.androidman.internal.DefaultStore
 import top.androidman.internal.Plasterer
@@ -11,11 +10,11 @@ import top.androidman.internal.Plasterer
 
 /**
  * @author         yanjie
- * @date           2019-12-17 00:07
+ * @date           2019-12-17 00:09
  * @version        1.0
  */
-class SuperRelativeLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        RelativeLayout(context, attrs, defStyleAttr) {
+class SuperFrameLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+        FrameLayout(context, attrs, defStyleAttr) {
     /**
      * 粉刷图纸
      */
