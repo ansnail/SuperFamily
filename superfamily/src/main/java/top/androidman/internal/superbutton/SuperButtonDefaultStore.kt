@@ -64,5 +64,10 @@ class SuperButtonDefaultStore : DefaultStore() {
      * 字符最大长度
      */
     var maxLength = Constant.VALUE_NULL
+    /**
+     * 是否自适应图片大小
+     */
+    var iconAuto = false
+
 
 }

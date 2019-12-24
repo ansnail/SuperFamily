@@ -152,6 +152,11 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         if (globalStore.iconWidth != VALUE_NULL && globalStore.iconHeight != VALUE_NULL) {
             iconLayoutParams.width = globalStore.iconWidth
             iconLayoutParams.height = globalStore.iconHeight
+        } else {
+            if (globalStore.iconAuto && globalStore.textSize != 0) {
+                iconLayoutParams.width = (globalStore.textSize * 1.2f).toInt()
+                iconLayoutParams.height = (globalStore.textSize * 1.2f).toInt()
+            }
         }
 
         val hasIcon = globalStore.icon != null

@@ -86,7 +86,7 @@ object AttributeSetHelper {
 
             //形状
             if (attr == R.styleable.SuperView_shape) {
-                defaultStore.shape = typedArray.getInt(attr, RECT)
+                defaultStore.shape = typedArray.getInt(attr, 1)
             }
 
             //背景开始颜色
@@ -119,6 +119,64 @@ object AttributeSetHelper {
             if (attr == R.styleable.SuperView_disableColor) {
                 defaultStore.disableColor = typedArray.getColor(attr, VALUE_NULL)
             }
+
+            //////////////////////////////////////////属性兼容//////////////////////////////////////////
+            //默认背景颜色
+            if (attr == R.styleable.SuperView_color_normal) {
+                defaultStore.backgroundNormalColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+            //按压时的背景颜色
+            if (attr == R.styleable.SuperView_color_pressed) {
+                defaultStore.backgroundPressedColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+
+            //背景开始颜色
+            if (attr == R.styleable.SuperView_color_start) {
+                defaultStore.backgroundStartColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+            //背景结束颜色
+            if (attr == R.styleable.SuperView_color_end) {
+                defaultStore.backgroundEndColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+            //背景颜色方向
+            if (attr == R.styleable.SuperView_color_direction) {
+                defaultStore.backgroundColorOrientation = getColorOrientation(typedArray.getInt(attr, LEFT_RIGHT))
+            }
+
+            //左上角圆角半径
+            if (attr == R.styleable.SuperView_corner_left_top) {
+                defaultStore.leftTopCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
+            }
+            //右上角圆角半径
+            if (attr == R.styleable.SuperView_corner_right_top) {
+                defaultStore.rightTopCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
+            }
+            //左下角圆角半径
+            if (attr == R.styleable.SuperView_corner_left_bottom) {
+                defaultStore.leftBottomCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
+            }
+            //右下角圆角半径
+            if (attr == R.styleable.SuperView_corner_right_bottom) {
+                defaultStore.rightBottomCorner = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
+            }
+
+            //阴影开始颜色
+            if (attr == R.styleable.SuperView_color_shadow_start) {
+                defaultStore.shadowStartColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+            //阴影结束颜色
+            if (attr == R.styleable.SuperView_color_shadow_end) {
+                defaultStore.shadowEndColor = typedArray.getColor(attr, VALUE_NULL)
+            }
+
+            //按钮是否可以点击
+            if (attr == R.styleable.SuperView_button_click_able) {
+                defaultStore.clickable = typedArray.getBoolean(attr, true)
+            }
+
+            //////////////////////////////////////////属性兼容//////////////////////////////////////////
+
+
         }
         typedArray.recycle()
         return defaultStore

@@ -31,7 +31,7 @@ import kotlin.math.cos
  */
 class RoundRectDrawableWithShadow(backgroundColor: ColorStateList, radius: Float,
                                   private val mShadowStartColor: Int, private val mShadowEndColor: Int,
-                                  shadowSize: Float, maxShadowSize: Float) : Drawable() {
+                                  shadowSize: Float) : Drawable() {
     /**
      * extra shadow to avoid gaps between card and shadow
      */

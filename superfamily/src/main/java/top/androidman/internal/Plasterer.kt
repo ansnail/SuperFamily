@@ -69,6 +69,28 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundEndColor)
     }
 
+    init {
+        paintObject.setOnTouchListener { view, event ->
+            if (globalStore.disableColor != VALUE_NULL || (globalStore.disableColor == VALUE_NULL && !globalStore.clickable)) {
+                return@setOnTouchListener true
+            }
+            when (event.actionMasked) {
+                //按下
+                MotionEvent.ACTION_DOWN -> {
+                    isPressed = true
+                    startPaint()
+                }
+                //抬起或取消
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    isPressed = false
+                    startPaint()
+                }
+            }
+
+            return@setOnTouchListener !view.hasOnClickListeners()
+        }
+    }
+
     /**
      * 设置正常状态下颜色
      */
@@ -248,7 +270,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                             }),
                     globalStore.corner,
                     globalStore.shadowStartColor, globalStore.shadowEndColor,
-                    globalStore.shadowSize.toFloat(), globalStore.shadowSize.toFloat())
+                    globalStore.shadowSize.toFloat())
         } else {
             generateGradientDrawable(hasCustomPressedEffect)
         }
@@ -256,24 +278,6 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         paintObject.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         paintObject.background = backGroundDrawable
 
-        paintObject.setOnTouchListener { _, event ->
-            if (globalStore.disableColor != VALUE_NULL || (globalStore.disableColor == VALUE_NULL && !globalStore.clickable)) {
-                return@setOnTouchListener true
-            }
-            when (event.actionMasked) {
-                //按下
-                MotionEvent.ACTION_DOWN -> {
-                    isPressed = true
-                    startPaint()
-                }
-                //抬起或取消
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    isPressed = false
-                    startPaint()
-                }
-            }
-            return@setOnTouchListener false
-        }
     }
 
     /**

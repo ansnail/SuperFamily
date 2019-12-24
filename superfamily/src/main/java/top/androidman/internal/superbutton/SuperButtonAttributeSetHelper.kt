@@ -3,12 +3,15 @@ package top.androidman.internal.superbutton
 import android.content.Context
 import android.util.AttributeSet
 import top.androidman.R
+import top.androidman.internal.BOTTOM
 import top.androidman.internal.Constant.DEFAULT_HINT_TEXT_COLOR
 import top.androidman.internal.Constant.DEFAULT_TEXT_COLOR
 import top.androidman.internal.Constant.DEFAULT_TEXT_SIZE
 import top.androidman.internal.Constant.VALUE_DEFAULT_INT
 import top.androidman.internal.Constant.VALUE_NULL
 import top.androidman.internal.LEFT
+import top.androidman.internal.RIGHT
+import top.androidman.internal.TOP
 
 
 /**
@@ -71,6 +74,10 @@ object SuperButtonAttributeSetHelper {
             if (attr == R.styleable.SuperButton_iconHeight) {
                 defaultStore.iconHeight = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
             }
+            //自动适应文字的大小
+            if (attr == R.styleable.SuperButton_iconAuto) {
+                defaultStore.iconAuto = typedArray.getBoolean(attr, false)
+            }
             //图标在文字的那个方向
             if (attr == R.styleable.SuperButton_iconOrientation) {
                 defaultStore.iconAtTextOrientation = typedArray.getInt(attr, LEFT)
@@ -79,6 +86,51 @@ object SuperButtonAttributeSetHelper {
             if (attr == R.styleable.SuperButton_maxLength) {
                 defaultStore.maxLength = typedArray.getInt(attr, VALUE_NULL)
             }
+
+            //////////////////////////////////////////属性兼容//////////////////////////////////////////
+            //图片在文字左边
+            if (attr == R.styleable.SuperButton_drawable_left) {
+                defaultStore.icon = typedArray.getDrawable(attr)
+                defaultStore.iconAtTextOrientation = LEFT
+            }
+            //图片在文字右边
+            if (attr == R.styleable.SuperButton_drawable_right) {
+                defaultStore.icon = typedArray.getDrawable(attr)
+                defaultStore.iconAtTextOrientation = RIGHT
+            }
+            //图片在文字上边
+            if (attr == R.styleable.SuperButton_drawable_top) {
+                defaultStore.icon = typedArray.getDrawable(attr)
+                defaultStore.iconAtTextOrientation = TOP
+            }
+            //图片在文字下边
+            if (attr == R.styleable.SuperButton_drawable_bottom) {
+                defaultStore.icon = typedArray.getDrawable(attr)
+                defaultStore.iconAtTextOrientation = BOTTOM
+            }
+            //图标距离文字距离
+            if (attr == R.styleable.SuperButton_drawable_padding) {
+                defaultStore.iconPadding = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT)
+            }
+            //自动适应文字的大小
+            if (attr == R.styleable.SuperButton_drawable_auto) {
+                defaultStore.iconAuto = typedArray.getBoolean(attr, false)
+            }
+
+            //图片在中间
+            if (attr == R.styleable.SuperButton_drawable_middle) {
+                defaultStore.icon = typedArray.getDrawable(attr)
+            }
+            //图标的宽度
+            if (attr == R.styleable.SuperButton_drawable_middle_width) {
+                defaultStore.iconWidth = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
+            }
+            //图标的高度
+            if (attr == R.styleable.SuperButton_drawable_middle_height) {
+                defaultStore.iconHeight = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
+            }
+
+            //////////////////////////////////////////属性兼容//////////////////////////////////////////
         }
         typedArray.recycle()
         return defaultStore

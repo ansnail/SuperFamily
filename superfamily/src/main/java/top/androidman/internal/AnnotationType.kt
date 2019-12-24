@@ -74,11 +74,11 @@ annotation class IconOrientation
 /**
  * 圆形
  */
-const val CIRCLE = 0x1
+const val CIRCLE = 1
 /**
  * 矩形
  */
-const val RECT = 0x2
+const val RECT = 2
 
 @IntDef(CIRCLE, RECT)
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
