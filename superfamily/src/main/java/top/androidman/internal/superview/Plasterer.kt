@@ -1,4 +1,4 @@
-package top.androidman.internal
+package top.androidman.internal.superview
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
+import top.androidman.internal.*
 import top.androidman.internal.Constant.DEFAULT_PRESSED_FOREGROUND_COLOR
 import top.androidman.internal.Constant.DEFAULT_UNABLE_FOREGROUND_COLOR
 import top.androidman.internal.Constant.VALUE_NULL

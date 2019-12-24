@@ -1,10 +1,12 @@
-package top.androidman.internal
+package top.androidman.internal.superview
 
 import android.content.Context
 import android.util.AttributeSet
 import top.androidman.R
 import top.androidman.internal.Constant.VALUE_DEFAULT_INT
 import top.androidman.internal.Constant.VALUE_NULL
+import top.androidman.internal.LEFT_RIGHT
+import top.androidman.internal.getColorOrientation
 
 
 /**
@@ -172,6 +174,15 @@ object AttributeSetHelper {
             //按钮是否可以点击
             if (attr == R.styleable.SuperView_button_click_able) {
                 defaultStore.clickable = typedArray.getBoolean(attr, true)
+            }
+
+            //关闭点击效果,默认关闭
+            if (attr == R.styleable.SuperView_close_default_pressed) {
+                defaultStore.openPressedEffect = !typedArray.getBoolean(attr, true)
+            }
+            //按压时的背景颜色
+            if (attr == R.styleable.SuperView_color_default_pressed) {
+                defaultStore.backgroundPressedColor = typedArray.getColor(attr, VALUE_NULL)
             }
 
             //////////////////////////////////////////属性兼容//////////////////////////////////////////

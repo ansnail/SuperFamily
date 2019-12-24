@@ -1,10 +1,11 @@
-package top.androidman.internal
+package top.androidman.internal.superview
 
 import android.graphics.drawable.GradientDrawable
 import top.androidman.internal.Constant.VALUE_DEFAULT_FLOAT
 import top.androidman.internal.Constant.VALUE_DEFAULT_INT
 import top.androidman.internal.Constant.VALUE_NULL
 import top.androidman.internal.Constant.VALUE_NULL_FLOAT
+import top.androidman.internal.RECT
 
 
 /**

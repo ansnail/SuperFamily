@@ -3,7 +3,7 @@ package top.androidman.internal.superbutton
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import top.androidman.internal.Constant
-import top.androidman.internal.DefaultStore
+import top.androidman.internal.superview.DefaultStore
 import top.androidman.internal.LEFT
 
 

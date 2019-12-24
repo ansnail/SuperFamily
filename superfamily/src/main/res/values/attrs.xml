@@ -125,6 +125,11 @@
         <!--按钮是否可以点击-->
         <attr name="button_click_able" format="boolean" />
 
+        <!--是否关闭默认的点击效果-->
+        <attr name="close_default_pressed" format="boolean" />
+        <!--设置默认的点击效果颜色-->
+        <attr name="color_default_pressed" format="color" />
+
         <!--====================兼容属性====================-->
 
 
