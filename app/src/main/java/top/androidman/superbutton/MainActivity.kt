@@ -18,11 +18,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "是不是很神奇", Toast.LENGTH_SHORT).show()
         }
 
-        button.plasterer.textView.text = "尝试一下"
-        button.plasterer
-                .setMaxLength(2)
-                .setText("窗前明月光")
-                .startPaint()
+        button.setText("尝试一下")
+        button.setMaxLength(2)
+        button.setText("窗前明月光")
 
     }
 

@@ -38,7 +38,7 @@ publish {
     groupId = 'top.androidman'//jcenter上的路径
     artifactId = 'superfamily'//项目名称
     publishVersion = '2.0.0'//版本号
-    desc = '让按钮使用更简单'//描述
+    desc = '让写布局更简单'//描述
     website = 'https://github.com/ansnail/SuperFamily'
 }
 repositories {

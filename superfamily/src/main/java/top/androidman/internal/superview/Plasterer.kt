@@ -119,7 +119,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * 设置是否可以点击，默认可以
      */
-    fun setClickable(clickable: Boolean): Plasterer {
+    fun setViewClickable(clickable: Boolean): Plasterer {
         globalStore.clickable = clickable
         return this
     }
