@@ -16,7 +16,7 @@ interface ISuperButtonPlastererAction {
      * 设置文字
      * @param text CharSequence
      */
-    fun setText(text: CharSequence)
+    fun setText(text: CharSequence?)
 
     /**
      * 设置字体颜色
@@ -27,7 +27,7 @@ interface ISuperButtonPlastererAction {
      * 设置提示文字
      * @param hintText CharSequence
      */
-    fun setHintText(hintText: CharSequence)
+    fun setHintText(hintText: CharSequence?)
 
     /**
      * 设置提示字体颜色

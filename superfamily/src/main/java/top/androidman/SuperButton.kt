@@ -184,7 +184,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * 设置文字
      * @param text CharSequence
      */
-    override fun setText(text: CharSequence) {
+    override fun setText(text: CharSequence?) {
         plasterer.setText(text).startPaint()
     }
 
@@ -199,7 +199,7 @@ class SuperButton @JvmOverloads constructor(context: Context, attrs: AttributeSe
      * 设置提示文字
      * @param hintText CharSequence
      */
-    override fun setHintText(hintText: CharSequence) {
+    override fun setHintText(hintText: CharSequence?) {
         plasterer.setHintText(hintText).startPaint()
     }
 

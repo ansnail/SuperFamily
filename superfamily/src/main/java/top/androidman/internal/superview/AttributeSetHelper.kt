@@ -175,6 +175,10 @@ object AttributeSetHelper {
             if (attr == R.styleable.SuperView_button_click_able) {
                 defaultStore.clickable = typedArray.getBoolean(attr, true)
             }
+            //按钮是否可以点击
+            if (attr == R.styleable.SuperView_button_clickable) {
+                defaultStore.clickable = typedArray.getBoolean(attr, true)
+            }
 
             //关闭点击效果,默认关闭
             if (attr == R.styleable.SuperView_close_default_pressed) {
@@ -185,6 +189,14 @@ object AttributeSetHelper {
                 defaultStore.backgroundPressedColor = typedArray.getColor(attr, VALUE_NULL)
             }
 
+            //边框虚线宽度
+            if (attr == R.styleable.SuperView_border_dash_width) {
+                defaultStore.borderDashWidth = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
+            }
+            //边框虚线间隙值
+            if (attr == R.styleable.SuperView_border_dash_gap) {
+                defaultStore.borderDashGap = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
+            }
             //////////////////////////////////////////属性兼容//////////////////////////////////////////
 
 

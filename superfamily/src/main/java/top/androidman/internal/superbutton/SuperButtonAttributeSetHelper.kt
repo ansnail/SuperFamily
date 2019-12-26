@@ -130,6 +130,18 @@ object SuperButtonAttributeSetHelper {
                 defaultStore.iconHeight = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
             }
 
+            //图片在中间
+            if (attr == R.styleable.SuperButton_drawable_center) {
+                defaultStore.icon = typedArray.getDrawable(attr)
+            }
+            //图标的宽度
+            if (attr == R.styleable.SuperButton_drawable_center_width) {
+                defaultStore.iconWidth = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
+            }
+            //图标的高度
+            if (attr == R.styleable.SuperButton_drawable_center_height) {
+                defaultStore.iconHeight = typedArray.getDimensionPixelSize(attr, VALUE_NULL)
+            }
             //////////////////////////////////////////属性兼容//////////////////////////////////////////
         }
         typedArray.recycle()

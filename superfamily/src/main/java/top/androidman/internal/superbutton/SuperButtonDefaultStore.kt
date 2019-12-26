@@ -16,7 +16,7 @@ class SuperButtonDefaultStore : DefaultStore() {
     /**
      * 文字内容
      */
-    var text: CharSequence = ""
+    var text: CharSequence? = ""
     /**
      * 文字颜色
      */
@@ -29,7 +29,7 @@ class SuperButtonDefaultStore : DefaultStore() {
     /**
      * 提示文字内容
      */
-    var hintText: CharSequence = ""
+    var hintText: CharSequence? = ""
     /**
      * 提示文字内容颜色
      */

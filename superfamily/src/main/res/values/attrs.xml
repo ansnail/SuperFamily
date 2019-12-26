@@ -124,6 +124,13 @@
 
         <!--按钮是否可以点击-->
         <attr name="button_click_able" format="boolean" />
+        <!--按钮是否可以点击-->
+        <attr name="button_clickable" format="boolean" />
+
+        <!--边框虚线宽度-->
+        <attr name="border_dash_width" format="dimension" />
+        <!--边框虚线间隙值-->
+        <attr name="border_dash_gap" format="dimension" />
 
         <!--是否关闭默认的点击效果-->
         <attr name="close_default_pressed" format="boolean" />
@@ -242,6 +249,13 @@
         <attr name="drawable_middle_width" format="dimension" />
         <!--图片在中间时高-->
         <attr name="drawable_middle_height" format="dimension" />
+
+        <!--只有图片的情况,此时会忽略文字，即便设置-->
+        <attr name="drawable_center" format="reference|color" />
+        <!--图片在中间时宽-->
+        <attr name="drawable_center_width" format="dimension" />
+        <!--图片在中间时高-->
+        <attr name="drawable_center_height" format="dimension" />
 
         <!--====================兼容属性====================-->
 

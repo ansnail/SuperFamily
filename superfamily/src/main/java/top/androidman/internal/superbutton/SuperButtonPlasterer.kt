@@ -44,7 +44,7 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      * 设置文字
      * @param text CharSequence
      */
-    fun setText(text: CharSequence): SuperButtonPlasterer {
+    fun setText(text: CharSequence?): SuperButtonPlasterer {
         globalStore.text = text
         return this
     }
@@ -61,7 +61,7 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
      * 设置提示文字
      * @param hintText CharSequence
      */
-    fun setHintText(hintText: CharSequence): SuperButtonPlasterer {
+    fun setHintText(hintText: CharSequence?): SuperButtonPlasterer {
         globalStore.hintText = hintText
         return this
     }
@@ -161,7 +161,8 @@ class SuperButtonPlasterer(linearLayout: LinearLayout, valueStore: SuperButtonDe
         }
 
         val hasIcon = globalStore.icon != null
-        val hasText = globalStore.text.isNotEmpty() || globalStore.hintText.isNotEmpty()
+        val hasText = (globalStore.text ?: "").isNotEmpty() ||
+                (globalStore.hintText ?: "").isNotEmpty()
 
         when (globalStore.iconAtTextOrientation) {
             //图标在文字上面
