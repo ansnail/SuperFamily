@@ -71,7 +71,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     init {
-        paintObject.setOnTouchListener { view, event ->
+        paintObject.setOnTouchListener { _, event ->
             if (globalStore.disableColor != VALUE_NULL || (globalStore.disableColor == VALUE_NULL && !globalStore.clickable)) {
                 return@setOnTouchListener true
             }
@@ -249,9 +249,14 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         //是否有自定义按压效果
         val hasCustomPressedEffect = globalStore.backgroundPressedColor != VALUE_NULL
         //是否有阴影效果
-        val hasShadow = globalStore.shadowSize != VALUE_NULL &&
-                globalStore.shadowStartColor != VALUE_NULL &&
-                globalStore.shadowEndColor != VALUE_NULL
+        val hasShadow = if (globalStore.backgroundStartColor != VALUE_NULL && globalStore.backgroundEndColor != VALUE_NULL)
+            false
+        else {
+            globalStore.shadowSize != VALUE_NULL &&
+                    globalStore.shadowStartColor != VALUE_NULL &&
+                    globalStore.shadowEndColor != VALUE_NULL
+        }
+
 
         val backGroundDrawable = if (hasShadow) {
             RoundRectDrawableWithShadow(
