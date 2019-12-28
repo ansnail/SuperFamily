@@ -1,10 +1,12 @@
 package top.androidman.internal.superview
 
 import android.content.res.ColorStateList
+import android.graphics.Outline
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewOutlineProvider
 import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
 import top.androidman.internal.*
@@ -273,6 +275,15 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                     globalStore.shadowStartColor, globalStore.shadowEndColor,
                     globalStore.shadowSize.toFloat())
         } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                paintObject.outlineProvider = object : ViewOutlineProvider() {
+                    override fun getOutline(view: View?, outline: Outline?) {
+                        outline?.setRoundRect(0, 0, view?.width ?: 0, view?.height
+                                ?: 0, globalStore.corner)
+                    }
+                }
+                paintObject.clipToOutline = true
+            }
             generateGradientDrawable(hasCustomPressedEffect)
         }
         //关闭硬件加速
