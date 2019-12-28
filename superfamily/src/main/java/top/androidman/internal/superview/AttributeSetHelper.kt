@@ -78,7 +78,7 @@ object AttributeSetHelper {
                 defaultStore.borderDashWidth = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //边框虚线间隙值
-            if (attr == R.styleable.SuperView_border_dashGap) {
+            if (attr == R.styleable.SuperView_border_dashGapWidth) {
                 defaultStore.borderDashGap = typedArray.getDimensionPixelSize(attr, VALUE_DEFAULT_INT).toFloat()
             }
             //边框颜色

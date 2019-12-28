@@ -280,7 +280,11 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                     globalStore.shadowStartColor, globalStore.shadowEndColor,
                     globalStore.shadowSize.toFloat())
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                    (globalStore.leftTopCorner == VALUE_NULL_FLOAT &&
+                            globalStore.leftBottomCorner == VALUE_NULL_FLOAT &&
+                            globalStore.rightTopCorner == VALUE_NULL_FLOAT &&
+                            globalStore.rightBottomCorner == VALUE_NULL_FLOAT)) {
                 paintObject.outlineProvider = object : ViewOutlineProvider() {
                     override fun getOutline(view: View?, outline: Outline?) {
                         outline?.setRoundRect(0, 0, view?.width ?: 0, view?.height

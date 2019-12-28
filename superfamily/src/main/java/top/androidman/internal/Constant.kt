@@ -30,7 +30,7 @@ object Constant {
     /**
      * value空值
      */
-    const val VALUE_NULL_FLOAT = -1.0f
+    const val VALUE_NULL_FLOAT = Int.MAX_VALUE.toFloat()
     /**
      * value默认值(Int)
      */

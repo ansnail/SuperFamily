@@ -84,3 +84,20 @@ const val RECT = 2
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
 annotation class Shape
 ///////////////////////////////////////////////////////
+
+
+/////////////////////////直线方向///////////////////////
+/**
+ * 竖直
+ */
+const val VERTICAL = 0x1
+/**
+ * 水平
+ */
+const val HORIZONTAL = 0x2
+
+@IntDef(VERTICAL, HORIZONTAL)
+@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+annotation class LineOrientation
+///////////////////////////////////////////////////////
+

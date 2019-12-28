@@ -35,7 +35,7 @@
         <!--边框虚线宽度-->
         <attr name="border_dashWidth" format="dimension" />
         <!--边框虚线间隙值-->
-        <attr name="border_dashGap" format="dimension" />
+        <attr name="border_dashGapWidth" format="dimension" />
         <!--边框颜色-->
         <attr name="border_color" format="color" />
 
@@ -177,7 +177,7 @@
         <!--边框虚线宽度-->
         <attr name="border_dashWidth" />
         <!--边框虚线间隙值-->
-        <attr name="border_dashGap" />
+        <attr name="border_dashGapWidth" />
         <!--边框颜色-->
         <attr name="border_color" />
 
@@ -296,7 +296,7 @@
         <!--边框虚线宽度-->
         <attr name="border_dashWidth" />
         <!--边框虚线间隙值-->
-        <attr name="border_dashGap" />
+        <attr name="border_dashGapWidth" />
         <!--边框颜色-->
         <attr name="border_color" />
 
@@ -346,7 +346,7 @@
         <!--边框虚线宽度-->
         <attr name="border_dashWidth" />
         <!--边框虚线间隙值-->
-        <attr name="border_dashGap" />
+        <attr name="border_dashGapWidth" />
         <!--边框颜色-->
         <attr name="border_color" />
 
@@ -397,7 +397,7 @@
         <!--边框虚线宽度-->
         <attr name="border_dashWidth" />
         <!--边框虚线间隙值-->
-        <attr name="border_dashGap" />
+        <attr name="border_dashGapWidth" />
         <!--边框颜色-->
         <attr name="border_color" />
 
@@ -448,7 +448,7 @@
         <!--边框虚线宽度-->
         <attr name="border_dashWidth" />
         <!--边框虚线间隙值-->
-        <attr name="border_dashGap" />
+        <attr name="border_dashGapWidth" />
         <!--边框颜色-->
         <attr name="border_color" />
 
@@ -462,6 +462,38 @@
         <attr name="background_endColor" />
         <!--颜色方向-->
         <attr name="background_colorOrientation" />
+    </declare-styleable>
+
+    <declare-styleable name="SuperLine">
+        <!--直线方向-->
+        <attr name="orientation" format="enum">
+            <!--竖直方向-->
+            <enum name="vertical" value="0x1" />
+            <!--水平方向-->
+            <enum name="horizontal" value="0x2" />
+        </attr>
+
+        <!--直线颜色-->
+        <attr name="line_color" format="color" />
+
+        <!--直线渐变开始颜色-->
+        <attr name="line_startColor" format="color" />
+        <!--直线渐变结束颜色-->
+        <attr name="line_endColor" format="color" />
+
+        <!--虚线宽度-->
+        <attr name="line_dashWidth" format="dimension" />
+        <!--虚线间隙宽度-->
+        <attr name="line_dashGapWidth" format="dimension" />
+
+        <!--虚线间隙颜色-->
+        <attr name="line_dashGapColor" format="color" />
+
+        <!--虚线间隙渐变开始颜色-->
+        <attr name="line_dashGap_startColor" format="color" />
+        <!--虚线间隙渐变结束颜色-->
+        <attr name="line_dashGap_endColor" format="color" />
+
     </declare-styleable>
 
 </resources>

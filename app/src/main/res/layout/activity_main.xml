@@ -10,6 +10,37 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <top.androidman.SuperLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="15dp"
+            app:background_normalColor="@color/color_start"
+            app:corner="25dp">
+
+            <top.androidman.SuperButton
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:background_endColor="@color/color_end"
+                app:background_normalColor="@color/color_accent"
+                app:background_startColor="@color/color_start"
+                app:clickable="false"
+                app:hintText="@string/poetry_1"
+                app:hintTextColor="@color/color_red"
+                app:open_pressed_effect="true"
+                app:text="@string/poetry_2"
+                app:textColor="@color/color_end"
+                app:textSize="22dp" />
+
+        </top.androidman.SuperLinearLayout>
+
+
+        <top.androidman.SuperLine
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            app:line_color="@color/color_start"
+            app:line_dashGapWidth="5dp"
+            app:line_dashWidth="10dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -273,7 +304,7 @@
             android:layout_height="60dp"
             android:layout_margin="20dp"
             app:border_color="@color/color_text_grey_input"
-            app:border_dashGap="5dp"
+            app:border_dashGapWidth="5dp"
             app:border_dashWidth="10dp"
             app:border_width="2dp"
             app:color_normal="@color/color_white"
