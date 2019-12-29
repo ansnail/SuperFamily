@@ -143,7 +143,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     /**
-     * 设置按钮左上角圆角角度，单位为dp
+     * 设置按钮左上角圆角角度，单位为px
      */
     fun setLeftTopCorner(leftTopCorner: Float): Plasterer {
         globalStore.leftTopCorner = dp2px(leftTopCorner)
@@ -151,7 +151,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     /**
-     * 设置按钮右上角圆角角度，单位为dp
+     * 设置按钮右上角圆角角度，单位为px
      */
     fun setRightTopCorner(rightTopCorner: Float): Plasterer {
         globalStore.rightTopCorner = dp2px(rightTopCorner)
@@ -159,7 +159,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     /**
-     * 设置按钮右下角圆角角度，单位为dp
+     * 设置按钮右下角圆角角度，单位为px
      */
     fun setRightBottomCorner(rightBottomCorner: Float): Plasterer {
         globalStore.rightBottomCorner = dp2px(rightBottomCorner)
@@ -167,7 +167,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     /**
-     * 设置按钮左下角圆角角度，单位为dp
+     * 设置按钮左下角圆角角度，单位为px
      */
     fun setLeftBottomCorner(leftBottomCorner: Float): Plasterer {
         globalStore.leftBottomCorner = dp2px(leftBottomCorner)
@@ -175,7 +175,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     }
 
     /**
-     * 设置按钮所有圆角角度，单位为dp
+     * 设置按钮所有圆角角度，单位为px
      * @param leftTopCorner Float 左上角圆角角度
      * @param rightTopCorner Float 右上角圆角角度
      * @param rightBottomCorner Float 右下角圆角角度
@@ -192,7 +192,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
     /**
      * 设置边框
      * @param borderColor Int 边框颜色
-     * @param borderWidth Int 边框宽度
+     * @param borderWidth Int 边框宽度，单位为px
      * @param borderDashWidth Float 边框虚线宽度
      * @param borderDashGap Float 边框虚线间隙宽度
      */
@@ -203,6 +203,36 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
         globalStore.borderDashGap = borderDashGap
         return this
     }
+
+    /**
+     * 设置边框颜色
+     * @param borderColor Int
+     */
+    fun setBorderColor(@ColorInt borderColor: Int): Plasterer {
+        globalStore.borderColor = borderColor
+        return this
+    }
+
+    /**
+     * 设置边框
+     * @param borderWidth Int 边框宽度
+     */
+    fun setBorderWidth(borderWidth: Int): Plasterer {
+        globalStore.borderWidth = borderWidth
+        return this
+    }
+
+    /**
+     * 设置边框宽度，单位为px
+     * @param borderDashWidth Float 边框虚线宽度
+     * @param borderDashGap Float 边框虚线间隙宽度
+     */
+    fun setBorderDash(borderDashWidth: Float, borderDashGap: Float): Plasterer {
+        globalStore.borderDashWidth = borderDashWidth
+        globalStore.borderDashGap = borderDashGap
+        return this
+    }
+
 
     /**
      * 设置渐变色

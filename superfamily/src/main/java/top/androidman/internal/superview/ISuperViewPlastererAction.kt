@@ -83,6 +83,25 @@ interface ISuperViewPlastererAction {
     fun setBorder(@ColorInt borderColor: Int, borderWidth: Int, borderDashWidth: Float, borderDashGap: Float)
 
     /**
+     * 设置边框颜色
+     * @param borderColor Int
+     */
+    fun setBorderColor(@ColorInt borderColor: Int)
+
+    /**
+     * 设置边框宽度，单位为dp
+     * @param borderWidth Int 边框宽度
+     */
+    fun setBorderWidth(borderWidth: Int)
+
+    /**
+     * 设置边框虚线
+     * @param borderDashWidth Float 边框虚线宽度
+     * @param borderDashGap Float 边框虚线间隙宽度
+     */
+    fun setBorderDash(borderDashWidth: Float, borderDashGap: Float)
+
+    /**
      * 设置渐变色
      * @param orientation Int 方向
      * @param startColor Int 开始颜色

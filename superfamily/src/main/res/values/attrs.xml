@@ -488,12 +488,6 @@
 
         <!--虚线间隙颜色-->
         <attr name="line_dashGapColor" format="color" />
-
-        <!--虚线间隙渐变开始颜色-->
-        <attr name="line_dashGap_startColor" format="color" />
-        <!--虚线间隙渐变结束颜色-->
-        <attr name="line_dashGap_endColor" format="color" />
-
     </declare-styleable>
 
 </resources>

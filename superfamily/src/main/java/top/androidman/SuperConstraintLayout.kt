@@ -125,6 +125,33 @@ class SuperConstraintLayout @JvmOverloads constructor(context: Context, attrs: A
         plasterer.setBorder(borderColor, borderWidth, borderDashWidth, borderDashGap).startPaint()
     }
 
+
+    /**
+     * 设置边框颜色
+     * @param borderColor Int
+     */
+    override fun setBorderColor(borderColor: Int) {
+        plasterer.setBorderColor(borderColor).startPaint()
+    }
+
+    /**
+     * 设置边框
+     * @param borderWidth Int 边框宽度
+     */
+    override fun setBorderWidth(borderWidth: Int) {
+        plasterer.setBorderWidth(borderWidth).startPaint()
+    }
+
+    /**
+     * 设置边框宽度，单位为px
+     * @param borderDashWidth Float 边框虚线宽度
+     * @param borderDashGap Float 边框虚线间隙宽度
+     */
+    override fun setBorderDash(borderDashWidth: Float, borderDashGap: Float) {
+        plasterer.setBorderDash(borderDashWidth, borderDashGap).startPaint()
+    }
+
+
     /**
      * 设置背景渐变色
      * @param orientation Int 方向

@@ -30,7 +30,7 @@ object SuperLineAttributeSetHelper {
             val attr = typedArray.getIndex(i)
             //直线方向
             if (attr == R.styleable.SuperLine_orientation) {
-                defaultStore.lineOrientation = typedArray.getInt(attr, HORIZONTAL)
+                defaultStore.lineOrientation = typedArray.getInt(attr, VALUE_NULL)
             }
             //直线颜色
             if (attr == R.styleable.SuperLine_line_color) {
@@ -55,14 +55,6 @@ object SuperLineAttributeSetHelper {
             //虚线间隙颜色
             if (attr == R.styleable.SuperLine_line_dashGapColor) {
                 defaultStore.lineDashGapColor = typedArray.getColor(attr, VALUE_NULL)
-            }
-            //虚线间隙渐变开始颜色
-            if (attr == R.styleable.SuperLine_line_dashGap_startColor) {
-                defaultStore.lineDashGapStartColor = typedArray.getColor(attr, VALUE_NULL)
-            }
-            //虚线间隙渐变结束颜色
-            if (attr == R.styleable.SuperLine_line_dashGap_endColor) {
-                defaultStore.lineDashGapEndColor = typedArray.getColor(attr, VALUE_NULL)
             }
         }
         typedArray.recycle()

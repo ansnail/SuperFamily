@@ -1,6 +1,5 @@
 import android.graphics.Color
 import top.androidman.internal.Constant.VALUE_NULL
-import top.androidman.internal.HORIZONTAL
 
 /**
  * @author         yanjie
@@ -11,11 +10,11 @@ class SuperLineDefaultStore {
     /**
      * 直线方向
      */
-    var lineOrientation = HORIZONTAL
+    var lineOrientation = VALUE_NULL
     /**
      * 直线颜色
      */
-    var lineColor = Color.RED
+    var lineColor = Color.GRAY
     /**
      * 直线渐变开始颜色
      */
@@ -36,12 +35,4 @@ class SuperLineDefaultStore {
      * 虚线颜色
      */
     var lineDashGapColor = VALUE_NULL
-    /**
-     * 虚线间隙渐变开始颜色
-     */
-    var lineDashGapStartColor = VALUE_NULL
-    /**
-     * 虚线间隙渐变结束颜色
-     */
-    var lineDashGapEndColor = VALUE_NULL
 }
