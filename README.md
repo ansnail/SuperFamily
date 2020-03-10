@@ -36,7 +36,7 @@ implementation 'top.androidman:superfamily:2.1.0'
 
 在实现阴影的过程中，作者参考了cardview阴影的具体实现，在5.0以后由于Android原生支持了elevation,但是设置阴影的具体实现在native代码里面，所以暂时没有找到比较好的设置方法。所以作者换了个思路，暂时阴影实现都使用5.0以下的实现方式，但是5.0以下版本阴影会占用view自身的空间，所以使用时需要注意使用padding，让布局显示正常。
 
-### SuperFamily成员
+### SuperFamily成员(原生属性仍然可用)
 - SuperButton 
 - SuperConstraintLayout
 - SuperFrameLayout
