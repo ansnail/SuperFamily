@@ -18,10 +18,12 @@
     <color name="color_ffB419">#FFFFB419</color>
     <color name="color_6596ff">#FF6596FF</color>
     <color name="color_14c7de">#FF14C7DE</color>
-    <color name="toast_bg_error">#FFF8388D</color>
+    <color name="green">#38ef7d</color>
 
     <color name="light_red">#55F8388D</color>
 
-    <color name="color_start">#FFC165DD</color>
-    <color name="color_end">#FF5C27F1</color>
+    <color name="normal_color">#c471ed</color>
+
+    <color name="start_color">#ffc471ed</color>
+    <color name="end_color">#fff64f59</color>
 </resources>
