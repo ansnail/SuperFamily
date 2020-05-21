@@ -1,9 +1,9 @@
 ### 引入
 
-[ ![Download](https://api.bintray.com/packages/androidman/maven/superfamily/images/download.svg?version=2.1.0) ](https://bintray.com/androidman/maven/superfamily/1.2.0/link)
+[ ![Download](https://api.bintray.com/packages/androidman/maven/superfamily/images/download.svg?version=2.2.0) ](https://bintray.com/androidman/maven/superfamily/2.2.0/link)
 
 ```
-implementation 'top.androidman:superfamily:2.1.0'
+implementation 'top.androidman:superfamily:2.2.0'
 ```
 [Github传送门](https://github.com/ansnail/superfamily)
 
