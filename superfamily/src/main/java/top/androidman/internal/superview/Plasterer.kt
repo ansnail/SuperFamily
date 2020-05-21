@@ -31,40 +31,47 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
      * 粉刷图纸
      */
     private var globalStore: DefaultStore = valueStore
+
     /**
      * 粉刷对象
      */
     private var paintObject: View = view
+
     /**
      * 可以点击时混合后的按压时的颜色
      */
     private val compositeNormalBackgroundColorWhenPressed by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
     }
+
     /**
      * 可以点击时混合后的按压时的背景开始颜色
      */
     private val compositeBackgroundStartColorWhenPressed by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundStartColor)
     }
+
     /**
      * 可以点击时混合后的按压时的背景结束颜色
      */
     private val compositeBackgroundEndColorWhenPressed by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_PRESSED_FOREGROUND_COLOR, globalStore.backgroundEndColor)
     }
+
     /**
      * 不可以点击时混合后的按压时的颜色
      */
     private val compositeNormalBackgroundColorWhenUnableClick by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundNormalColor)
     }
+
     /**
      * 不可以点击时混合后的按压时的背景开始颜色
      */
     private val compositeBackgroundStartColorWhenUnableClick by lazy {
         return@lazy ColorUtils.compositeColors(DEFAULT_UNABLE_FOREGROUND_COLOR, globalStore.backgroundStartColor)
     }
+
     /**
      * 不可以点击时混合后的按压时的背景结束颜色
      */
@@ -90,7 +97,7 @@ open class Plasterer(view: View, valueStore: DefaultStore) {
                 }
             }
 
-            return@setOnTouchListener !view.hasOnClickListeners()
+            return@setOnTouchListener !view.hasOnClickListeners() && globalStore.openPressedEffect
         }
     }
 
